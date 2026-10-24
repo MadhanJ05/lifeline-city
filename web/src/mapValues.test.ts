@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   bboxOf,
   clampHourIdx,
+  DEFAULT_HOUR,
   defaultHourIdx,
   fillColorExpression,
   formatLayerValue,
@@ -17,6 +18,7 @@ import {
   NO_VALUE_COLOR,
   RAMP,
   RAMPS,
+  RAMP_START,
   niceCeil,
   pinFeatures,
   pinGroups,
@@ -152,11 +154,19 @@ describe("hours", () => {
     expect(clampHourIdx(Number.NaN, 119)).toBe(0);
   });
 
-  it("defaults to the third key demo hour, else 0", () => {
-    const hours = ["a", "b", "c", "d"];
-    expect(defaultHourIdx(hours, ["a", "b", "d"])).toBe(3);
-    expect(defaultHourIdx(hours, ["a"])).toBe(0);
-    expect(defaultHourIdx(hours, ["a", "b", "zz"])).toBe(0);
+  it("defaults to Mon Feb 23, 5 PM, else 0", () => {
+    expect(DEFAULT_HOUR).toBe("2026-02-23T17:00");
+    const hours = ["2026-02-23T01:00", "2026-02-23T09:00", "2026-02-23T17:00", "2026-02-24T09:00"];
+    expect(defaultHourIdx(hours)).toBe(2);
+    expect(defaultHourIdx(hours.slice(0, 2))).toBe(0);
+    expect(defaultHourIdx([])).toBe(0);
+    expect(defaultHourIdx(hours, "2026-02-24T09:00")).toBe(3);
+    // Full Cape timeline: hourly from 2026-02-23T01:00, so 17:00 is index 16.
+    const cape = Array.from({ length: 119 }, (_, i) => {
+      const d = new Date(Date.UTC(2026, 1, 23, 1 + i));
+      return `${d.toISOString().slice(0, 13)}:00`;
+    });
+    expect(defaultHourIdx(cape)).toBe(16);
   });
 
   it("nextHourKey rolls over days and months", () => {
@@ -194,16 +204,19 @@ describe("legend", () => {
     expect(layerDomainMax("lifelines", tl)).toBe(1);
   });
 
-  it("each layer has a 6-stop single-hue ramp with rising lightness", () => {
+  it("each layer has a 6-stop ramp: neutral start, then single-hue rising lightness", () => {
     for (const { id } of LAYERS) {
       const ramp = RAMPS[id];
       expect(ramp).toHaveLength(6);
-      for (let i = 1; i < ramp.length; i++) expect(luminance(ramp[i]!)).toBeGreaterThan(luminance(ramp[i - 1]!));
+      expect(ramp[0]).toBe(RAMP_START);
+      for (let i = 2; i < ramp.length; i++) expect(luminance(ramp[i]!)).toBeGreaterThan(luminance(ramp[i - 1]!));
       expect(legendStops(1, ramp).map((s) => s.color)).toEqual(ramp);
+      expect(luminance(NO_VALUE_COLOR)).toBeLessThan(luminance(ramp[0]!));
     }
+    expect(RAMP_START).toBe("#2A313B");
     expect(RAMP).toEqual(RAMPS.priority);
     expect(RAMPS.priority[4]).toBe("#F2A541");
-    expect(Number.isFinite(luminance(NO_VALUE_COLOR))).toBe(true);
+    expect(NO_VALUE_COLOR).not.toBe(RAMP_START);
   });
 
   it("fill expression interpolates the value feature state", () => {

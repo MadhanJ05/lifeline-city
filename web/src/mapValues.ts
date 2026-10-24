@@ -24,10 +24,12 @@ export function clampHourIdx(idx: number, n: number): number {
   return Math.min(n - 1, Math.max(0, Math.round(idx)));
 }
 
-/** Demo default: the third key demo hour (2026-02-24T09:00) when present, else hour 0. */
-export function defaultHourIdx(hours: readonly HourKey[], keyHours: readonly HourKey[]): number {
-  const k = keyHours[2];
-  const i = k === undefined ? -1 : hours.indexOf(k);
+/** Hour the demo opens on: Mon Feb 23, 5 PM (a key demo hour). */
+export const DEFAULT_HOUR: HourKey = "2026-02-23T17:00";
+
+/** Index of the demo default hour when the timeline has it, else hour 0. */
+export function defaultHourIdx(hours: readonly HourKey[], preferred: HourKey = DEFAULT_HOUR): number {
+  const i = hours.indexOf(preferred);
   return i >= 0 ? i : 0;
 }
 
@@ -114,17 +116,20 @@ export function layerDomainMax(layer: Layer, timeline: CapeTimeline): number {
 
 // ---------------------------------------------------------------- legend and color
 
-/** Single-hue sequential ramps, dark to bright (design.md "Map colors"). Lightness rises
- *  monotonically, so each ramp still reads in grayscale and values are also shown as text. */
+/** Neutral slate start shared by every ramp, so zero and low values stay visible on the dark basemap. */
+export const RAMP_START = "#2A313B";
+
+/** Single-hue sequential ramps, dark to bright (design.md "Map colors"). After the neutral start,
+ *  lightness rises monotonically; values are also shown as text. */
 export const RAMPS: Record<Layer, readonly string[]> = {
-  priority: ["#151A21", "#3A2A17", "#7A4512", "#C46A17", "#F2A541", "#FFD38A"],
-  need: ["#151A21", "#2A2140", "#4B3577", "#7651B8", "#A985F0", "#D9C8FF"],
-  lifelines: ["#151A21", "#3A1D22", "#6E2A2F", "#AE3B3B", "#EE5F55", "#FFA594"],
+  priority: [RAMP_START, "#3A2A17", "#7A4512", "#C46A17", "#F2A541", "#FFD38A"],
+  need: [RAMP_START, "#2A2140", "#4B3577", "#7651B8", "#A985F0", "#D9C8FF"],
+  lifelines: [RAMP_START, "#3A1D22", "#6E2A2F", "#AE3B3B", "#EE5F55", "#FFA594"],
 };
 /** Priority ramp; kept for callers that predate per-layer ramps. */
 export const RAMP: readonly string[] = RAMPS.priority;
-/** Neutral dark grey for tracts with no value; distinct from every ramp's first stop. */
-export const NO_VALUE_COLOR = "#2A313B";
+/** Near-black for tracts with no value; darker than, and distinct from, every ramp's first stop. */
+export const NO_VALUE_COLOR = "#161B22";
 
 /** Relative luminance (WCAG) of a #RRGGBB color. */
 export function luminance(hex: string): number {

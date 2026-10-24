@@ -55,6 +55,13 @@ export const FALLBACK_STYLE: StyleSpecification = {
 setWorkerUrl(maplibreWorkerUrl);
 
 const STYLE_TIMEOUT_MS = 10_000;
+/** fitBounds padding that keeps the Cape clear of the floating panels (left list, top bar, time bar). */
+const FIT_PADDING = { left: 400, right: 40, top: 90, bottom: 130 } as const;
+/** Same, while the 440px tract drawer is open on the right. */
+const FIT_PADDING_DRAWER = { ...FIT_PADDING, right: 480 } as const;
+/** maplibre-gl.css (unlayered) sets .maplibregl-map { position: relative }, which beats Tailwind's
+ *  layered `absolute inset-0` and collapses the container to 0px. Inline styles win over both. */
+const FILL_PARENT = { position: "absolute", inset: 0 } as const;
 const OVERLAY_SOURCES = new Set(["tracts", "towns", "pins"]);
 const TOOLTIP_W = 288;
 
@@ -101,7 +108,7 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
       id: "tract-outline",
       type: "line",
       source: "tracts",
-      paint: { "line-color": "rgba(255,255,255,0.06)", "line-width": 0.5 },
+      paint: { "line-color": "rgba(255,255,255,0.12)", "line-width": 0.5 },
     },
     beforeLabels,
   );
@@ -110,7 +117,7 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
     id: "town-line",
     type: "line",
     source: "towns",
-    paint: { "line-color": "rgba(255,255,255,0.28)", "line-width": 1 },
+    paint: { "line-color": "rgba(255,255,255,0.35)", "line-width": 1.2 },
   });
   map.addLayer({
     id: "tract-highlight",
@@ -176,6 +183,11 @@ export function MapView({
   const [openPin, setOpenPin] = useState<string | null>(null);
   const [popupEl, setPopupEl] = useState<HTMLDivElement | null>(null);
 
+  const drawerOpen = selectedGeoid !== null && tracts.features.some((f) => f.properties.geoid === selectedGeoid);
+  const fitPadding = drawerOpen ? FIT_PADDING_DRAWER : FIT_PADDING;
+  const fitPaddingRef = useRef(fitPadding);
+  fitPaddingRef.current = fitPadding;
+
   useEffect(() => {
     onSelectRef.current = onSelectTract;
   }, [onSelectTract]);
@@ -221,7 +233,7 @@ export function MapView({
       container,
       style: CARTO_STYLE_URL,
       bounds: bboxOf(tracts),
-      fitBoundsOptions: { padding: 24 },
+      fitBoundsOptions: { padding: fitPaddingRef.current },
       attributionControl: { compact: true },
       dragRotate: false,
       pitchWithRotate: false,
@@ -294,6 +306,9 @@ export function MapView({
     map.on("style.load", () => {
       addOverlays(map, tracts, towns, groups, stopsRef.current);
       overlaysAdded = true;
+      // The container may have had no size when the map was created; measure again and re-fit.
+      map.resize();
+      map.fitBounds(bboxOf(tracts), { padding: fitPaddingRef.current, duration: 0 });
       if (!fallback) setBasemap("carto");
       if (!handlersBound) {
         bindHandlers();
@@ -319,6 +334,19 @@ export function MapView({
       highlighted.current = { hover: null, selected: null };
     };
   }, [tracts, towns, groups]);
+
+  // Re-fit when the drawer opens or closes so the Cape stays in the uncovered area.
+  // duration 0: no motion on map updates (design.md).
+  const firstFit = useRef(true);
+  useEffect(() => {
+    if (firstFit.current) {
+      firstFit.current = false; // the initial fit happens at creation and on style.load
+      return;
+    }
+    const map = mapRef.current;
+    if (!map) return;
+    map.fitBounds(bboxOf(tracts), { padding: drawerOpen ? FIT_PADDING_DRAWER : FIT_PADDING, duration: 0 });
+  }, [drawerOpen, tracts]);
 
   const mapReady = (): MapLibreMap | null => {
     const map = mapRef.current;
@@ -404,8 +432,9 @@ export function MapView({
         role="region"
         aria-label={mapLabel}
         className="lifeline-map absolute inset-0 overflow-hidden bg-bg"
+        style={FILL_PARENT}
       >
-        <div ref={containerRef} className="absolute inset-0" />
+        <div ref={containerRef} className="absolute inset-0" style={FILL_PARENT} />
 
         {hover && hoverRef && (
           <div
@@ -526,7 +555,7 @@ function Legend({ layer, stops }: { layer: Layer; stops: LegendStop[] }) {
       </p>
       <p className="mt-1.5 flex items-center gap-1.5">
         <span aria-hidden="true" className="inline-block h-2 w-3 rounded-sm" style={{ background: NO_VALUE_COLOR }} />
-        Darker is lower, brighter is higher. Dark grey: no value.
+        Darker is lower, brighter is higher. Near-black: no value.
       </p>
       <p className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
         <span aria-hidden="true" className="lifeline-pin-key lifeline-pin-key--active" />

@@ -138,7 +138,7 @@ interface CapeViewProps {
 function CapeView({ data, layer, hourIdx: hourIdxProp, onHourIdx, resetVersion }: CapeViewProps) {
   const { timeline, tracts, towns, events } = data;
   const n = timeline.hours.length;
-  const hourIdx = clampHourIdx(hourIdxProp ?? defaultHourIdx(timeline.hours, timeline.key_demo_hours), n);
+  const hourIdx = clampHourIdx(hourIdxProp ?? defaultHourIdx(timeline.hours), n);
   const [selectedGeoid, setSelectedGeoid] = useState<Geoid | null>(null);
   const setHourIdx = useCallback((i: number) => onHourIdx(clampHourIdx(i, n)), [n, onHourIdx]);
   const onSelectTract = useCallback((geoid: Geoid) => setSelectedGeoid(geoid), []);
