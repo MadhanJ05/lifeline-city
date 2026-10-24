@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 61% of customers in this tract are without power.",
+    "value": 0.614087
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been without power for 54 hours.",
+    "value": 54.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank at the 91st percentile for this tract.",
+    "value": 0.910714
+   },
+   {
+    "field": "rank",
+    "text": "The tract ranks 9 on the current priority list.",
+    "value": 9.0
+   }
+  ],
+  "headline": "Bourne tract dark 54 hours with 61% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

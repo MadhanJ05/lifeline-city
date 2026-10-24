@@ -1,0 +1,28 @@
+# Hazards and Scale_Selector entries. Only cape_blizzard (and boston_blizzard if built) carry real data.
+# Preview entries list the inputs they would use and never show scores.
+
+hazards:
+  blizzard:  {label: Blizzard, lost_lifelines: [power, phones, blocked roads]}
+  noreaster: {label: "Nor'easter", lost_lifelines: [power, phones, blocked roads]}
+  ice_storm: {label: Ice storm, lost_lifelines: [power, phones, blocked roads]}
+  flood:     {label: Flood, lost_lifelines: [flood zones, river gauges, road closures]}
+  heat:      {label: Heat, lost_lifelines: [power, heat index]}
+
+need_inputs:
+  - seniors living alone
+  - disability
+  - limited-English households
+  - no-vehicle households
+  - renter share
+  - electricity-dependent Medicare beneficiaries
+
+# Tier 2 (adds the Voice layer) for these towns; Tier 1 for every other town.
+open_311_towns: [Boston]
+
+entries:
+  - {id: cape_blizzard, place: "Barnstable County (Cape Cod)", hazard: blizzard, mode: live}
+  - {id: boston_blizzard, place: Boston, hazard: blizzard, mode: live_if_built}
+  - {id: plymouth_noreaster, place: Plymouth, hazard: noreaster, mode: preview}
+  - {id: worcester_ice_storm, place: Worcester, hazard: ice_storm, mode: preview}
+  - {id: lowell_flood, place: Lowell, hazard: flood, mode: preview}
+  - {id: springfield_heat, place: Springfield, hazard: heat, mode: preview}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 25 hours.",
+    "value": 25.0
+   },
+   {
+    "field": "customers",
+    "text": "The tract serves 4461 customers.",
+    "value": 4461.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone score at the 77% level relative to other tracts.",
+    "value": 0.767857
+   }
+  ],
+  "headline": "Wellfleet tract fully out for 25 hours, ranked 10 for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

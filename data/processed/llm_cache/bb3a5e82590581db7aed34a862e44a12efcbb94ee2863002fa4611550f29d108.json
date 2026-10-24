@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 73% of customers in this tract are without power.",
+    "value": 0.727766
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 7 hours.",
+    "value": 7.0
+   },
+   {
+    "field": "population",
+    "text": "Population in the tract is 3841 residents.",
+    "value": 3841.0
+   },
+   {
+    "field": "need_t",
+    "text": "Combined need score is 0.91, with high shares of seniors alone and no-vehicle households.",
+    "value": 0.91369
+   }
+  ],
+  "headline": "Barnstable tract ranks 7 in priority with 73% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

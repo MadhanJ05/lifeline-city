@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 85% of customers in this tract are without power.",
+    "value": 0.85
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank at the 93rd percentile for need in this tract.",
+    "value": 0.928571
+   },
+   {
+    "field": "rank",
+    "text": "This tract holds priority rank 8 for outreach.",
+    "value": 8.0
+   }
+  ],
+  "headline": "Eastham tract ranks 8 in priority with 85% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

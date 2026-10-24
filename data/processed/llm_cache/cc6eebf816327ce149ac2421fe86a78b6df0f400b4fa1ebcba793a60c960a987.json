@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 14% of customers in this tract are currently without power.",
+    "value": 0.138477
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "The tract sits at the 95th percentile for residents with a disability.",
+    "value": 0.946429
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle are at the 89th percentile.",
+    "value": 0.892857
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently stands at 0.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Yarmouth tract ranks 9 with 14% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 15% of customers in this tract are currently without power.",
+    "value": 0.152325
+   },
+   {
+    "field": "population",
+    "text": "The tract has 3841 residents.",
+    "value": 3841.0
+   },
+   {
+    "field": "need.limited_english.pct",
+    "text": "Limited English need sits at the 100th percentile, the top of the range.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently reads 0 for this tract.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Barnstable tract ranks 3 in priority with about 15% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

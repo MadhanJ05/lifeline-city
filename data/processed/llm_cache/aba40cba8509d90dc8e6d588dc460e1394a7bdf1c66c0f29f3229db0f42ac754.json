@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 30% of customers in this tract are without power.",
+    "value": 0.304825
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently stands at 0.",
+    "value": 0.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the 88th percentile for this tract.",
+    "value": 0.875
+   },
+   {
+    "field": "need.renter.pct",
+    "text": "Renters are at the 84th percentile for this tract.",
+    "value": 0.839286
+   }
+  ],
+  "headline": "Orleans tract has about 30% of customers out, no hours dark yet"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

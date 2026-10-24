@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 85% of customers in this tract are without power.",
+    "value": 0.85
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the 93rd percentile share among tracts.",
+    "value": 0.928571
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "Residents with disabilities rank at the 86th percentile share.",
+    "value": 0.857143
+   }
+  ],
+  "headline": "Eastham tract ranks 8 with 85% of customers out for 55 hours"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

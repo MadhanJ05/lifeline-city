@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 42% of the 21105 customers in this tract are without power.",
+    "value": 0.421579
+   },
+   {
+    "field": "customers",
+    "text": "The tract serves 21105 customers in total.",
+    "value": 21105.0
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "Disability need ranks at the 95th percentile among tracts.",
+    "value": 0.946429
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently stands at 0.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Yarmouth tract has 42% of customers out, with high disability need"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

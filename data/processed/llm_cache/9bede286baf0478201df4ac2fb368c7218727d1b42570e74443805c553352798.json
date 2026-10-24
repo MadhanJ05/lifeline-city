@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "customers",
+    "text": "About 4461 customers are served in this tract.",
+    "value": 4461.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle rank high here, at the 82% percentile among tracts.",
+    "value": 0.821429
+   }
+  ],
+  "headline": "Wellfleet tract fully dark for 9 hours with telecom down"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

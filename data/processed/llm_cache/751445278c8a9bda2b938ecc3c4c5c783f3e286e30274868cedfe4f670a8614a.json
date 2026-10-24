@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 58% of customers in this tract are without power.",
+    "value": 0.578937
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "rank",
+    "text": "The tract ranks 7 in current priority order.",
+    "value": 7.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Residents without a vehicle rank at the 88th percentile for this need.",
+    "value": 0.875
+   }
+  ],
+  "headline": "Falmouth tract dark 55 hours with 58% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,21 @@
+# Exact pins, resolved on Python 3.13 with `uv pip install` (see tech.md).
+# Pipeline
+pandas==3.1.0
+geopandas==1.2.0
+shapely==2.2.0
+numpy==2.5.4
+scipy==1.18.1
+requests==2.34.2
+pyyaml==6.0.3
+openpyxl==3.1.5
+pydantic==2.14.1
+python-dotenv==1.2.4
+# anthropic 2.3.0 supports output_config (effort + JSON-schema format)
+anthropic==2.3.0
+# API
+fastapi==0.162.0
+uvicorn==0.54.0
+httpx==0.28.1
+# Tests
+pytest==9.1.1
+hypothesis==6.170.9

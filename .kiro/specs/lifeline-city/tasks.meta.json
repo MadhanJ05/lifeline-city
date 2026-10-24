@@ -1,0 +1,750 @@
+{
+  "pbtResults": {
+    "19.4 Write the property test for hourly scaling": {
+      "status": "passed",
+      "lastRunTimestamp": 1792869010831
+    },
+    "4.4 Write the required property test for lifelines bounds": {
+      "status": "passed",
+      "lastRunTimestamp": 1792869571690
+    },
+    "5.3 Write the required property test for the verifier": {
+      "status": "passed",
+      "lastRunTimestamp": 1792869879925
+    },
+    "5.5 Write the required property test for SMS segments": {
+      "status": "passed",
+      "lastRunTimestamp": 1792870419671
+    },
+    "5.7 Write the required property test for channel and radio coverage": {
+      "status": "passed",
+      "lastRunTimestamp": 1792870773049
+    }
+  },
+  "executionHistory": {
+    "1.1 Initialize git and write `.gitignore`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846045
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866853152
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867023856
+      }
+    ],
+    "1.2 Create the Python environment and package skeleton": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846139
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866853902
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867024248
+      }
+    ],
+    "1.3 Write the `config/` files": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846175
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866854692
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867025108
+      }
+    ],
+    "1.4 Write `.env.example`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846211
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866855518
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867026203
+      }
+    ],
+    "2.1 Implement `pipeline/common.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846238
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867029964
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867435224
+      }
+    ],
+    "2.2 Implement the `pipeline/run.py` skeleton": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846266
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867438531
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867542089
+      }
+    ],
+    "2.3 Implement `pipeline/fetch.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846291
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867544688
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868446590
+      }
+    ],
+    "3.1 Implement `pipeline/tracts_towns.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846318
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868451140
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868594792
+      }
+    ],
+    "3.2 Implement `pipeline/need.py` for the Cape and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846359
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868598286
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868836625
+      }
+    ],
+    "3.3 Implement the Tab 3 curve, anchors and town customers in `pipeline/outage_curves.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846391
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868261538
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868447435
+      }
+    ],
+    "3.4 Implement curve shaping and hourly scaling in `pipeline/outage_curves.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846424
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868839596
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869032763
+      }
+    ],
+    "4.1 Implement `pipeline/wires.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846451
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869037872
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869142214
+      }
+    ],
+    "4.2 Implement `pipeline/telecom.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846473
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869145312
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869344048
+      }
+    ],
+    "4.3 Implement `pipeline/lifelines.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846509
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869346912
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869506372
+      }
+    ],
+    "4.4 Write the required property test for lifelines bounds": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846540
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869510282
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869791984
+      }
+    ],
+    "4.5 Implement the key-hour channel report in `pipeline/lifelines.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846573
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869511498
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869792422
+      }
+    ],
+    "5.1 Implement `pipeline/synthetic.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846606
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869797395
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869932562
+      }
+    ],
+    "5.2 Implement `pipeline/verifier.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846634
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869512024
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869793584
+      }
+    ],
+    "5.3 Write the required property test for the verifier": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846667
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869798105
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869933379
+      }
+    ],
+    "5.4 Implement Resident_Templates, rendering and Template_Briefings in `pipeline/content.py` and register the content step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846692
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869936772
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870340963
+      }
+    ],
+    "5.5 Write the required property test for SMS segments": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846725
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870345134
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870663986
+      }
+    ],
+    "5.6 Implement LLM operator Briefings in `pipeline/content.py` and register the LLM and verifier steps": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846756
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870345900
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870664478
+      }
+    ],
+    "5.7 Write the required property test for channel and radio coverage": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846790
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870668097
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870785081
+      }
+    ],
+    "6.1 Implement `pipeline/scale_catalog.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846827
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870668733
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870785914
+      }
+    ],
+    "6.2 Implement `pipeline/export.py` and register the step": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846857
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870789836
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871390634
+      }
+    ],
+    "6.3 Implement `pipeline/privacy_guard.py` and the guard step in `pipeline/run.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846889
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871394199
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871589456
+      }
+    ],
+    "7.1 Create the required property-test hook": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846922
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871594059
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871649107
+      }
+    ],
+    "7.2 Create the privacy-guard hooks": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846954
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871594767
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871649138
+      }
+    ],
+    "8. Checkpoint: Cape pipeline and hooks": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866846984
+      },
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871657155
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792872097371
+      }
+    ],
+    "9.1 Implement `api/data.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847034
+      }
+    ],
+    "9.2 Implement `api/reach.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847062
+      }
+    ],
+    "9.3 Implement the read and content endpoints in `api/main.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847088
+      }
+    ],
+    "9.4 Add the demo reset endpoint": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847124
+      }
+    ],
+    "10. Checkpoint: API": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847156
+      }
+    ],
+    "11.1 Scaffold `web/`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847184
+      }
+    ],
+    "11.2 Implement `MapView`, `TimeSlider` and `SourceBadges` and wire them into `App.tsx`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847206
+      }
+    ],
+    "11.3 Implement `Queue` and wire it into `App.tsx`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847228
+      }
+    ],
+    "11.4 Implement `TractDrawer` and `WhyFlagged` and wire them into `App.tsx`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847250
+      }
+    ],
+    "11.5 Implement `ReachPanel` inside the drawer": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847271
+      }
+    ],
+    "11.6 Implement `ScaleSelector` and the reset control in the header": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847291
+      }
+    ],
+    "12. Checkpoint: web app": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847312
+      }
+    ],
+    "13.1 Implement `api/sms.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847335
+      }
+    ],
+    "13.2 Implement the check-in state machine in `api/state.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847357
+      }
+    ],
+    "13.3 Add the check-in endpoints to `api/main.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847382
+      }
+    ],
+    "13.4 Connect \"Send check-ins\", polling and counters in the web app": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847403
+      }
+    ],
+    "13.5 Implement `PhoneSimulator` in the drawer": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847423
+      }
+    ],
+    "14. Checkpoint: check-in loop": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847448
+      }
+    ],
+    "15.1 Write `README.md`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847470
+      }
+    ],
+    "15.2 Write `docs/methods.md` (one page at most)": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847515
+      }
+    ],
+    "15.3 Write `docs/kiro-usage.md`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847534
+      }
+    ],
+    "16.1 Add the Boston fetches and confirm the Boston config": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847554
+      }
+    ],
+    "16.2 Implement Boston tracts, Boston Need and 311 cleaning in `pipeline/voice_boston.py`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847587
+      }
+    ],
+    "16.3 Implement the Voice scores, register the step and export `boston_voice.geojson`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847610
+      }
+    ],
+    "16.4 Serve `GET /api/boston/voice`": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847637
+      }
+    ],
+    "16.5 Implement `BostonVoiceView` and route the Boston entry to it": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847659
+      }
+    ],
+    "17. Checkpoint: Boston Voice": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792866847678
+      }
+    ],
+    "1. Set up the repository and scaffold": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792867026234
+      }
+    ],
+    "2. Build the pipeline foundations": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792868446649
+      }
+    ],
+    "3. Build the Cape geography, Need and outage curves": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869032804
+      }
+    ],
+    "4. Build wires, telecom and the scoring layer": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792869792449
+      }
+    ],
+    "5. Build synthetic records, content and the verifier": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792870785123
+      }
+    ],
+    "6. Finish the pipeline with the scale catalog, export and privacy guard": [
+      {
+        "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792871589488
+      }
+    ]
+  }
+}

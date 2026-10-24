@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 30% of customers in this tract are without power.",
+    "value": 0.304825
+   },
+   {
+    "field": "rank",
+    "text": "The tract holds rank 10 on the current priority list.",
+    "value": 10.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently stands at 0 for this tract.",
+    "value": 0.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent residents score at the 68th percentile of need.",
+    "value": 0.678571
+   }
+  ],
+  "headline": "Orleans tract ranks 10 in priority with 30% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Privacy guard at end of agent turn",
+      "trigger": "Stop",
+      "description": "After every agent turn, re-scans api/ and data/processed/ for unmasked phone numbers and street addresses so files written through tools are covered (real data must stay aggregate-only). Exits non-zero and prints only path, line and match type, never the matched value. Reqs 31.4, 31.5.",
+      "action": {
+        "type": "command",
+        "command": ".venv/bin/python -m pipeline.privacy_guard api data/processed"
+      }
+    }
+  ]
+}

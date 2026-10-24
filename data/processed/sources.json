@@ -1,0 +1,1214 @@
+{
+ "acs_variables": [
+  {
+   "geo": "tract",
+   "id": "B01003_001E",
+   "label": "Estimate!!Total",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B11001_001E",
+   "label": "Estimate!!Total:",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B11010_005E",
+   "label": "Estimate!!Total:!!Male householder:!!Living alone:!!Householder 65 years and over",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B11010_012E",
+   "label": "Estimate!!Total:!!Female householder:!!Living alone:!!Householder 65 years and over",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B25003_001E",
+   "label": "Estimate!!Total:",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B25003_003E",
+   "label": "Estimate!!Total:!!Renter occupied",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B25044_001E",
+   "label": "Estimate!!Total:",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B25044_003E",
+   "label": "Estimate!!Total:!!Owner occupied:!!No vehicle available",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "B25044_010E",
+   "label": "Estimate!!Total:!!Renter occupied:!!No vehicle available",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "C16002_001E",
+   "label": "Estimate!!Total:",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "C16002_004E",
+   "label": "Estimate!!Total:!!Spanish:!!Limited English speaking household",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "C16002_007E",
+   "label": "Estimate!!Total:!!Other Indo-European languages:!!Limited English speaking household",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "C16002_010E",
+   "label": "Estimate!!Total:!!Asian and Pacific Island languages:!!Limited English speaking household",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "C16002_013E",
+   "label": "Estimate!!Total:!!Other languages:!!Limited English speaking household",
+   "vintage": 2024
+  },
+  {
+   "geo": "tract",
+   "id": "S1810_C03_001E",
+   "label": "Estimate!!Percent with a disability!!Total civilian noninstitutionalized population",
+   "vintage": 2024
+  },
+  {
+   "geo": "cousub",
+   "id": "B25001_001E",
+   "label": "Estimate!!Total",
+   "vintage": 2024
+  }
+ ],
+ "acs_vintage": {
+  "cousub": 2024,
+  "tract": 2024
+ },
+ "assumptions": [
+  {
+   "key": "telecom_model",
+   "label": "Modeled: assumes tower backup lasts about 8 hours",
+   "value": "out_pct >= 0.8 for 8 consecutive Hours"
+  },
+  {
+   "key": "telecom_observed_default_hours",
+   "label": "Assumed duration: 12 hours (no end time reported)",
+   "value": 12
+  },
+  {
+   "key": "acs_customers",
+   "label": "Estimated from ACS housing units.",
+   "value": "Chatham, Sandwich"
+  },
+  {
+   "key": "household_language_mix.default",
+   "label": "Assumed language mix for simulated households",
+   "value": "en 0.85, pt 0.1, es 0.05"
+  },
+  {
+   "key": "household_language_mix.Barnstable",
+   "label": "Assumed language mix for simulated households",
+   "value": "en 0.6, pt 0.3, es 0.1"
+  },
+  {
+   "key": "household_language_mix.Yarmouth",
+   "label": "Assumed language mix for simulated households",
+   "value": "en 0.6, pt 0.3, es 0.1"
+  },
+  {
+   "key": "operator_household",
+   "label": "Simulated household #1 is the presenter's household; in Barnstable and Yarmouth tracts its language is always pt",
+   "value": 1
+  },
+  {
+   "key": "towns_without_anchors",
+   "label": "No Anchors: unscaled out_pct is the Cape-wide share (Cape_Total_Curve / total Cape customers)",
+   "value": "Chatham"
+  },
+  {
+   "key": "empower_zip_to_tract",
+   "label": "emPOWER ZIP counts are allocated to tracts by area weight (assumes an even spread in each ZIP)",
+   "value": "area(ZIP ∩ tract) / area(ZIP), EPSG:26986"
+  },
+  {
+   "key": "empower_masking",
+   "label": "emPOWER reports counts of 1 to 10 as 11; 11 is used as reported and the ZIP is marked masked",
+   "value": 11
+  },
+  {
+   "key": "tract_town_assignment",
+   "label": "Each tract takes the town that contains its centroid",
+   "value": "centroid in EPSG:26986, else nearest boundary"
+  },
+  {
+   "key": "help_line.cape",
+   "label": "Call 911 for emergencies, 2-1-1 for shelters and help.",
+   "value": "2-1-1"
+  },
+  {
+   "key": "help_line.boston",
+   "label": "Call 911 for emergencies, 311 for city help.",
+   "value": "311"
+  }
+ ],
+ "customer_count_sources": {
+  "Barnstable": "MEMA via Patch 2026-02-23T12:30 (anchors row 4)",
+  "Bourne": "MEMA via Patch 2026-02-23T12:30 (anchors row 8)",
+  "Brewster": "MEMA via Patch 2026-02-23T12:30 (anchors row 9)",
+  "Chatham": "ACS B25001 housing units (county subdivision)",
+  "Dennis": "MEMA via Patch 2026-02-23T12:30 (anchors row 5)",
+  "Eastham": "MEMA via Patch 2026-02-23T12:30 (anchors row 12)",
+  "Falmouth": "MEMA via Patch 2026-02-23T12:30 (anchors row 3)",
+  "Harwich": "MEMA via Patch 2026-02-23T12:30 (anchors row 10)",
+  "Mashpee": "MEMA via Patch 2026-02-23T12:30 (anchors row 7)",
+  "Orleans": "MEMA via Patch 2026-02-23T12:30 (anchors row 13)",
+  "Provincetown": "MEMA via Patch 2026-02-23T12:30 (anchors row 14)",
+  "Sandwich": "ACS B25001 housing units (county subdivision)",
+  "Truro": "MEMA via Patch 2026-02-23T12:30 (anchors row 19)",
+  "Wellfleet": "MEMA via Patch 2026-02-23T12:30 (anchors row 16)",
+  "Yarmouth": "MEMA via Patch 2026-02-23T12:30 (anchors row 6)"
+ },
+ "empower_masked_zips": [
+  "02534",
+  "02543",
+  "02553",
+  "02561",
+  "02641",
+  "02647",
+  "02650",
+  "02652",
+  "02659",
+  "02661",
+  "02663",
+  "02666",
+  "02671",
+  "02672"
+ ],
+ "excluded": [
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "reason": "Scope 'eversource_ma' is not cape_eversource: not used (Req 4.4)",
+   "row": 22
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "reason": "Scope 'ma_all_utilities' is not cape_eversource: not used (Req 4.4)",
+   "row": 23
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "reason": "Scope 'eversource_ma' is not cape_eversource: not used (Req 4.4)",
+   "row": 24
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "reason": "Scope 'ma_all_utilities' is not cape_eversource: not used (Req 4.4)",
+   "row": 25
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "reason": "Scope 'eversource_ma' is not cape_eversource: not used (Req 4.4)",
+   "row": 26
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "reason": "Not a Barnstable County town (Req 3.1)",
+   "row": 2
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "reason": "Not a Barnstable County town (Req 3.1)",
+   "row": 11
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "reason": "Not a Barnstable County town (Req 3.1)",
+   "row": 15
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "reason": "Not a Barnstable County town (Req 3.1)",
+   "row": 17
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "reason": "Not a Barnstable County town (Req 3.1)",
+   "row": 18
+  }
+ ],
+ "fetches": [
+  {
+   "name": "tl_2020_25_tract",
+   "url": "https://www2.census.gov/geo/tiger/TIGER2020/TRACT/tl_2020_25_tract.zip"
+  },
+  {
+   "name": "tl_2020_25_cousub",
+   "url": "https://www2.census.gov/geo/tiger/TIGER2020/COUSUB/tl_2020_25_cousub.zip"
+  },
+  {
+   "name": "empower_zips_p0",
+   "url": "https://services2.arcgis.com/ZQ4jTQn6k7VPXEwO/arcgis/rest/services/HHS_emPOWER_REST_Service_Public/FeatureServer/1/query?where=1%3D1&geometry=-70.7585%2C41.4641%2C-69.8589%2C42.1345&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=Zip_Code%2CCOUNTY%2CPower_Dependent_Devices_DME%2CMedicare_Benes&returnGeometry=true&outSR=4326&f=geojson&orderByFields=OBJECTID&resultOffset=0&resultRecordCount=500"
+  },
+  {
+   "name": "acs2024_groups_B01003",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B01003.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_B11001",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B11001.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_B11010",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B11010.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_B25003",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B25003.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_B25044",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B25044.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_C16002",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/C16002.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_S1810",
+   "url": "https://api.census.gov/data/2024/acs/acs5/subject/groups/S1810.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_tract_001_detail",
+   "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME%2CB01003_001E%2CB11001_001E%2CB11010_005E%2CB11010_012E%2CC16002_001E%2CC16002_004E%2CC16002_007E%2CC16002_010E%2CC16002_013E%2CB25044_001E%2CB25044_003E%2CB25044_010E%2CB25003_001E%2CB25003_003E&for=tract%3A%2A&in=state%3A25+county%3A001",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_tract_001_subject",
+   "url": "https://api.census.gov/data/2024/acs/acs5/subject?get=NAME%2CS1810_C03_001E&for=tract%3A%2A&in=state%3A25+county%3A001",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_groups_B25001",
+   "url": "https://api.census.gov/data/2024/acs/acs5/groups/B25001.json",
+   "vintage": 2024
+  },
+  {
+   "name": "acs2024_cousub_001_detail",
+   "url": "https://api.census.gov/data/2024/acs/acs5?get=NAME%2CB25001_001E&for=county+subdivision%3A%2A&in=state%3A25+county%3A001",
+   "vintage": 2024
+  }
+ ],
+ "inputs": [
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 3,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 4,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 5,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 6,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 7,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 8,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 9,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 10,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 12,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 13,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 14,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 16,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 19,
+   "source_name": "MEMA via Patch",
+   "source_url": "https://patch.com/massachusetts/across-ma/130k-without-power-amid-30-inch-snow-forecasts-75-mph-winds-ma-blizzard-2026",
+   "used_in": [
+    "out_pct",
+    "customers"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 20,
+   "source_name": "Bourne Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 21,
+   "source_name": "Eastham Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 22,
+   "source_name": "Wellfleet Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 23,
+   "source_name": "Sandwich Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 24,
+   "source_name": "Eastham Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 25,
+   "source_name": "Town of Sandwich via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 26,
+   "source_name": "MEMA via WBUR",
+   "source_url": "https://www.wbur.org/upnext/2026/02/24/blizzard-orleanes-cape-cod-power-outage-damage",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 27,
+   "source_name": "Eastham Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 28,
+   "source_name": "Falmouth Emergency Preparedness via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 29,
+   "source_name": "News report (Yahoo syndication)",
+   "source_url": "https://www.yahoo.com/news/articles/cape-cod-town-remains-100-113423299.html",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 30,
+   "source_name": "CBS Boston",
+   "source_url": "https://www.cbsnews.com/boston/news/cape-cod-blizzard-power-outages/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 31,
+   "source_name": "MEMA via Boston Globe",
+   "source_url": "https://www.bostonglobe.com/2026/02/26/metro/power-outages-massachusetts/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 32,
+   "source_name": "Boston Globe",
+   "source_url": "https://www.bostonglobe.com/2026/02/26/metro/power-outages-massachusetts/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 33,
+   "source_name": "Boston Globe",
+   "source_url": "https://www.bostonglobe.com/2026/02/26/metro/power-outages-massachusetts/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 34,
+   "source_name": "Boston Globe",
+   "source_url": "https://www.bostonglobe.com/2026/02/26/metro/power-outages-massachusetts/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 35,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 36,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_town_outage_anchors.csv",
+   "row": 37,
+   "source_name": "Eversource news release (final event report p.140)",
+   "source_url": "https://eeaonline.eea.state.ma.us/DPU/Fileroom/dockets/bynumber/25-ERP-10",
+   "used_in": [
+    "out_pct"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 2,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 3,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 4,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 5,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 6,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 7,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 8,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 9,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 10,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 11,
+   "source_name": "Eversource via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 12,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-2-pm-live-blog-continuing-coverage-of-the-blizzard-of-2026-2-pm-forward/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 13,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 14,
+   "source_name": "Eversource via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 15,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 16,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 17,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 18,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 19,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 20,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_total_outage_timeline.csv",
+   "row": 21,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 2,
+   "source_name": "MEMA Situation Report #4 (CoMIRS status as of 06:30)",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 3,
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 4,
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 5,
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 6,
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 7,
+   "source_name": "Bourne Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 8,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 9,
+   "source_name": "Eastham Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 10,
+   "source_name": "Boston.com",
+   "source_url": "https://www.boston.com/news/local-news/2026/02/24/blizzard-leaves-cape-cod-buried-and-struggling-to-recover/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 11,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 12,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 13,
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 14,
+   "source_name": "BCREPC Situational Report #009",
+   "source_url": "https://www.capecod.gov/2026/02/26/34512/",
+   "used_in": [
+    "telecom_events"
+   ]
+  },
+  {
+   "file": "data/raw/curated/cape_telecom_events.csv",
+   "row": 15,
+   "source_name": "Barnstable County After-Action Report (Obs. #16)",
+   "source_url": "https://www.capecod.gov/wp-content/uploads/2026/08/Barnstable-County-Blizzard-Hernando-AAR-v3-16Jul26.pdf",
+   "used_in": [
+    "telecom_events"
+   ]
+  }
+ ],
+ "provenance_labels": {
+  "acs_customers": "Estimated from ACS housing units.",
+  "modeled_telecom": "Modeled: assumes tower backup lasts about 8 hours",
+  "observed_default": "Assumed duration: 12 hours (no end time reported)",
+  "reconstructed": "Reconstructed from MEMA, Eversource and public-safety reports."
+ },
+ "tab5_blank_received_calls": 0,
+ "tab5_unmatched_towns": [
+  {
+   "calls": 174,
+   "town": "PLYMOUTH"
+  },
+  {
+   "calls": 56,
+   "town": "WAREHAM"
+  },
+  {
+   "calls": 54,
+   "town": "MARSHFIELD"
+  },
+  {
+   "calls": 42,
+   "town": "DUXBURY"
+  },
+  {
+   "calls": 35,
+   "town": "MATTAPOISETT"
+  },
+  {
+   "calls": 20,
+   "town": "FAIRHAVEN"
+  },
+  {
+   "calls": 15,
+   "town": "NEW BEDFORD"
+  },
+  {
+   "calls": 14,
+   "town": "EDGARTOWN"
+  },
+  {
+   "calls": 13,
+   "town": "DARTMOUTH"
+  },
+  {
+   "calls": 13,
+   "town": "KINGSTON"
+  },
+  {
+   "calls": 13,
+   "town": "ROCHESTER"
+  },
+  {
+   "calls": 11,
+   "town": "CARVER"
+  },
+  {
+   "calls": 11,
+   "town": "SHARON"
+  },
+  {
+   "calls": 10,
+   "town": "MARION"
+  },
+  {
+   "calls": 10,
+   "town": "NEWTON"
+  },
+  {
+   "calls": 10,
+   "town": "NORTH TISBURY"
+  },
+  {
+   "calls": 7,
+   "town": "MILTON"
+  },
+  {
+   "calls": 7,
+   "town": "PLYMPTON"
+  },
+  {
+   "calls": 7,
+   "town": "WALPOLE"
+  },
+  {
+   "calls": 7,
+   "town": "WESTPORT"
+  },
+  {
+   "calls": 6,
+   "town": "OAK BLUFFS"
+  },
+  {
+   "calls": 5,
+   "town": "BROOKLINE"
+  },
+  {
+   "calls": 5,
+   "town": "FREETOWN"
+  },
+  {
+   "calls": 5,
+   "town": "NEEDHAM"
+  },
+  {
+   "calls": 5,
+   "town": "WEST ROXBURY"
+  },
+  {
+   "calls": 4,
+   "town": "DORCHESTER"
+  },
+  {
+   "calls": 4,
+   "town": "MILLIS"
+  },
+  {
+   "calls": 4,
+   "town": "SCITUATE"
+  },
+  {
+   "calls": 4,
+   "town": "SHERBORN"
+  },
+  {
+   "calls": 4,
+   "town": "SUDBURY"
+  },
+  {
+   "calls": 3,
+   "town": "BRIGHTON"
+  },
+  {
+   "calls": 3,
+   "town": "BURLINGTON"
+  },
+  {
+   "calls": 3,
+   "town": "CARLISLE"
+  },
+  {
+   "calls": 3,
+   "town": "CHILMARK"
+  },
+  {
+   "calls": 3,
+   "town": "MEDWAY"
+  },
+  {
+   "calls": 3,
+   "town": "WAYLAND"
+  },
+  {
+   "calls": 3,
+   "town": "WESTWOOD"
+  },
+  {
+   "calls": 2,
+   "town": "ACTON"
+  },
+  {
+   "calls": 2,
+   "town": "ACUSHNET"
+  },
+  {
+   "calls": 2,
+   "town": "AQUINNAH"
+  },
+  {
+   "calls": 2,
+   "town": "ARLINGTON"
+  },
+  {
+   "calls": 2,
+   "town": "CHARLESTOWN"
+  },
+  {
+   "calls": 2,
+   "town": "DOVER"
+  },
+  {
+   "calls": 2,
+   "town": "HOLLISTON"
+  },
+  {
+   "calls": 2,
+   "town": "LEXINGTON"
+  },
+  {
+   "calls": 2,
+   "town": "MAYNARD"
+  },
+  {
+   "calls": 2,
+   "town": "NORFOLK"
+  },
+  {
+   "calls": 2,
+   "town": "SOMERVILLE"
+  },
+  {
+   "calls": 2,
+   "town": "SOUTH BOSTON"
+  },
+  {
+   "calls": 2,
+   "town": "WATERTOWN"
+  },
+  {
+   "calls": 2,
+   "town": "WEST TISBURY"
+  },
+  {
+   "calls": 2,
+   "town": "WESTON"
+  },
+  {
+   "calls": 2,
+   "town": "WINCHESTER"
+  },
+  {
+   "calls": 2,
+   "town": "WOBURN"
+  },
+  {
+   "calls": 1,
+   "town": "BOSTON DOWNTOWN"
+  },
+  {
+   "calls": 1,
+   "town": "CAMBRIDGE"
+  },
+  {
+   "calls": 1,
+   "town": "CANTON"
+  },
+  {
+   "calls": 1,
+   "town": "DEDHAM"
+  },
+  {
+   "calls": 1,
+   "town": "FRAMINGHAM"
+  },
+  {
+   "calls": 1,
+   "town": "LAKEVILLE"
+  },
+  {
+   "calls": 1,
+   "town": "LINCOLN"
+  },
+  {
+   "calls": 1,
+   "town": "ROXBURY"
+  }
+ ],
+ "towns_without_anchors": [
+  "Chatham"
+ ],
+ "tract_town_nearest": [
+  {
+   "geoid": "25001010700",
+   "town": "Chatham"
+  }
+ ],
+ "tz": "America/New_York",
+ "unmatched_hours": [],
+ "workbook_inputs": [
+  {
+   "file": "data/raw/eversource_dpu_25-ERP-10/eversource_final_event_report_tabs.xlsx",
+   "sheet": "Tab 3",
+   "source_name": "Eversource final event report (DPU 25-ERP-10)",
+   "source_url": "https://eeaonline.eea.state.ma.us/DPU/Fileroom/dockets/bynumber/25-ERP-10",
+   "used_in": [
+    "cape_total"
+   ]
+  },
+  {
+   "file": "data/raw/eversource_dpu_25-ERP-10/eversource_final_event_report_tabs.xlsx",
+   "note": "Town-hour aggregates only; no call rows or street text are exported",
+   "sheet": "Tab 5",
+   "source_name": "Eversource final event report (DPU 25-ERP-10)",
+   "source_url": "https://eeaonline.eea.state.ma.us/DPU/Fileroom/dockets/bynumber/25-ERP-10",
+   "used_in": [
+    "wires"
+   ]
+  }
+ ]
+}

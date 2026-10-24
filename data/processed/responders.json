@@ -1,0 +1,530 @@
+{
+ "responders": [
+  {
+   "id": "barnstable-police_wellness",
+   "label": "Barnstable police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Barnstable"
+  },
+  {
+   "id": "barnstable-fire_wellness",
+   "label": "Barnstable fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Barnstable"
+  },
+  {
+   "id": "barnstable-coa_driver",
+   "label": "Barnstable COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Barnstable"
+  },
+  {
+   "id": "barnstable-elder_services",
+   "label": "Barnstable Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Barnstable"
+  },
+  {
+   "id": "barnstable-meals_on_wheels",
+   "label": "Barnstable Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Barnstable"
+  },
+  {
+   "id": "bourne-police_wellness",
+   "label": "Bourne police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Bourne"
+  },
+  {
+   "id": "bourne-fire_wellness",
+   "label": "Bourne fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Bourne"
+  },
+  {
+   "id": "bourne-coa_driver",
+   "label": "Bourne COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Bourne"
+  },
+  {
+   "id": "bourne-elder_services",
+   "label": "Bourne Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Bourne"
+  },
+  {
+   "id": "bourne-meals_on_wheels",
+   "label": "Bourne Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Bourne"
+  },
+  {
+   "id": "brewster-police_wellness",
+   "label": "Brewster police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Brewster"
+  },
+  {
+   "id": "brewster-fire_wellness",
+   "label": "Brewster fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Brewster"
+  },
+  {
+   "id": "brewster-coa_driver",
+   "label": "Brewster COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Brewster"
+  },
+  {
+   "id": "brewster-elder_services",
+   "label": "Brewster Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Brewster"
+  },
+  {
+   "id": "brewster-meals_on_wheels",
+   "label": "Brewster Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Brewster"
+  },
+  {
+   "id": "chatham-police_wellness",
+   "label": "Chatham police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Chatham"
+  },
+  {
+   "id": "chatham-fire_wellness",
+   "label": "Chatham fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Chatham"
+  },
+  {
+   "id": "chatham-coa_driver",
+   "label": "Chatham COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Chatham"
+  },
+  {
+   "id": "chatham-elder_services",
+   "label": "Chatham Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Chatham"
+  },
+  {
+   "id": "chatham-meals_on_wheels",
+   "label": "Chatham Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Chatham"
+  },
+  {
+   "id": "dennis-police_wellness",
+   "label": "Dennis police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Dennis"
+  },
+  {
+   "id": "dennis-fire_wellness",
+   "label": "Dennis fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Dennis"
+  },
+  {
+   "id": "dennis-coa_driver",
+   "label": "Dennis COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Dennis"
+  },
+  {
+   "id": "dennis-elder_services",
+   "label": "Dennis Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Dennis"
+  },
+  {
+   "id": "dennis-meals_on_wheels",
+   "label": "Dennis Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Dennis"
+  },
+  {
+   "id": "eastham-police_wellness",
+   "label": "Eastham police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Eastham"
+  },
+  {
+   "id": "eastham-fire_wellness",
+   "label": "Eastham fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Eastham"
+  },
+  {
+   "id": "eastham-coa_driver",
+   "label": "Eastham COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Eastham"
+  },
+  {
+   "id": "eastham-elder_services",
+   "label": "Eastham Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Eastham"
+  },
+  {
+   "id": "eastham-meals_on_wheels",
+   "label": "Eastham Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Eastham"
+  },
+  {
+   "id": "falmouth-police_wellness",
+   "label": "Falmouth police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Falmouth"
+  },
+  {
+   "id": "falmouth-fire_wellness",
+   "label": "Falmouth fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Falmouth"
+  },
+  {
+   "id": "falmouth-coa_driver",
+   "label": "Falmouth COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Falmouth"
+  },
+  {
+   "id": "falmouth-elder_services",
+   "label": "Falmouth Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Falmouth"
+  },
+  {
+   "id": "falmouth-meals_on_wheels",
+   "label": "Falmouth Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Falmouth"
+  },
+  {
+   "id": "harwich-police_wellness",
+   "label": "Harwich police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Harwich"
+  },
+  {
+   "id": "harwich-fire_wellness",
+   "label": "Harwich fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Harwich"
+  },
+  {
+   "id": "harwich-coa_driver",
+   "label": "Harwich COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Harwich"
+  },
+  {
+   "id": "harwich-elder_services",
+   "label": "Harwich Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Harwich"
+  },
+  {
+   "id": "harwich-meals_on_wheels",
+   "label": "Harwich Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Harwich"
+  },
+  {
+   "id": "mashpee-police_wellness",
+   "label": "Mashpee police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Mashpee"
+  },
+  {
+   "id": "mashpee-fire_wellness",
+   "label": "Mashpee fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Mashpee"
+  },
+  {
+   "id": "mashpee-coa_driver",
+   "label": "Mashpee COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Mashpee"
+  },
+  {
+   "id": "mashpee-elder_services",
+   "label": "Mashpee Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Mashpee"
+  },
+  {
+   "id": "mashpee-meals_on_wheels",
+   "label": "Mashpee Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Mashpee"
+  },
+  {
+   "id": "orleans-police_wellness",
+   "label": "Orleans police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Orleans"
+  },
+  {
+   "id": "orleans-fire_wellness",
+   "label": "Orleans fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Orleans"
+  },
+  {
+   "id": "orleans-coa_driver",
+   "label": "Orleans COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Orleans"
+  },
+  {
+   "id": "orleans-elder_services",
+   "label": "Orleans Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Orleans"
+  },
+  {
+   "id": "orleans-meals_on_wheels",
+   "label": "Orleans Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Orleans"
+  },
+  {
+   "id": "provincetown-police_wellness",
+   "label": "Provincetown police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Provincetown"
+  },
+  {
+   "id": "provincetown-fire_wellness",
+   "label": "Provincetown fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Provincetown"
+  },
+  {
+   "id": "provincetown-coa_driver",
+   "label": "Provincetown COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Provincetown"
+  },
+  {
+   "id": "provincetown-elder_services",
+   "label": "Provincetown Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Provincetown"
+  },
+  {
+   "id": "provincetown-meals_on_wheels",
+   "label": "Provincetown Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Provincetown"
+  },
+  {
+   "id": "sandwich-police_wellness",
+   "label": "Sandwich police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Sandwich"
+  },
+  {
+   "id": "sandwich-fire_wellness",
+   "label": "Sandwich fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Sandwich"
+  },
+  {
+   "id": "sandwich-coa_driver",
+   "label": "Sandwich COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Sandwich"
+  },
+  {
+   "id": "sandwich-elder_services",
+   "label": "Sandwich Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Sandwich"
+  },
+  {
+   "id": "sandwich-meals_on_wheels",
+   "label": "Sandwich Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Sandwich"
+  },
+  {
+   "id": "truro-police_wellness",
+   "label": "Truro police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Truro"
+  },
+  {
+   "id": "truro-fire_wellness",
+   "label": "Truro fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Truro"
+  },
+  {
+   "id": "truro-coa_driver",
+   "label": "Truro COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Truro"
+  },
+  {
+   "id": "truro-elder_services",
+   "label": "Truro Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Truro"
+  },
+  {
+   "id": "truro-meals_on_wheels",
+   "label": "Truro Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Truro"
+  },
+  {
+   "id": "wellfleet-police_wellness",
+   "label": "Wellfleet police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Wellfleet"
+  },
+  {
+   "id": "wellfleet-fire_wellness",
+   "label": "Wellfleet fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Wellfleet"
+  },
+  {
+   "id": "wellfleet-coa_driver",
+   "label": "Wellfleet COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Wellfleet"
+  },
+  {
+   "id": "wellfleet-elder_services",
+   "label": "Wellfleet Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Wellfleet"
+  },
+  {
+   "id": "wellfleet-meals_on_wheels",
+   "label": "Wellfleet Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Wellfleet"
+  },
+  {
+   "id": "yarmouth-police_wellness",
+   "label": "Yarmouth police wellness check (Simulated)",
+   "role": "police_wellness",
+   "synthetic": true,
+   "town": "Yarmouth"
+  },
+  {
+   "id": "yarmouth-fire_wellness",
+   "label": "Yarmouth fire wellness check (Simulated)",
+   "role": "fire_wellness",
+   "synthetic": true,
+   "town": "Yarmouth"
+  },
+  {
+   "id": "yarmouth-coa_driver",
+   "label": "Yarmouth COA driver (Simulated)",
+   "role": "coa_driver",
+   "synthetic": true,
+   "town": "Yarmouth"
+  },
+  {
+   "id": "yarmouth-elder_services",
+   "label": "Yarmouth Elder Services worker (Simulated)",
+   "role": "elder_services",
+   "synthetic": true,
+   "town": "Yarmouth"
+  },
+  {
+   "id": "yarmouth-meals_on_wheels",
+   "label": "Yarmouth Meals on Wheels driver (Simulated)",
+   "role": "meals_on_wheels",
+   "synthetic": true,
+   "town": "Yarmouth"
+  }
+ ],
+ "tz": "America/New_York"
+}

@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Privacy guard on save (api, data/processed)",
+      "trigger": "PostFileSave",
+      "description": "When a file under api/ or data/processed/ is saved, scans every file there for unmasked phone numbers and street addresses (real data must stay aggregate-only). Exits non-zero and prints only path, line and match type, never the matched value. Reqs 31.4, 31.5.",
+      "matcher": "/(api|data/processed)/",
+      "action": {
+        "type": "command",
+        "command": ".venv/bin/python -m pipeline.privacy_guard api data/processed"
+      }
+    }
+  ]
+}

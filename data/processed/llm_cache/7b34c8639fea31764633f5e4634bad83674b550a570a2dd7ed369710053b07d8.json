@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 14% of customers in this tract are without power.",
+    "value": 0.138477
+   },
+   {
+    "field": "need.seniors_alone.raw",
+    "text": "Seniors living alone make up about 39% of this tract.",
+    "value": 0.391061
+   },
+   {
+    "field": "need_t",
+    "text": "The combined need score for this tract is 0.87.",
+    "value": 0.873512
+   },
+   {
+    "field": "hours_dark",
+    "text": "Recorded hours dark currently stands at 0.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Yarmouth tract has 14% of customers out, with high social need"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

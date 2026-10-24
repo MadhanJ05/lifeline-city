@@ -1,0 +1,442 @@
+{
+ "events": [
+  {
+   "affects": "responders",
+   "areas": [
+    "Wellfleet"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-23T16:18",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_01",
+   "matched_towns": [
+    "Wellfleet"
+   ],
+   "note": "No generator + power outage and/or backhaul outage",
+   "pins": [
+    {
+     "caption": "Wellfleet",
+     "kind": "town",
+     "lat": 41.9183,
+     "lon": -70.0255,
+     "town": "Wellfleet"
+    }
+   ],
+   "source_name": "MEMA Situation Report #4 (CoMIRS status as of 06:30)",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "start_local": "2026-02-23T04:18",
+   "status": "off_air",
+   "system": "state_public_safety_radio",
+   "town_or_area": "Wellfleet"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Brewster",
+    "Orleans"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-23T16:42",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_02",
+   "matched_towns": [
+    "Brewster",
+    "Orleans"
+   ],
+   "note": null,
+   "pins": [
+    {
+     "caption": "Brewster",
+     "kind": "town",
+     "lat": 41.7472,
+     "lon": -70.068,
+     "town": "Brewster"
+    },
+    {
+     "caption": "Orleans",
+     "kind": "town",
+     "lat": 41.7687,
+     "lon": -69.966,
+     "town": "Orleans"
+    }
+   ],
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "start_local": "2026-02-23T04:42",
+   "status": "on_generator",
+   "system": "state_public_safety_radio",
+   "town_or_area": "Brewster;Orleans"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Bourne"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-23T17:39",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_03",
+   "matched_towns": [
+    "Bourne"
+   ],
+   "note": null,
+   "pins": [
+    {
+     "caption": "Bourne",
+     "kind": "town",
+     "lat": 41.7285,
+     "lon": -70.5871,
+     "town": "Bourne"
+    }
+   ],
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "start_local": "2026-02-23T05:39",
+   "status": "on_generator",
+   "system": "state_public_safety_radio",
+   "town_or_area": "Bourne"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Cape-wide"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": false,
+   "end_effective": "2026-02-23T06:25",
+   "end_label": null,
+   "end_local": "2026-02-23T06:25",
+   "id": "tel_04",
+   "matched_towns": [],
+   "note": "64 busies; some adjacent site traffic removed",
+   "pins": [
+    {
+     "caption": "Cape-wide",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "start_local": "2026-02-23T05:45",
+   "status": "overloaded",
+   "system": "state_public_safety_radio",
+   "town_or_area": "Cape-wide"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Barnstable County Sheriff dispatch"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-23T18:30",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_05",
+   "matched_towns": [],
+   "note": "Comcast connection bouncing (power and/or backhaul)",
+   "pins": [
+    {
+     "caption": "Barnstable County Sheriff dispatch",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "MEMA Situation Report #4",
+   "source_url": "https://hingham-ma.gov/DocumentCenter/View/27390/MEMA-Storm-Update?bidId=",
+   "start_local": "2026-02-23T06:30",
+   "status": "intermittent",
+   "system": "dispatch_internet",
+   "town_or_area": "Barnstable County Sheriff dispatch"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Bourne"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-23T22:00",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_06",
+   "matched_towns": [
+    "Bourne"
+   ],
+   "note": "Internet intermittent; phones on cellular backup; one call at a time; 911 fully operational",
+   "pins": [
+    {
+     "caption": "Bourne",
+     "kind": "town",
+     "lat": 41.7285,
+     "lon": -70.5871,
+     "town": "Bourne"
+    }
+   ],
+   "source_name": "Bourne Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "start_local": "2026-02-23T10:00",
+   "status": "degraded",
+   "system": "police_phone_internet",
+   "town_or_area": "Bourne"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Outer Cape"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-24T00:30",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_07",
+   "matched_towns": [],
+   "note": "Responders using backup radios",
+   "pins": [
+    {
+     "caption": "Outer Cape",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-7-am-live-blog-cwn-continuing-coverage-of-blizzard-conditions-on-cape-cod/",
+   "start_local": "2026-02-23T12:30",
+   "status": "malfunctioning",
+   "system": "public_safety_radio",
+   "town_or_area": "Outer Cape"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Eastham"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-24T22:15",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_08",
+   "matched_towns": [
+    "Eastham"
+   ],
+   "note": "Business line down",
+   "pins": [
+    {
+     "caption": "Eastham",
+     "kind": "town",
+     "lat": 41.8377,
+     "lon": -69.9895,
+     "town": "Eastham"
+    }
+   ],
+   "source_name": "Eastham Police via Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/updated-815-am-live-blog-day-2-as-the-dig-out-and-restoration-after-the-blizzard-shifts-into-high-gear/",
+   "start_local": "2026-02-24T10:15",
+   "status": "down",
+   "system": "police_phone",
+   "town_or_area": "Eastham"
+  },
+  {
+   "affects": "residents",
+   "areas": [
+    "Cape-wide"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-25T00:00",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_09",
+   "matched_towns": [],
+   "note": "All but one of AT&T's towers in Barnstable reported down across the Cape; Verizon main sites on generator, smaller supporting poles may be down",
+   "pins": [
+    {
+     "caption": "Cape-wide",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "Boston.com",
+   "source_url": "https://www.boston.com/news/local-news/2026/02/24/blizzard-leaves-cape-cod-buried-and-struggling-to-recover/",
+   "start_local": "2026-02-24T12:00",
+   "status": "widespread_outage",
+   "system": "cellular",
+   "town_or_area": "Cape-wide"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Barnstable County Sheriff 911/dispatch center"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": false,
+   "end_effective": "2026-02-26T21:30",
+   "end_label": null,
+   "end_local": "2026-02-26T21:30",
+   "id": "tel_10",
+   "matched_towns": [],
+   "note": "911 redirected to alternate site; radio dispatch via portable radios / mobile command unit. Center is 911 answering point for Falmouth, Mashpee, Harwich, Chatham, Brewster, Orleans, Eastham, Wellfleet and fire dispatch for most Cape towns",
+   "pins": [
+    {
+     "caption": "Barnstable County Sheriff 911/dispatch center",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "start_local": "2026-02-26T12:00",
+   "status": "major_failure",
+   "system": "911_dispatch",
+   "town_or_area": "Barnstable County Sheriff 911/dispatch center"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Dennis"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-27T02:00",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_11",
+   "matched_towns": [
+    "Dennis"
+   ],
+   "note": null,
+   "pins": [
+    {
+     "caption": "Dennis",
+     "kind": "town",
+     "lat": 41.7037,
+     "lon": -70.1561,
+     "town": "Dennis"
+    }
+   ],
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "start_local": "2026-02-26T14:00",
+   "status": "down",
+   "system": "fire_phone",
+   "town_or_area": "Dennis"
+  },
+  {
+   "affects": "residents",
+   "areas": [
+    "Cape-wide",
+    "Nantucket",
+    "Martha's Vineyard"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-27T05:15",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_12",
+   "matched_towns": [],
+   "note": null,
+   "pins": [
+    {
+     "caption": "Cape-wide;Nantucket;Martha's Vineyard",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "Cape Wide News live blog",
+   "source_url": "https://www.capecod.com/cape-wide-news/top-story-cape-wide-news/updated-8-am-live-blog-day-4-of-blizzard-coverage-the-latest-2-overnight-fires/",
+   "start_local": "2026-02-26T17:15",
+   "status": "outage_being_restored",
+   "system": "internet_comcast",
+   "town_or_area": "Cape-wide;Nantucket;Martha's Vineyard"
+  },
+  {
+   "affects": "responders",
+   "areas": [
+    "Barnstable County MACC"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": true,
+   "end_effective": "2026-02-27T00:00",
+   "end_label": "Assumed duration: 12 hours (no end time reported)",
+   "end_local": null,
+   "id": "tel_13",
+   "matched_towns": [],
+   "note": "Primary MACC call line down",
+   "pins": [
+    {
+     "caption": "Barnstable County MACC",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "BCREPC Situational Report #009",
+   "source_url": "https://www.capecod.gov/2026/02/26/34512/",
+   "start_local": "2026-02-26T12:00",
+   "status": "down",
+   "system": "county_coordination_line",
+   "town_or_area": "Barnstable County MACC"
+  },
+  {
+   "affects": "residents",
+   "areas": [
+    "Cape-wide"
+   ],
+   "drives_reach_flag": false,
+   "end_assumed": false,
+   "end_effective": "2026-02-27T13:00",
+   "end_label": null,
+   "end_local": "2026-02-27T13:00",
+   "id": "tel_14",
+   "matched_towns": [],
+   "note": "No backup comms protocol; ARES: 6-12 more storm hours would likely have meant complete cellular failure across the Cape",
+   "pins": [
+    {
+     "caption": "Cape-wide",
+     "kind": "cape_wide",
+     "lat": 41.85,
+     "lon": -70.25,
+     "marker_label": "Cape-wide",
+     "town": null
+    }
+   ],
+   "source_name": "Barnstable County After-Action Report (Obs. #16)",
+   "source_url": "https://www.capecod.gov/wp-content/uploads/2026/08/Barnstable-County-Blizzard-Hernando-AAR-v3-16Jul26.pdf",
+   "start_local": "2026-02-23T00:00",
+   "status": "widespread_outage",
+   "system": "cellular_internet",
+   "town_or_area": "Cape-wide"
+  }
+ ],
+ "tz": "America/New_York"
+}

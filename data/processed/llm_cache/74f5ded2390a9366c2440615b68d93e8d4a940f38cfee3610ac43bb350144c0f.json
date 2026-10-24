@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 98% of customers in this tract are without power.",
+    "value": 0.98274
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the 98th percentile for this measure.",
+    "value": 0.982143
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle are also at the 98th percentile.",
+    "value": 0.982143
+   }
+  ],
+  "headline": "Falmouth tract ranks 4 with 98% of customers out for 9 hours"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

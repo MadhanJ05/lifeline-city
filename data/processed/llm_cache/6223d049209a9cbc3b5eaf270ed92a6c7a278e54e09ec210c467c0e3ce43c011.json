@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 24 hours.",
+    "value": 24.0
+   },
+   {
+    "field": "telecom",
+    "text": "Telecom outage indicator stands at 1, the maximum value.",
+    "value": 1.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent residents rank at the 98th percentile among tracts.",
+    "value": 0.982143
+   }
+  ],
+  "headline": "Bourne tract fully dark for 24 hours, ranked 3 for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "population",
+    "text": "About 3162 residents live in the tract.",
+    "value": 3162.0
+   },
+   {
+    "field": "need.limited_english.pct",
+    "text": "Limited English need sits at the 86% percentile among tracts.",
+    "value": 0.857143
+   }
+  ],
+  "headline": "Eastham tract fully without power for 9 hours, telecom also affected"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

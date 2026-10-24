@@ -1,0 +1,15 @@
+# Secrets (only .env.example is committed)
+.env
+
+# Raw data cache
+data/raw/cache/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+.hypothesis/
+
+# Web
+web/node_modules/
+web/dist/

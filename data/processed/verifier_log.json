@@ -1,0 +1,422 @@
+{
+ "counts": {
+  "fallback": 1,
+  "pass": 14,
+  "regenerated": 35
+ },
+ "failures": [
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001014800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:2"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001014900",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:3"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001012102",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001010206",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:6",
+    "number_not_allowed:4461"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001010100",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:7"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001010800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:8"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001012002",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:9"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T09:00/25001010306",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:10"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001010100",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:2"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001010206",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:3"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001014800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4"
+   ]
+  },
+  {
+   "attempt": 2,
+   "key": "2026-02-23T17:00/25001014800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001010306",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:5"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001010208",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:6"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001013700",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:9"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-23T17:00/25001010400",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:10"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001014900",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:2"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001013700",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:3"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001013900",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001010800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:5"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001014002",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:6"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001015300",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:7"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001010100",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:8"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001014600",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:9"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-24T09:00/25001010206",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:10"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-25T15:00/25001010306",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:3"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-25T15:00/25001010900",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-25T15:00/25001014800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:5"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-25T15:00/25001010304",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:8"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001010304",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:2"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001015300",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:3"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001010206",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:4461"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001012102",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:5"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001010800",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:6"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001013700",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:7"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001010400",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:8"
+   ]
+  },
+  {
+   "attempt": 1,
+   "key": "2026-02-26T13:00/25001012002",
+   "kind": "briefing",
+   "reasons": [
+    "number_not_allowed:9"
+   ]
+  }
+ ],
+ "has_mixed_hour": true,
+ "key_hour_channels": {
+  "2026-02-23T09:00": {
+   "door_knock": {
+    "count": 0,
+    "towns": []
+   },
+   "sms": {
+    "count": 10,
+    "towns": [
+     "Barnstable",
+     "Bourne",
+     "Brewster",
+     "Eastham",
+     "Falmouth",
+     "Provincetown",
+     "Wellfleet",
+     "Yarmouth"
+    ]
+   }
+  },
+  "2026-02-23T17:00": {
+   "door_knock": {
+    "count": 6,
+    "towns": [
+     "Brewster",
+     "Eastham",
+     "Orleans",
+     "Provincetown",
+     "Truro",
+     "Wellfleet"
+    ]
+   },
+   "sms": {
+    "count": 4,
+    "towns": [
+     "Barnstable",
+     "Bourne",
+     "Falmouth"
+    ]
+   }
+  },
+  "2026-02-24T09:00": {
+   "door_knock": {
+    "count": 9,
+    "towns": [
+     "Bourne",
+     "Brewster",
+     "Falmouth",
+     "Provincetown",
+     "Wellfleet"
+    ]
+   },
+   "sms": {
+    "count": 1,
+    "towns": [
+     "Barnstable"
+    ]
+   }
+  },
+  "2026-02-25T15:00": {
+   "door_knock": {
+    "count": 5,
+    "towns": [
+     "Brewster",
+     "Eastham",
+     "Wellfleet"
+    ]
+   },
+   "sms": {
+    "count": 5,
+    "towns": [
+     "Bourne",
+     "Falmouth"
+    ]
+   }
+  },
+  "2026-02-26T13:00": {
+   "door_knock": {
+    "count": 0,
+    "towns": []
+   },
+   "sms": {
+    "count": 10,
+    "towns": [
+     "Barnstable",
+     "Bourne",
+     "Brewster",
+     "Eastham",
+     "Orleans",
+     "Wellfleet",
+     "Yarmouth"
+    ]
+   }
+  }
+ },
+ "llm_step": "ran",
+ "outreach": {
+  "doorstep": {
+   "checked": 45
+  },
+  "radio": {
+   "checked": 2400
+  },
+  "sms": {
+   "checked": 135
+  },
+  "why_chip": {
+   "checked": 2380
+  }
+ },
+ "template_briefings": {
+  "checked": 6615,
+  "pass": 6615
+ },
+ "tz": "America/New_York"
+}

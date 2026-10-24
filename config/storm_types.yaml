@@ -1,0 +1,3 @@
+# Boston 311 case types counted for storm-spike day exclusion from the baseline (Boston Voice block).
+# PROVISIONAL placeholders: replaced with exact observed case type values in task 16.1.
+case_types: ["<snow plowing request>", "<unshoveled sidewalk>", "<downed tree>"]

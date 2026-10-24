@@ -1,0 +1,5 @@
+# Boston 311 source channels (Boston Voice block).
+# PROVISIONAL: confirmed against observed 311 channel values in task 16.1.
+keep: ["Constituent Call", "Self Service", "Citizens Connect App"]      # resident-originated
+drop: ["Employee Generated", "City Worker App", "Maximo Integration"]   # worker or system generated
+unknown: drop_and_report                                                # any value not listed above

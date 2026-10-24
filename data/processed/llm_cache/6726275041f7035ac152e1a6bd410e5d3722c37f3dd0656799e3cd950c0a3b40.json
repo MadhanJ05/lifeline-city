@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "customers",
+    "text": "The tract serves 5943 customers.",
+    "value": 5943.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "No-vehicle households rank at the 86% percentile among tracts.",
+    "value": 0.857143
+   }
+  ],
+  "headline": "Provincetown tract fully out for 9 hours, ranked 2 for door knocking"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

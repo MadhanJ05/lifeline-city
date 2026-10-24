@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power (100% out).",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "customers",
+    "text": "The tract serves 4461 customers.",
+    "value": 4461.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone percentile is 77%, relevant for door-knock outreach.",
+    "value": 0.767857
+   }
+  ],
+  "headline": "Wellfleet tract fully out for 9 hours, ranked 3 for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 42% of customers in this tract are without power.",
+    "value": 0.421579
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the top need percentile here, at 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "population",
+    "text": "The tract has a population of 3176 residents.",
+    "value": 3176.0
+   },
+   {
+    "field": "need_t",
+    "text": "Overall need score for the tract is 0.87.",
+    "value": 0.873512
+   }
+  ],
+  "headline": "Yarmouth tract ranks high in priority with 42% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

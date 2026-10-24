@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 30% of customers in this tract are without power.",
+    "value": 0.304825
+   },
+   {
+    "field": "rank",
+    "text": "The tract ranks 4 in current priority order.",
+    "value": 4.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone sit at the 77th percentile of need.",
+    "value": 0.767857
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle sit at the 82nd percentile of need.",
+    "value": 0.821429
+   }
+  ],
+  "headline": "Wellfleet tract ranks 4 with 30% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

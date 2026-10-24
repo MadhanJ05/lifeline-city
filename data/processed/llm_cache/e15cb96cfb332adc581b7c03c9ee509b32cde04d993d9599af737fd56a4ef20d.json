@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 61% of customers in this tract are without power.",
+    "value": 0.614087
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 54 hours.",
+    "value": 54.0
+   },
+   {
+    "field": "rank",
+    "text": "The tract ranks 10 in current priority order.",
+    "value": 10.0
+   },
+   {
+    "field": "population",
+    "text": "Population of the tract is 4532 residents.",
+    "value": 4532.0
+   }
+  ],
+  "headline": "Bourne tract: 61% of customers out after 54 hours dark"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

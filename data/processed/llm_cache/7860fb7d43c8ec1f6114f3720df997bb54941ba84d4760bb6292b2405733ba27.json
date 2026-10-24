@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle sit at the 86th percentile of need.",
+    "value": 0.857143
+   },
+   {
+    "field": "telecom",
+    "text": "The telecom outage indicator is at its maximum value of 1.",
+    "value": 1.0
+   }
+  ],
+  "headline": "Provincetown tract fully without power for 9 hours, ranked second for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

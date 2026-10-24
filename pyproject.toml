@@ -1,0 +1,10 @@
+[project]
+name = "lifeline-city"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "required_pbt: required property-based tests (Properties 1 to 4), run by the required-pbt hook",
+]

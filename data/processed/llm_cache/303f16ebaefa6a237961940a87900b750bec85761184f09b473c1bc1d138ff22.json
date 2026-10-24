@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 14% of customers in this tract are currently without power.",
+    "value": 0.138477
+   },
+   {
+    "field": "population",
+    "text": "The tract has 3176 residents.",
+    "value": 3176.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the 100th percentile of need here.",
+    "value": 1.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle rank at the 95th percentile.",
+    "value": 0.946429
+   }
+  ],
+  "headline": "Yarmouth tract ranks 5 with 14% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 42% of customers in this tract are currently without power.",
+    "value": 0.421579
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the top percentile for this tract, 100% of the scale.",
+    "value": 1.0
+   },
+   {
+    "field": "need.limited_english.pct",
+    "text": "Limited English need sits at the 95th percentile, relevant for SMS outreach wording.",
+    "value": 0.946429
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently reads 0 for this tract.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Yarmouth tract ranks 4 with 42% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "hours_dark",
+    "text": "Customers in this tract have been without power for 72 hours.",
+    "value": 72.0
+   },
+   {
+    "field": "out_pct",
+    "text": "About 52% of customers in the tract are currently out.",
+    "value": 0.52
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone in this tract sit at the 93rd percentile of need.",
+    "value": 0.928571
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "Disability need in this tract sits at the 86th percentile.",
+    "value": 0.857143
+   }
+  ],
+  "headline": "Eastham tract dark for 72 hours with 52% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

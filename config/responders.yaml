@@ -1,0 +1,28 @@
+# Synthetic responder types per Cape town. All responders are synthetic and labeled "Simulated".
+# Door-knock entries are assigned only to roles listed for the tract's town.
+
+roles:
+  police_wellness: "police wellness check"
+  fire_wellness: "fire wellness check"
+  coa_driver: "COA driver"                   # Council on Aging
+  elder_services: "Elder Services worker"
+  meals_on_wheels: "Meals on Wheels driver"
+
+default_roles: &default_roles [police_wellness, fire_wellness, coa_driver, elder_services, meals_on_wheels]
+
+towns:                                       # all 15 Cape towns; same default set unless overridden
+  Barnstable: *default_roles
+  Bourne: *default_roles
+  Brewster: *default_roles
+  Chatham: *default_roles
+  Dennis: *default_roles
+  Eastham: *default_roles
+  Falmouth: *default_roles
+  Harwich: *default_roles
+  Mashpee: *default_roles
+  Orleans: *default_roles
+  Provincetown: *default_roles
+  Sandwich: *default_roles
+  Truro: *default_roles
+  Wellfleet: *default_roles
+  Yarmouth: *default_roles

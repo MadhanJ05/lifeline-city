@@ -1,0 +1,136 @@
+{
+ "entries": [
+  {
+   "data_endpoint": "/api/tracts",
+   "hazard": "blizzard",
+   "hazard_label": "Blizzard",
+   "id": "cape_blizzard",
+   "lost_lifelines_inputs": [
+    "power",
+    "phones",
+    "blocked roads"
+   ],
+   "mode": "live",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Barnstable County (Cape Cod)",
+   "tier": 1
+  },
+  {
+   "hazard": "blizzard",
+   "hazard_label": "Blizzard",
+   "id": "boston_blizzard",
+   "label": "Configuration preview",
+   "lost_lifelines_inputs": [
+    "power",
+    "phones",
+    "blocked roads"
+   ],
+   "mode": "preview",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Boston",
+   "tier": 2
+  },
+  {
+   "hazard": "noreaster",
+   "hazard_label": "Nor'easter",
+   "id": "plymouth_noreaster",
+   "label": "Configuration preview",
+   "lost_lifelines_inputs": [
+    "power",
+    "phones",
+    "blocked roads"
+   ],
+   "mode": "preview",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Plymouth",
+   "tier": 1
+  },
+  {
+   "hazard": "ice_storm",
+   "hazard_label": "Ice storm",
+   "id": "worcester_ice_storm",
+   "label": "Configuration preview",
+   "lost_lifelines_inputs": [
+    "power",
+    "phones",
+    "blocked roads"
+   ],
+   "mode": "preview",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Worcester",
+   "tier": 1
+  },
+  {
+   "hazard": "flood",
+   "hazard_label": "Flood",
+   "id": "lowell_flood",
+   "label": "Configuration preview",
+   "lost_lifelines_inputs": [
+    "flood zones",
+    "river gauges",
+    "road closures"
+   ],
+   "mode": "preview",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Lowell",
+   "tier": 1
+  },
+  {
+   "hazard": "heat",
+   "hazard_label": "Heat",
+   "id": "springfield_heat",
+   "label": "Configuration preview",
+   "lost_lifelines_inputs": [
+    "power",
+    "heat index"
+   ],
+   "mode": "preview",
+   "need_inputs": [
+    "seniors living alone",
+    "disability",
+    "limited-English households",
+    "no-vehicle households",
+    "renter share",
+    "electricity-dependent Medicare beneficiaries"
+   ],
+   "place": "Springfield",
+   "tier": 1
+  }
+ ],
+ "tz": "America/New_York"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 83% of customers in this tract are without power.",
+    "value": 0.833788
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "telecom",
+    "text": "Telecom outage indicator for the tract reads 1.",
+    "value": 1.0
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "Disability need ranks at the 74th percentile among tracts.",
+    "value": 0.741071
+   }
+  ],
+  "headline": "Brewster tract has 83% of customers out after 55 hours dark"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

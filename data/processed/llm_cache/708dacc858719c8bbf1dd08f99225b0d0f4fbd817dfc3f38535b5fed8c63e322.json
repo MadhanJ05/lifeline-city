@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power (100% out).",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 8 hours.",
+    "value": 8.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent need is high, at the 98th percentile among tracts.",
+    "value": 0.982143
+   },
+   {
+    "field": "population",
+    "text": "About 4304 residents live in the tract.",
+    "value": 4304.0
+   }
+  ],
+  "headline": "Bourne tract fully dark for 8 hours, ranked 9 in priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

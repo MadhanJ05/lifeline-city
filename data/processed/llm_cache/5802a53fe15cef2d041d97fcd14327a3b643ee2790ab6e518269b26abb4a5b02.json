@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "Outage share in this tract stands at 100% of customers.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been without power for 25 hours.",
+    "value": 25.0
+   },
+   {
+    "field": "need.seniors_alone.raw",
+    "text": "About 33% of households are seniors living alone.",
+    "value": 0.329474
+   },
+   {
+    "field": "need.no_vehicle.raw",
+    "text": "Roughly 23% of households have no vehicle.",
+    "value": 0.230526
+   }
+  ],
+  "headline": "Falmouth tract ranks 1 with full outage after 25 hours dark"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

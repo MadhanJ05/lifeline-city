@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 24 hours.",
+    "value": 24.0
+   },
+   {
+    "field": "telecom",
+    "text": "Telecom disruption is at its maximum level, scored 1.",
+    "value": 1.0
+   },
+   {
+    "field": "need.renter.pct",
+    "text": "About 75% of households rent, a high percentile among tracts.",
+    "value": 0.75
+   }
+  ],
+  "headline": "Bourne tract fully without power for 24 hours, telecom also affected"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

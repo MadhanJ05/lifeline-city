@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank high here, at the 88th percentile of need.",
+    "value": 0.875
+   },
+   {
+    "field": "population",
+    "text": "The tract population is 3327 residents.",
+    "value": 3327.0
+   }
+  ],
+  "headline": "Orleans tract fully without power for 9 hours, telecom also out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

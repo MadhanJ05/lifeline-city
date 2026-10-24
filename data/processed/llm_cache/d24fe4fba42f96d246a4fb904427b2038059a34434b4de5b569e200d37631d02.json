@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 51% of customers in this tract are without power.",
+    "value": 0.507324
+   },
+   {
+    "field": "rank",
+    "text": "The tract ranks 5 on the current priority list.",
+    "value": 5.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent need sits at the 98th percentile among tracts.",
+    "value": 0.982143
+   },
+   {
+    "field": "population",
+    "text": "The tract has a population of 4304.",
+    "value": 4304.0
+   }
+  ],
+  "headline": "Bourne tract ranks 5 in priority with 51% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

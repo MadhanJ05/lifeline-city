@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are out of power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent residents are at the 93% percentile among tracts.",
+    "value": 0.928571
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank at the 61% percentile for this tract.",
+    "value": 0.607143
+   }
+  ],
+  "headline": "Truro tract fully without power for 9 hours, telecom also affected"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

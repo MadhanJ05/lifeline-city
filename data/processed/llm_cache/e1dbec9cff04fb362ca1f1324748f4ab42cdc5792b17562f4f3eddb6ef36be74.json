@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 63% of customers in this tract are without power.",
+    "value": 0.632368
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 1 hour so far.",
+    "value": 1.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone are at the 98th percentile share for this area.",
+    "value": 0.982143
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle are at the 98th percentile share.",
+    "value": 0.982143
+   }
+  ],
+  "headline": "Falmouth tract ranks second for priority with 63% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 70% of customers in this tract are without power.",
+    "value": 0.702631
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for about 1 hour.",
+    "value": 1.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank at the 77th percentile for need here.",
+    "value": 0.767857
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle rank at the 82nd percentile for need.",
+    "value": 0.821429
+   }
+  ],
+  "headline": "Wellfleet tract: 70% of customers out, about one hour dark"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

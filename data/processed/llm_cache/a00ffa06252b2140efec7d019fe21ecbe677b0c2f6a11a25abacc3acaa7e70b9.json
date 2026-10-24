@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 21% of customers in this tract are currently without power.",
+    "value": 0.210024
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent need sits at the 98th percentile among tracts.",
+    "value": 0.982143
+   },
+   {
+    "field": "population",
+    "text": "The tract has a population of 4304 residents.",
+    "value": 4304.0
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "No-vehicle households rank at the 80th percentile.",
+    "value": 0.803571
+   }
+  ],
+  "headline": "Bourne tract shows 21% of customers out, high electricity-dependent need"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

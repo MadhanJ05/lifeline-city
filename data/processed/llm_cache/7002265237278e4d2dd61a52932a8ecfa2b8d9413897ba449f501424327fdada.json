@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 98% of customers in this tract are without power.",
+    "value": 0.98274
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent residents rank at the 86th percentile among tracts.",
+    "value": 0.857143
+   },
+   {
+    "field": "rank",
+    "text": "The tract holds priority rank 8.",
+    "value": 8.0
+   }
+  ],
+  "headline": "Falmouth tract: 98% of customers out, dark for 9 hours"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 83% of customers in this tract are without power.",
+    "value": 0.833788
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "The disability need indicator sits at the 74th percentile.",
+    "value": 0.741071
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "The no-vehicle need indicator sits at the 73rd percentile.",
+    "value": 0.732143
+   }
+  ],
+  "headline": "Brewster tract ranks 4 with 83% of customers out after 55 hours dark"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

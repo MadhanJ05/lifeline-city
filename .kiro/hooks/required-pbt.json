@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Required property tests (Properties 1-4)",
+      "trigger": "PostFileSave",
+      "description": "Runs the required_pbt property tests on every save of a pipeline/*.py file: lifelines bounds, channel/radio coverage, verifier grounding, SMS segments. On failure pytest names the failing test and Hypothesis prints the falsifying example (Req 31.2, 31.3).",
+      "matcher": "/pipeline/.*\\.py$",
+      "action": {
+        "type": "command",
+        "command": ".venv/bin/python -m pytest -q -m required_pbt",
+        "timeout": 120
+      }
+    }
+  ]
+}

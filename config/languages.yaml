@@ -1,0 +1,74 @@
+# Languages config for Lifeline City. Rules: .kiro/steering/outreach-style.md
+# sms  = SMS body text. pt and es are written without accents so they stay in GSM-7.
+# full = doorstep scripts, radio scripts and UI text. Accents kept.
+
+supported: [en, pt, es]
+labels: {en: English, pt: Português, es: Español}
+
+# Matched after trimming, ignoring case and removing accents. "1" and "2" are always accepted.
+reply_keywords:
+  en: {ok: ["OK", "YES"], help: ["HELP"]}   # quoted: unquoted YES parses as a YAML boolean
+  pt: {ok: ["OK", "SIM"], help: ["AJUDA"]}
+  es: {ok: ["OK", "SI"], help: ["AYUDA"]}
+
+# CO_Safety_Line: always first in SMS, doorstep scripts, confirmations and re-prompts.
+co_line:
+  en:
+    sms: "Never run a generator, grill or stove indoors or in a garage. If you feel dizzy or have a headache, get fresh air and call 911."
+    full: "Never run a generator, grill or stove indoors or in a garage. If you feel dizzy or have a headache, get fresh air and call 911."
+  pt:
+    sms: "Nunca use gerador, churrasqueira ou fogareiro dentro de casa ou na garagem. Se sentir tontura ou mal-estar, saia para tomar ar fresco e ligue para o 911."
+    full: "Nunca use gerador, churrasqueira ou fogão dentro de casa ou na garagem. Se sentir tontura ou dor de cabeça, saia para tomar ar fresco e ligue para o 911."
+  es:
+    sms: "Nunca use un generador, una parrilla o una estufa dentro de casa o en el garaje. Si siente mareo o dolor de cabeza, salga a tomar aire fresco y llame al 911."
+    full: "Nunca use un generador, una parrilla o una estufa dentro de casa o en el garaje. Si siente mareo o dolor de cabeza, salga a tomar aire fresco y llame al 911."
+
+# Help_Line_Sentence per region. Same sms/full split as co_line.
+help_line:
+  cape:                                      # statewide Mass 211; MEMA directed residents there during the storm
+    number: "2-1-1"
+    sentence:
+      en:
+        sms: "Call 911 for emergencies, 2-1-1 for shelters and help."
+        full: "Call 911 for emergencies, 2-1-1 for shelters and help."
+      pt:
+        sms: "Ligue 911 em emergencias e 2-1-1 para abrigos e ajuda."
+        full: "Ligue 911 em emergências e 2-1-1 para abrigos e ajuda."
+      es:
+        sms: "Llame al 911 en emergencias y al 2-1-1 para refugios y ayuda."
+        full: "Llame al 911 en emergencias y al 2-1-1 para refugios y ayuda."
+  boston:
+    number: "311"
+    sentence:
+      en:
+        sms: "Call 911 for emergencies, 311 for city help."
+        full: "Call 911 for emergencies, 311 for city help."
+      pt:
+        sms: "Ligue 911 em emergencias e 311 para ajuda da cidade."
+        full: "Ligue 911 em emergências e 311 para ajuda da cidade."
+      es:
+        sms: "Llame al 911 en emergencias y al 311 para ayuda de la ciudad."
+        full: "Llame al 911 en emergencias y al 311 para ayuda de la ciudad."
+
+# The only acronyms or number codes allowed in resident-facing text.
+allowed_acronyms: ["911", "2-1-1", "311", "OK"]
+
+# Banned_Terms: blaming words, rejected in every resident-facing text and briefing (whole word, case-insensitive).
+banned_terms:
+  en: [neglected, ignored, abandoned]
+  pt: [negligenciado, negligenciada, negligenciados, negligenciadas, ignorado, ignorada, ignorados, ignoradas, abandonado, abandonada, abandonados, abandonadas]
+  es: [descuidado, descuidada, descuidados, descuidadas, ignorado, ignorada, ignorados, ignoradas, abandonado, abandonada, abandonados, abandonadas]
+
+# Regexes for promised response times (case-insensitive). Any match is rejected.
+promise_patterns:
+  en: ["\\bwithin \\d+", "\\bin \\d+ (minutes|hours)"]
+  pt: ["\\bem \\d+ (minutos|horas)"]
+  es: ["\\ben \\d+ (minutos|horas)"]
+
+# ASSUMPTION: used only to sample languages for simulated households. Not measured data.
+household_language_mix:
+  label: "Assumed language mix for simulated households"
+  default: {en: 0.85, pt: 0.10, es: 0.05}    # every Cape town not listed in by_town
+  by_town:
+    Barnstable: {en: 0.6, pt: 0.3, es: 0.1}  # ASSUMPTION; household #1 of each tract is forced to pt
+    Yarmouth:   {en: 0.6, pt: 0.3, es: 0.1}  # ASSUMPTION; household #1 of each tract is forced to pt

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 85% of customers in this tract are without power.",
+    "value": 0.85
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "need.limited_english.pct",
+    "text": "Limited English need sits at the 86th percentile among tracts.",
+    "value": 0.857143
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Households without a vehicle rank at the 84th percentile.",
+    "value": 0.839286
+   }
+  ],
+  "headline": "Eastham tract ranks 3 with 85% of customers out for 55 hours"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

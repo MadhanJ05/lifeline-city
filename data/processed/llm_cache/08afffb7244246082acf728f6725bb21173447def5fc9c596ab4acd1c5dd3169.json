@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power (100%).",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 24 hours.",
+    "value": 24.0
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "Seniors living alone rank high here, at the 91st percentile of tracts.",
+    "value": 0.910714
+   },
+   {
+    "field": "population",
+    "text": "About 5256 residents live in this tract.",
+    "value": 5256.0
+   }
+  ],
+  "headline": "Bourne tract fully dark for 24 hours with telecom down"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

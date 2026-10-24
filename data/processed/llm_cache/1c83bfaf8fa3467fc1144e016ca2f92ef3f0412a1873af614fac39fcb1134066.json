@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "hours_dark",
+    "text": "This tract has been without power for 55 hours.",
+    "value": 55.0
+   },
+   {
+    "field": "out_pct",
+    "text": "About 58% of customers in the tract are currently out.",
+    "value": 0.578937
+   },
+   {
+    "field": "need.seniors_alone.pct",
+    "text": "The tract ranks at the 98th percentile for seniors living alone.",
+    "value": 0.982143
+   },
+   {
+    "field": "need.disability.pct",
+    "text": "The tract ranks at the 97th percentile for residents with a disability.",
+    "value": 0.973214
+   }
+  ],
+  "headline": "Falmouth tract dark for 55 hours with 58% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

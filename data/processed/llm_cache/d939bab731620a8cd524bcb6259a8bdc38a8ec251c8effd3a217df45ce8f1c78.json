@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "telecom",
+    "text": "Telecom disruption indicator is at its maximum value of 1.",
+    "value": 1.0
+   },
+   {
+    "field": "need.limited_english.pct",
+    "text": "Limited English need ranks at the 86th percentile, relevant for door knock outreach.",
+    "value": 0.857143
+   }
+  ],
+  "headline": "Eastham tract fully out for 9 hours, ranked 5 for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,45 @@
+# Scoring config for Lifeline City.
+# Formulas live in DECISIONS.md Section 3 and .kiro/steering/scoring.md. Change weights and thresholds here, never the formulas.
+
+# lifelines(T,h) = 0.4*out_pct + 0.3*min(hours_dark/72,1) + 0.1*wires + 0.2*telecom   (weights must sum to 1)
+lifelines_weights: {out_pct: 0.4, hours_dark: 0.3, wires: 0.1, telecom: 0.2}
+hours_dark_cap: 72
+dark_threshold: 0.5
+
+# ASSUMPTION about tower backup life: telecom = 1 when out_pct >= 0.8 in each of the 8 consecutive hours ending at h. Label "Modeled".
+telecom_model: {out_pct_threshold: 0.8, consecutive_hours: 8}
+
+# ASSUMPTION: "Assumed duration: 12 hours (no end time reported)".
+# Used only for an observed telecom event with drives_reach_flag = true and no end_local.
+telecom_observed_default_hours: 12
+
+access_hazard_wires_pct: 0.8
+queue_size: 10
+
+# LLM briefings only at these hours. Initial values; adjusted after the first --no-llm key-hour report (checkpoint 8)
+# so that at least one hour shows both sms and door_knock.
+key_demo_hours: ["2026-02-23T09:00", "2026-02-23T17:00", "2026-02-24T09:00", "2026-02-25T15:00", "2026-02-26T13:00"]
+
+# Briefing verifier: a claim matches when |claim - metric| <= abs_tol or <= rel_tol * |metric|.
+verifier: {abs_tol: 0.01, rel_tol: 0.01}
+
+demo:
+  seed: 20260223
+  households_per_tract: 8
+  operator_household: 1                      # household #1 never gets a generated reply; pt in Barnstable and Yarmouth
+  reply_mix: {ok: 0.55, help: 0.2, unclear: 0.05, none: 0.2}
+  reply_delay_s: [3, 20]
+  radio_update_interval_hours: 2
+
+boston:
+  k_pseudo_days: 7
+  acute_cap: 6
+  silence_weights: {acute: 0.5, structural: 0.5}
+  min_tract_pop: 500
+  exclude_geoids: []                         # Logan, Harbor Islands, large parks: filled during the Boston block
+  storm_window: ["2026-02-22T14:00", "2026-02-25T23:59"]
+  baseline: ["2026-01-05", "2026-03-31"]
+  baseline_exclude: [["2026-01-24", "2026-01-27"], ["2026-02-07", "2026-02-09"], ["2026-02-22", "2026-02-28"]]
+  holidays: ["2026-01-19", "2026-02-16"]
+  storm_spike_multiplier: 3
+  default_coord: {lat: 42.3594, lon: -71.0587, radius_m: 50}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "All customers in this tract are without power, an outage share of 100%.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 9 hours.",
+    "value": 9.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent residents rank at the 93rd percentile among tracts.",
+    "value": 0.928571
+   },
+   {
+    "field": "telecom",
+    "text": "The telecom outage indicator is at its maximum value of 1.",
+    "value": 1.0
+   }
+  ],
+  "headline": "Truro tract fully out for 9 hours, ranked 6 for priority"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

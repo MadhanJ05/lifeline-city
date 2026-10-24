@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 63% of customers in this tract are without power.",
+    "value": 0.632368
+   },
+   {
+    "field": "hours_dark",
+    "text": "The tract has been dark for 1 hour so far.",
+    "value": 1.0
+   },
+   {
+    "field": "need.elec_dependent.pct",
+    "text": "Electricity-dependent need sits at the 86th percentile among tracts.",
+    "value": 0.857143
+   },
+   {
+    "field": "population",
+    "text": "The tract is home to 3514 residents.",
+    "value": 3514.0
+   }
+  ],
+  "headline": "Falmouth tract ranks 3 in priority with 63% of customers out"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}

@@ -1,0 +1,29 @@
+{
+ "body": {
+  "claims": [
+   {
+    "field": "out_pct",
+    "text": "About 15% of customers in this tract are currently without power.",
+    "value": 0.152325
+   },
+   {
+    "field": "need_t",
+    "text": "The combined household need score for this tract is 0.91.",
+    "value": 0.91369
+   },
+   {
+    "field": "need.no_vehicle.pct",
+    "text": "Share of households without a vehicle sits at the 100th percentile.",
+    "value": 1.0
+   },
+   {
+    "field": "hours_dark",
+    "text": "Hours dark currently reads 0 for this tract.",
+    "value": 0.0
+   }
+  ],
+  "headline": "Barnstable tract has 15% of customers out with high household need"
+ },
+ "model": "claude-opus-5-5",
+ "stop_reason": "end_turn"
+}
