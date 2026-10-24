@@ -5,7 +5,8 @@ import { briefingBadge, briefingNote } from "../drawer";
 import { formatHour } from "../format";
 import { shortTractName } from "../mapValues";
 import { channelLabel, channelNote, formatPriority } from "../queue";
-import type { Briefing, CapeTimeline, Geoid, HourKey, Run, TractDetail } from "../types";
+import { DRAWER_TABS, DRAWER_TAB_LABEL, nextTab, shownTab, type DrawerTab } from "../tabs";
+import type { Briefing, CapeTimeline, Channel, Claim, Geoid, HourKey, Run, TelecomRule, TractDetail } from "../types";
 import { CheckInStatus } from "./CheckInStatus";
 import { ReachPanel } from "./ReachPanel";
 import { WhyFlagged } from "./WhyFlagged";
@@ -33,13 +34,38 @@ interface Props {
   reach?: (ctx: RunContext) => ReactNode;
 }
 
+const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+const LABEL = "text-[11px] font-medium uppercase tracking-[0.06em] text-faint";
+
+/** Short pill text per channel; the full channel label stays in the Reach tab. */
+const CHANNEL_PILL: Record<Channel, { text: string; className: string }> = {
+  sms: { text: "Text check-in", className: "bg-text-channel/12 text-text-channel" },
+  door_knock: { text: "Door-knock", className: "bg-knock/12 text-knock" },
+};
+
+const RULE_TAG: Record<TelecomRule, string | null> = {
+  none: null,
+  modeled: "Modeled",
+  observed: "Observed",
+  both: "Modeled and Observed",
+};
+
+/** One muted line under the stats, e.g. "Phones likely degraded · Modeled". */
+function channelNoteLine(d: Pick<TractDetail, "channel" | "telecom_rule">): string {
+  const note = channelNote(d.channel);
+  const tag = RULE_TAG[d.telecom_rule] ?? null;
+  if (!note) return `${channelLabel(d.channel)} · Phones working`;
+  return tag ? `${note} · ${tag}` : note;
+}
+
 /** Non-modal side panel for the selected tract-hour (Req 10). On open, focus moves to the heading;
  *  Esc or the Close button closes it and focus returns to the control that opened it (Req 29.1).
  *  Render it only while a tract is selected, so mount = open and unmount = close. */
 export function TractDrawer({ geoid, hour, town, name, scoring, onClose, resetVersion = 0, reach }: Props) {
   const titleId = useId();
-  const reachId = useId();
+  const tabsId = useId();
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const tabRefs = useRef<Partial<Record<DrawerTab, HTMLButtonElement | null>>>({});
   const { detail, content, loading, error, reload } = useTractDetail(geoid, hour, resetVersion);
 
   useEffect(() => {
@@ -73,6 +99,19 @@ export function TractDrawer({ geoid, hour, town, name, scoring, onClose, resetVe
   const [sendError, setSendError] = useState<{ key: string; text: string } | null>(null);
   const latestKey = useLatest(runKey);
 
+  // The user's tab pick holds across hour changes for the same tract; a new tract starts from the default.
+  const [picked, setPicked] = useState<{ geoid: Geoid; tab: DrawerTab } | null>(null);
+  const tab = shownTab(picked && picked.geoid === geoid ? picked.tab : null, run !== null);
+  const pickTab = (t: DrawerTab) => setPicked({ geoid, tab: t });
+  const onTabKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const next = nextTab(tab, e.key);
+    if (!next) return;
+    e.preventDefault();
+    e.stopPropagation();
+    pickTab(next);
+    tabRefs.current[next]?.focus();
+  };
+
   const onSend = useCallback(() => {
     const sentKey = runKey;
     setSending(true);
@@ -93,6 +132,10 @@ export function TractDrawer({ geoid, hour, town, name, scoring, onClose, resetVe
   const sendNote = !detailForHour ? SEND_WAIT_NOTE : run ? SEND_EXISTS_NOTE : undefined;
   const shownSendError = sendError && sendError.key === runKey ? sendError.text : null;
 
+  const tabId = (t: DrawerTab) => `${tabsId}-tab-${t}`;
+  const panelId = (t: DrawerTab) => `${tabsId}-panel-${t}`;
+  const pill = current ? CHANNEL_PILL[current.channel] : null;
+
   return (
     <aside
       role="dialog"
@@ -100,134 +143,208 @@ export function TractDrawer({ geoid, hour, town, name, scoring, onClose, resetVe
       aria-labelledby={titleId}
       aria-busy={loading}
       onKeyDown={onKeyDown}
-      className="flex flex-col gap-3 rounded-md border border-slate-700 bg-slate-950 p-3 text-slate-100 shadow-xl xl:sticky xl:top-2 xl:max-h-[calc(100vh-1rem)] xl:w-[28rem] xl:shrink-0 xl:overflow-y-auto"
+      className="lifeline-drawer flex h-full flex-col gap-3 overflow-y-auto rounded-panel border border-line bg-panel-solid p-4 text-[13px] text-fg shadow-panel"
     >
-      <header className="flex items-start gap-2">
-        <div className="flex-1">
-          <h2 id={titleId} ref={headingRef} tabIndex={-1} className="text-lg font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300">
-            {town} {shortTractName(name)}
-          </h2>
-          <p className="text-sm text-slate-300">
-            {formatHour(shownHour)}
-            {current && (
-              <>
-                {" · "}
-                {current.rank !== null ? `Rank ${current.rank} in the queue` : "Not in the top 10 at this hour"}
-                {" · "}
-                <span className="tabular-nums">Priority {formatPriority(current.priority)}</span>
-              </>
-            )}
-          </p>
-          {current && (
-            <p className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
-              <span className="rounded border border-slate-500 bg-slate-800 px-1.5 py-0.5 font-semibold">
-                {channelLabel(current.channel)}
-              </span>
-              {channelNote(current.channel) && <span className="text-amber-100">{channelNote(current.channel)}</span>}
-            </p>
-          )}
+      <header className="flex flex-col gap-3">
+        <div className="flex items-start gap-2">
+          <div className="min-w-0 flex-1">
+            <h2
+              id={titleId}
+              ref={headingRef}
+              tabIndex={-1}
+              className={`text-[17px] font-semibold leading-tight ${FOCUS}`}
+            >
+              {town} {shortTractName(name)}
+            </h2>
+            <p className="mt-0.5 font-mono text-xs text-muted">{formatHour(shownHour)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close tract details"
+            className={`grid h-8 w-8 place-items-center rounded-card border border-line text-muted hover:bg-line hover:text-fg ${FOCUS}`}
+          >
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+              <path d="M4 4l8 8M12 4l-8 8" />
+            </svg>
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close tract details"
-          className="rounded-md border border-slate-600 bg-slate-800 px-2 py-1 text-sm text-slate-100 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
-        >
-          <span aria-hidden="true">✕</span>
-        </button>
+
+        {current && pill && (
+          <>
+            <dl className="grid grid-cols-3 gap-2">
+              <div className="rounded-card border border-line px-3 py-2">
+                <dt className={LABEL}>Rank</dt>
+                <dd className="font-mono text-[22px] font-medium leading-tight tabular-nums">
+                  {current.rank !== null ? (
+                    current.rank
+                  ) : (
+                    <>
+                      <span aria-hidden="true">—</span>
+                      <span className="sr-only">Not in the top 10 at this hour</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+              <div className="rounded-card border border-line px-3 py-2">
+                <dt className={LABEL}>Priority</dt>
+                <dd className="font-mono text-[22px] font-medium leading-tight tabular-nums">
+                  {formatPriority(current.priority)}
+                </dd>
+              </div>
+              <div className="rounded-card border border-line px-3 py-2">
+                <dt className={LABEL}>Channel</dt>
+                <dd className="mt-1">
+                  <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${pill.className}`}>
+                    {pill.text}
+                  </span>
+                </dd>
+              </div>
+            </dl>
+            <p className="truncate text-xs text-muted">{channelNoteLine(current)}</p>
+          </>
+        )}
       </header>
 
       <p role="status" className="sr-only">
         {loading ? `Loading ${town} ${shortTractName(name)} at ${formatHour(hour)}` : ""}
       </p>
-      {updating && <p className="text-xs text-slate-300">Updating to {formatHour(hour)}…</p>}
+      {updating && <p className="text-xs text-muted">Updating to {formatHour(hour)}…</p>}
 
       {error && (
-        <div role="alert" className="rounded-md border border-rose-400/70 bg-rose-950/60 p-2 text-sm">
+        <div role="alert" className="rounded-card border border-line border-l-2 border-l-help bg-help/10 p-2 text-sm">
           <p>Could not load this tract-hour: {error.message}</p>
           <button
             type="button"
             onClick={reload}
-            className="mt-1 rounded border border-slate-500 bg-slate-800 px-2 py-0.5 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
+            className={`mt-1 rounded-card border border-line-strong px-2 py-0.5 hover:bg-line ${FOCUS}`}
           >
             Retry
           </button>
         </div>
       )}
 
-      {!current && loading && <p className="text-sm text-slate-300">Loading tract details…</p>}
+      {!current && loading && <p className="text-sm text-muted">Loading tract details…</p>}
 
       {current && (
-        <div className={`flex flex-col gap-4 ${updating ? "opacity-70" : ""}`}>
-          <BriefingSection briefing={briefing} />
-          <WhyFlagged detail={current} scoring={scoring} />
-        </div>
+        <>
+          <div
+            role="tablist"
+            aria-label="Tract details"
+            onKeyDown={onTabKeyDown}
+            className="flex gap-1 rounded-full border border-line p-1"
+          >
+            {DRAWER_TABS.map((t) => {
+              const selected = t === tab;
+              return (
+                <button
+                  key={t}
+                  ref={(el) => {
+                    tabRefs.current[t] = el;
+                  }}
+                  id={tabId(t)}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  aria-controls={panelId(t)}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => pickTab(t)}
+                  className={`flex-1 rounded-full border px-3 py-1 text-xs font-medium ${FOCUS} ${
+                    selected ? "border-line-strong bg-bg text-fg" : "border-transparent text-muted hover:text-fg"
+                  }`}
+                >
+                  {DRAWER_TAB_LABEL[t]}
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            role="tabpanel"
+            id={panelId(tab)}
+            aria-labelledby={tabId(tab)}
+            tabIndex={0}
+            className={`flex flex-col gap-3 rounded-card ${FOCUS} ${updating ? "opacity-70" : ""}`}
+          >
+            {tab === "briefing" && <BriefingSection briefing={briefing} />}
+            {tab === "why" && <WhyFlagged detail={current} scoring={scoring} />}
+            {tab === "reach" && (
+              <>
+                <ReachPanel
+                  detail={current}
+                  content={content}
+                  telecomModel={scoring.telecom_model}
+                  onSend={canSend ? onSend : undefined}
+                  sending={sending}
+                  sendNote={canSend ? sendNote : undefined}
+                  sendError={shownSendError}
+                />
+                <CheckInStatus channel={current.channel} households={current.households} run={run} pollError={pollError} />
+                {reach?.({ detail: current, run, onRunUpdate: setRun })}
+              </>
+            )}
+          </div>
+        </>
       )}
 
-      <section aria-labelledby={reachId} className="flex flex-col gap-2 border-t border-slate-800 pt-3">
-        <h3 id={reachId} className="text-base font-semibold">
-          Reach
-        </h3>
-        {current ? (
-          <>
-            <ReachPanel
-              detail={current}
-              content={content}
-              telecomModel={scoring.telecom_model}
-              onSend={canSend ? onSend : undefined}
-              sending={sending}
-              sendNote={canSend ? sendNote : undefined}
-              sendError={shownSendError}
-            />
-            <CheckInStatus channel={current.channel} households={current.households} run={run} pollError={pollError} />
-            {reach?.({ detail: current, run, onRunUpdate: setRun })}
-          </>
-        ) : (
-          !error && <p className="text-sm text-slate-300">Loading reach options…</p>
-        )}
-      </section>
+      {!current && !loading && !error && <p className="text-sm text-muted">Loading reach options…</p>}
     </aside>
   );
 }
 
 const BADGE_CLASS = {
-  Verified: "border-emerald-300/70 bg-emerald-950 text-emerald-100",
-  Template: "border-slate-400/70 bg-slate-800 text-slate-100",
+  Verified: "bg-ok/12 text-ok",
+  Template: "border border-line-strong text-muted",
 } as const;
+
+/** Compact value for a claim: shares as percent, small fractions with 3 decimals, counts as integers. */
+function claimValueText(c: Claim): string {
+  const v = c.value;
+  if (!Number.isFinite(v)) return "n/a";
+  if (/pct|share|out_pct/.test(c.field) && v >= 0 && v <= 1) return `${Math.round(v * 100)}%`;
+  if (Number.isInteger(v)) return v.toLocaleString("en-US");
+  if (Math.abs(v) < 1) return v.toFixed(3);
+  return v.toFixed(1);
+}
 
 function BriefingSection({ briefing }: { briefing: Briefing | null }) {
   const headingId = useId();
   if (!briefing) {
     return (
-      <section aria-labelledby={headingId}>
-        <h3 id={headingId} className="text-base font-semibold">
+      <section aria-labelledby={headingId} className="flex flex-col gap-1">
+        <h3 id={headingId} className={LABEL}>
           Briefing
         </h3>
-        <p className="text-sm text-slate-300">No briefing cached for this tract-hour.</p>
+        <p className="text-sm text-muted">No briefing cached for this tract-hour.</p>
       </section>
     );
   }
   const badge = briefingBadge(briefing);
   return (
-    <section aria-labelledby={headingId} className="flex flex-col gap-1.5">
+    <section aria-labelledby={headingId} className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
-        <h3 id={headingId} className="text-base font-semibold">
+        <h3 id={headingId} className={LABEL}>
           Briefing
         </h3>
-        <span className={`rounded border px-1.5 py-0.5 text-xs font-semibold ${BADGE_CLASS[badge]}`}>{badge}</span>
+        <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${BADGE_CLASS[badge]}`}>{badge}</span>
       </div>
-      <p className="text-xs text-slate-400">{briefingNote(briefing)}</p>
-      <p className="font-semibold">{briefing.headline}</p>
-      <ul className="list-disc pl-5 text-sm">
+      <p className="text-xs text-muted">{briefingNote(briefing)}</p>
+      <p className="text-[15px] font-semibold leading-snug">{briefing.headline}</p>
+      <ul className="flex flex-col divide-y divide-line rounded-card border border-line">
         {briefing.claims.map((c) => (
-          <li key={`${c.field}:${c.text}`}>
-            {c.text} <span className="text-xs text-slate-400">(field: {c.field})</span>
+          <li key={`${c.field}:${c.text}`} className="flex items-start gap-3 px-3 py-2">
+            <div className="min-w-0 flex-1">
+              <p>{c.text}</p>
+              <p className="text-[11px] text-faint">field: {c.field}</p>
+            </div>
+            <span className="font-mono text-sm tabular-nums text-fg">{claimValueText(c)}</span>
           </li>
         ))}
       </ul>
-      <p className="text-sm">
-        <span className="font-semibold">Recommended action:</span> {briefing.action}
-      </p>
+      <div className="rounded-r-card border-l-2 border-accent bg-line px-3 py-2">
+        <p className={LABEL}>Recommended action</p>
+        <p className="mt-0.5">{briefing.action}</p>
+      </div>
     </section>
   );
 }

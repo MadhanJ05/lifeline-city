@@ -22,7 +22,7 @@ export const ScaleSelector = forwardRef<HTMLSelectElement, SelectorProps>(functi
   const id = useId();
   return (
     <div className="flex items-center gap-2">
-      <label htmlFor={id} className="text-sm text-slate-300">
+      <label htmlFor={id} className="text-sm text-muted">
         {SELECTOR_LABEL}
       </label>
       <select
@@ -30,7 +30,7 @@ export const ScaleSelector = forwardRef<HTMLSelectElement, SelectorProps>(functi
         ref={ref}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-md border border-slate-600 bg-slate-800 px-2 py-1 text-sm text-slate-100 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
+        className="rounded-md border border-line-strong bg-white/5 px-2 py-1 text-sm text-fg hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
       >
         {entries.map((e) => (
           <option key={e.id} value={e.id}>
@@ -55,25 +55,25 @@ export function ConfigurationPreview({ entry, onBack }: PreviewProps) {
   return (
     <section
       aria-labelledby={headingId}
-      className="mx-auto flex max-w-3xl flex-col gap-4 rounded-md border border-slate-700 bg-slate-900 p-5"
+      className="mx-auto flex max-w-3xl flex-col gap-4 rounded-md border border-line bg-panel-solid p-5"
     >
       <div className="flex flex-wrap items-center gap-3">
         <h2 id={headingId} className="text-xl font-semibold">
           {m.heading}
         </h2>
-        <span className="rounded border border-amber-300/70 bg-amber-950/70 px-1.5 py-0.5 text-xs font-semibold tracking-wide text-amber-100">
+        <span className="rounded border border-knock/40 bg-knock/10 px-1.5 py-0.5 text-xs font-semibold tracking-wide text-knock">
           {m.badge}
         </span>
-        <span className="rounded border border-slate-500 bg-slate-800 px-1.5 py-0.5 text-xs font-semibold">
+        <span className="rounded border border-line-strong bg-white/5 px-1.5 py-0.5 text-xs font-semibold">
           {m.tierLabel}
         </span>
       </div>
-      <p className="text-slate-200">{m.tierText}</p>
+      <p className="text-fg">{m.tierText}</p>
       <div className="grid gap-4 sm:grid-cols-2">
         <InputList title="Need inputs" items={m.needInputs} />
         <InputList title={`Lost-lifelines inputs for ${entry.hazard_label.toLowerCase()}`} items={m.lostLifelinesInputs} />
       </div>
-      <p className="text-sm text-slate-300">{m.noScoresText}</p>
+      <p className="text-sm text-muted">{m.noScoresText}</p>
       <div>
         <BackButton onBack={onBack} />
       </div>
@@ -84,8 +84,8 @@ export function ConfigurationPreview({ entry, onBack }: PreviewProps) {
 /** Switch point for the Boston Voice view: task 16 replaces this placeholder with BostonVoiceView. */
 export function BostonPlaceholder({ onBack }: { onBack: () => void }) {
   return (
-    <section className="mx-auto flex max-w-3xl flex-col gap-3 rounded-md border border-slate-700 bg-slate-900 p-5">
-      <p className="text-slate-200">{BOSTON_PLACEHOLDER_TEXT}</p>
+    <section className="mx-auto flex max-w-3xl flex-col gap-3 rounded-md border border-line bg-panel-solid p-5">
+      <p className="text-fg">{BOSTON_PLACEHOLDER_TEXT}</p>
       <div>
         <BackButton onBack={onBack} />
       </div>
@@ -97,7 +97,7 @@ function InputList({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <h3 className="mb-1 text-base font-semibold">{title}</h3>
-      <ul className="list-disc pl-5 text-slate-200">
+      <ul className="list-disc pl-5 text-fg">
         {items.map((i) => (
           <li key={i}>{i}</li>
         ))}
@@ -111,7 +111,7 @@ function BackButton({ onBack }: { onBack: () => void }) {
     <button
       type="button"
       onClick={onBack}
-      className="rounded-md border border-sky-300 bg-sky-900 px-3 py-1.5 text-sm font-semibold text-white hover:bg-sky-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
+      className="rounded-md border border-accent bg-accent px-3 py-1.5 text-sm font-semibold text-on-accent hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {BACK_TO_CAPE_LABEL}
     </button>

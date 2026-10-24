@@ -999,6 +999,85 @@
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792877247898
       }
+    ],
+    "20.1 Load the fonts and define the design tokens": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792878719258
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792878875663
+      }
+    ],
+    "20.2 Build the console layout": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792878876149
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879036361
+      }
+    ],
+    "20.3 Restyle the map": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879037151
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879560746
+      }
+    ],
+    "20.4 Build the time bar": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879038145
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879609294
+      }
+    ],
+    "20.5 Restyle the tract drawer": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879038771
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879561868
+      }
+    ],
+    "20.6 Add the Sources and assumptions popover": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879039473
+      },
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879562570
+      }
+    ],
+    "20. Redesign the web UI as an operator console (steering design.md)": [
+      {
+        "executionId": "e90bd07d-2f28-40c3-8c92-5fd6e329f551",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792879609348
+      }
     ]
   }
 }

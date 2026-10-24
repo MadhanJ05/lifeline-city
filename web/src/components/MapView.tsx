@@ -24,8 +24,10 @@ import {
   layerLabel,
   layerValues,
   legendStops,
+  NO_VALUE_COLOR,
   pinFeatures,
   pinGroups,
+  RAMPS,
   shortTractName,
   sortByValue,
   tractRefs,
@@ -37,16 +39,17 @@ import {
 } from "../mapValues";
 import { tooltipNotes } from "../provenance";
 import type { CapeTimeline, CapeTowns, CapeTracts, Geoid, HourKey, TelecomEvent, TelecomEvents } from "../types";
+import "../styles/map.css";
 
-/** CARTO dark-matter vector style; no token needed. */
-export const CARTO_STYLE_URL = "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json";
+/** CARTO dark-matter (no labels) vector style; no token needed. Town names come from our own markers. */
+export const CARTO_STYLE_URL = "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 
 /** Plain background used when the basemap style or tiles fail (Req 8.7). No glyphs or sprites. */
 export const FALLBACK_STYLE: StyleSpecification = {
   version: 8,
   name: "Lifeline plain background",
   sources: {},
-  layers: [{ id: "background", type: "background", paint: { "background-color": "#0b1220" } }],
+  layers: [{ id: "background", type: "background", paint: { "background-color": "#0A0E13" } }],
 };
 
 setWorkerUrl(maplibreWorkerUrl);
@@ -64,6 +67,8 @@ interface Props {
   layer: Layer;
   selectedGeoid: Geoid | null;
   onSelectTract: (geoid: Geoid) => void;
+  /** Left-panel element that hosts the collapsed "All tracts" and "Telecom reports" lists (portal). */
+  listsContainer?: HTMLElement | null;
 }
 
 interface Hover {
@@ -87,12 +92,17 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
       id: "tract-fill",
       type: "fill",
       source: "tracts",
-      paint: { "fill-color": fillColorExpression(stops), "fill-opacity": 0.8 },
+      paint: { "fill-color": fillColorExpression(stops), "fill-opacity": 0.78 },
     },
     beforeLabels,
   );
   map.addLayer(
-    { id: "tract-outline", type: "line", source: "tracts", paint: { "line-color": "#0f172a", "line-width": 0.6 } },
+    {
+      id: "tract-outline",
+      type: "line",
+      source: "tracts",
+      paint: { "line-color": "rgba(255,255,255,0.06)", "line-width": 0.5 },
+    },
     beforeLabels,
   );
   map.addSource("towns", { type: "geojson", data: asData(towns) });
@@ -100,15 +110,16 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
     id: "town-line",
     type: "line",
     source: "towns",
-    paint: { "line-color": "#e2e8f0", "line-width": 1.4, "line-opacity": 0.8, "line-dasharray": [3, 2] },
+    paint: { "line-color": "rgba(255,255,255,0.28)", "line-width": 1 },
   });
   map.addLayer({
     id: "tract-highlight",
     type: "line",
     source: "tracts",
     paint: {
-      "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#ffffff", "#7dd3fc"],
-      "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 3.5, 2.5],
+      // Hover: 1.5px --text. Selected: 2.5px --accent (selected wins when both apply).
+      "line-color": ["case", ["boolean", ["feature-state", "selected"], false], "#F2A541", "#E9EEF3"],
+      "line-width": ["case", ["boolean", ["feature-state", "selected"], false], 2.5, 1.5],
       "line-opacity": [
         "case",
         ["any", ["boolean", ["feature-state", "selected"], false], ["boolean", ["feature-state", "hover"], false]],
@@ -123,18 +134,35 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
     type: "circle",
     source: "pins",
     paint: {
-      "circle-radius": ["case", ["==", ["get", "kind"], "cape_wide"], 10, 7],
-      "circle-color": ["case", ["boolean", ["feature-state", "active"], false], "#fbbf24", "#94a3b8"],
-      "circle-stroke-color": "#020617",
+      // Active at the hour: --accent fill, dark ring. Inactive: transparent fill, --text-faint ring.
+      "circle-radius": 7,
+      "circle-color": ["case", ["boolean", ["feature-state", "active"], false], "#F2A541", "rgba(0,0,0,0)"],
+      "circle-stroke-color": ["case", ["boolean", ["feature-state", "active"], false], "#10151C", "#5C6876"],
       "circle-stroke-width": 2,
-      "circle-opacity": ["case", ["boolean", ["feature-state", "active"], false], 1, 0.75],
     },
   });
 }
 
+/** Small count badge next to pins that hold several events (e.g. the Cape-wide marker). DOM markers
+ *  need no glyphs, so they also show on the fallback background. aria-hidden: the Telecom reports
+ *  list is the accessible path to the same counts. */
+function addPinBadges(map: MapLibreMap, groups: readonly PinGroup[]): Marker[] {
+  return groups
+    .filter((g) => g.eventIds.length > 1)
+    .map((g) => {
+      const el = document.createElement("div");
+      el.className = "lifeline-pin-badge";
+      el.textContent = String(g.eventIds.length);
+      el.setAttribute("aria-hidden", "true");
+      return new Marker({ element: el, anchor: "bottom-left", offset: [4, -4] }).setLngLat([g.lon, g.lat]).addTo(map);
+    });
+}
+
 /** Cape map: choropleth (Priority, Need, Lost lifelines), town lines, telecom pins, legend, hover
  *  tooltip, and a keyboard tract list as the non-map alternative (Req 8.1, 8.4 to 8.7, 29.4). */
-export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selectedGeoid, onSelectTract }: Props) {
+export function MapView({
+  tracts, towns, timeline, events, hourIdx, layer, selectedGeoid, onSelectTract, listsContainer,
+}: Props) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
@@ -156,7 +184,7 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
   const refs = useMemo(() => tractRefs(tracts), [tracts]);
   const refByGeoid = useMemo(() => new Map(refs.map((r) => [r.geoid, r])), [refs]);
   const values = useMemo(() => layerValues(layer, refs, hourIdx, timeline), [layer, refs, hourIdx, timeline]);
-  const stops = useMemo(() => legendStops(layerDomainMax(layer, timeline)), [layer, timeline]);
+  const stops = useMemo(() => legendStops(layerDomainMax(layer, timeline), RAMPS[layer]), [layer, timeline]);
   const sorted = useMemo(() => sortByValue(refs, values), [refs, values]);
   const groups = useMemo(() => pinGroups(events.events), [events]);
   const eventById = useMemo(() => new Map(events.events.map((e) => [e.id, e])), [events]);
@@ -199,7 +227,7 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
       pitchWithRotate: false,
     });
     map.touchZoomRotate.disableRotation();
-    map.addControl(new NavigationControl({ showCompass: false }), "top-right");
+    map.addControl(new NavigationControl({ showCompass: false }), "top-left");
     mapRef.current = map;
 
     const useFallback = () => {
@@ -282,6 +310,7 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
       el.setAttribute("aria-hidden", "true");
       new Marker({ element: el }).setLngLat(f.properties.label_point).addTo(map);
     }
+    addPinBadges(map, groups);
 
     return () => {
       window.clearTimeout(timer);
@@ -366,22 +395,22 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
   const hoverNotes = hoverRef ? tooltipNotes(layer, hoverTown, hourIdx, timeline, towns) : [];
   const label = layerLabel(layer);
   const mapLabel = `Cape Cod map: ${label} by census tract at ${formatHour(hour)}, local time. ` +
-    "The tract list below the map offers the same values by keyboard.";
+    "The All tracts list in the left panel offers the same values by keyboard.";
 
   return (
-    <div className="flex flex-col gap-3">
+    <>
       <div
         ref={wrapperRef}
         role="region"
         aria-label={mapLabel}
-        className="relative h-[58vh] min-h-96 overflow-hidden rounded-md border border-slate-800 bg-[#0b1220]"
+        className="lifeline-map absolute inset-0 overflow-hidden bg-bg"
       >
         <div ref={containerRef} className="absolute inset-0" />
 
         {hover && hoverRef && (
           <div
             role="tooltip"
-            className="pointer-events-none absolute z-10 rounded-md border border-slate-500 bg-slate-950/95 px-3 py-2 text-sm text-slate-100 shadow-lg"
+            className="pointer-events-none absolute z-10 rounded-card border border-line-strong bg-panel-solid px-3 py-2 text-[13px] text-fg shadow-panel"
             style={{
               width: TOOLTIP_W,
               left: hover.via === "map" ? hover.left : 8,
@@ -389,11 +418,11 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
             }}
           >
             <p className="font-semibold">
-              {shortTractName(hoverRef.name)}, {hoverTown}
+              {hoverTown} <span className="font-normal text-muted">{shortTractName(hoverRef.name)}</span>
             </p>
-            <p className="tabular-nums">{formatLayerValue(layer, values.get(hoverRef.geoid))}</p>
+            <p className="mt-0.5 font-mono tabular-nums">{formatLayerValue(layer, values.get(hoverRef.geoid))}</p>
             {hoverNotes.map((n) => (
-              <p key={n} className="mt-1 text-xs text-slate-300">
+              <p key={n} className="mt-1 text-[11px] leading-snug text-muted">
                 {n}
               </p>
             ))}
@@ -403,7 +432,7 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
         {basemap === "fallback" && (
           <p
             role="status"
-            className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded bg-slate-900/95 px-2 py-1 text-xs text-slate-200"
+            className="absolute left-1/2 top-[76px] z-10 -translate-x-1/2 rounded-full border border-line bg-panel-solid px-3 py-1 text-xs text-fg"
           >
             Basemap unavailable. Showing tracts on a plain background.
           </p>
@@ -412,8 +441,12 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
         <Legend layer={layer} stops={stops} />
       </div>
 
-      <div className="grid gap-3 lg:grid-cols-[3fr_2fr]">
-        <TractList
+      {listsContainer &&
+        createPortal(
+          <div className="flex flex-col gap-2">
+            <details className="group rounded-card border border-line">
+              <summary className={SUMMARY}>All tracts ({sorted.length})</summary>
+              <TractList
           rows={sorted}
           layer={layer}
           hour={hour}
@@ -422,17 +455,23 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
           onFocusTract={(geoid) => setHover({ geoid, via: "list", left: 8, top: 8 })}
           onBlurTract={() => setHover((h) => (h?.via === "list" ? null : h))}
           onSelect={onSelectTract}
-        />
-        <PinList
-          groups={groups}
-          activeCount={activeCount}
-          openPin={openPin}
-          onOpen={(key, trigger) => {
-            pinReturnFocus.current = trigger;
-            setOpenPin(key);
-          }}
-        />
-      </div>
+              />
+            </details>
+            <details className="group rounded-card border border-line">
+              <summary className={SUMMARY}>Telecom reports ({events.events.length})</summary>
+              <PinList
+                groups={groups}
+                activeCount={activeCount}
+                openPin={openPin}
+                onOpen={(key, trigger) => {
+                  pinReturnFocus.current = trigger;
+                  setOpenPin(key);
+                }}
+              />
+            </details>
+          </div>,
+          listsContainer,
+        )}
 
       {popupEl && openGroup &&
         createPortal(
@@ -443,43 +482,56 @@ export function MapView({ tracts, towns, timeline, events, hourIdx, layer, selec
           />,
           popupEl,
         )}
-    </div>
+    </>
   );
 }
+
+const SUMMARY =
+  "cursor-pointer select-none rounded-card px-2.5 py-2 text-xs font-medium text-muted hover:bg-line hover:text-fg " +
+  "group-open:text-fg";
 
 // ---------------------------------------------------------------- legend
 
 function swatchFor(stops: readonly LegendStop[], v: number | null): string {
-  if (v === null) return "#475569";
-  let color = stops[0]?.color ?? "#475569";
+  if (v === null) return NO_VALUE_COLOR;
+  let color = stops[0]?.color ?? NO_VALUE_COLOR;
   for (const s of stops) if (v >= s.value) color = s.color;
   return color;
 }
 
+/** Compact legend chip: layer name, the ramp as discrete swatches (no gradient), min/max as text,
+ *  the no-value swatch and the telecom pin key. */
 function Legend({ layer, stops }: { layer: Layer; stops: LegendStop[] }) {
   const first = stops[0]?.label ?? "0.00";
   const last = stops[stops.length - 1]?.label ?? "1.00";
   return (
     <section
       aria-label={`Legend: ${layerLabel(layer)} from ${first} to ${last}`}
-      className="absolute bottom-2 left-2 z-10 rounded-md border border-slate-700 bg-slate-950/90 px-3 py-2 text-xs text-slate-200"
+      className="glass lifeline-legend absolute bottom-[116px] left-[calc(min(360px,28vw)+24px)] z-10 w-[232px] px-3 py-2.5 text-[11px] text-muted"
     >
-      <p className="font-semibold text-slate-100">
-        {layerLabel(layer)}, {first} to {last}
+      <p className="lifeline-legend-label">
+        {layerLabel(layer)}
+        <span className="sr-only">, {first} to {last}</span>
       </p>
-      <ol className="mt-1 flex">
+      <ol className="mt-1.5 flex h-2 overflow-hidden rounded-full" aria-label={`${stops.length} color steps`}>
         {stops.map((s) => (
-          <li key={s.label} className="flex w-11 flex-col items-center">
-            <span aria-hidden="true" className="block h-3 w-full border border-slate-950" style={{ background: s.color }} />
-            <span className="mt-0.5 tabular-nums">{s.label}</span>
+          <li key={s.label} className="h-full flex-1" style={{ background: s.color }}>
+            <span className="sr-only">{s.label}</span>
           </li>
         ))}
       </ol>
-      <p className="mt-1 text-slate-300">Darker is lower, brighter is higher. Grey: no value.</p>
-      <p className="mt-1 flex items-center gap-1.5 text-slate-300">
-        <span aria-hidden="true" className="inline-block h-2.5 w-2.5 rounded-full bg-amber-400" />
+      <p aria-hidden="true" className="mt-1 flex justify-between font-mono tabular-nums text-fg">
+        <span>{first}</span>
+        <span>{last}</span>
+      </p>
+      <p className="mt-1.5 flex items-center gap-1.5">
+        <span aria-hidden="true" className="inline-block h-2 w-3 rounded-sm" style={{ background: NO_VALUE_COLOR }} />
+        Darker is lower, brighter is higher. Dark grey: no value.
+      </p>
+      <p className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+        <span aria-hidden="true" className="lifeline-pin-key lifeline-pin-key--active" />
         Telecom event active at this hour
-        <span aria-hidden="true" className="ml-2 inline-block h-2.5 w-2.5 rounded-full bg-slate-400" />
+        <span aria-hidden="true" className="lifeline-pin-key ml-2" />
         Not active
       </p>
     </section>
@@ -489,8 +541,8 @@ function Legend({ layer, stops }: { layer: Layer; stops: LegendStop[] }) {
 // ---------------------------------------------------------------- keyboard tract list
 
 const ROW_BTN =
-  "grid w-full grid-cols-[1.75rem_0.75rem_1fr_auto] items-center gap-2 rounded px-2 py-1 text-left text-sm " +
-  "text-slate-100 hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-sky-300";
+  "grid w-full grid-cols-[1.75rem_0.75rem_1fr_auto] items-center gap-2 rounded-card px-2 py-1 text-left text-[13px] " +
+  "text-fg hover:bg-line focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent";
 
 interface TractListProps {
   rows: SortedTract[];
@@ -527,14 +579,14 @@ function TractList({ rows, layer, hour, stops, selectedGeoid, onFocusTract, onBl
   };
 
   return (
-    <section aria-labelledby={headingId} className="rounded-md border border-slate-800 bg-slate-900/70 p-2">
-      <h2 id={headingId} className="px-1 text-sm font-semibold text-slate-200">
+    <section aria-labelledby={headingId} className="px-1 pb-2">
+      <h2 id={headingId} className="px-1 text-xs font-semibold text-fg">
         Tract list: {layerLabel(layer)} at {formatHour(hour)}, highest first
       </h2>
-      <p id={hintId} className="px-1 pb-1 text-xs text-slate-400">
+      <p id={hintId} className="px-1 pb-1 text-xs text-muted">
         Up and down arrows move between tracts. Enter selects a tract.
       </p>
-      <ul aria-labelledby={headingId} aria-describedby={hintId} className="max-h-64 overflow-y-auto">
+      <ul aria-labelledby={headingId} aria-describedby={hintId} className="max-h-72 overflow-y-auto">
         {rows.map((r, i) => {
           const selected = r.ref.geoid === selectedGeoid;
           return (
@@ -553,14 +605,14 @@ function TractList({ rows, layer, hour, stops, selectedGeoid, onFocusTract, onBl
                 onBlur={onBlurTract}
                 onClick={() => onSelect(r.ref.geoid)}
                 onKeyDown={(e) => onKey(e, i)}
-                className={`${ROW_BTN} ${selected ? "bg-slate-800 ring-1 ring-white/70" : ""}`}
+                className={`${ROW_BTN} ${selected ? "bg-line ring-1 ring-accent" : ""}`}
               >
-                <span className="tabular-nums text-slate-400">{i + 1}</span>
+                <span className="font-mono tabular-nums text-faint">{i + 1}</span>
                 <span aria-hidden="true" className="h-3 w-3 rounded-sm" style={{ background: swatchFor(stops, r.value) }} />
                 <span>
-                  {r.ref.town} <span className="text-slate-300">{shortTractName(r.ref.name)}</span>
+                  {r.ref.town} <span className="text-muted">{shortTractName(r.ref.name)}</span>
                 </span>
-                <span className="font-semibold tabular-nums">{formatLayerValue(layer, r.value)}</span>
+                <span className="font-mono tabular-nums">{formatLayerValue(layer, r.value)}</span>
               </button>
             </li>
           );
@@ -582,8 +634,8 @@ interface PinListProps {
 function PinList({ groups, activeCount, openPin, onOpen }: PinListProps) {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} className="rounded-md border border-slate-800 bg-slate-900/70 p-2">
-      <h2 id={headingId} className="px-1 text-sm font-semibold text-slate-200">
+    <section aria-labelledby={headingId} className="px-1 pb-2">
+      <h2 id={headingId} className="px-1 text-xs font-semibold text-fg">
         Observed telecom events (map pins)
       </h2>
       <ul className="mt-1 space-y-0.5">
@@ -596,16 +648,16 @@ function PinList({ groups, activeCount, openPin, onOpen }: PinListProps) {
                 type="button"
                 aria-expanded={openPin === g.key}
                 onClick={(e) => onOpen(g.key, e.currentTarget)}
-                className="flex w-full items-center gap-2 rounded px-2 py-1 text-left text-sm text-slate-100 hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-sky-300"
+                className="flex w-full items-center gap-2 rounded-card px-2 py-1 text-left text-[13px] text-fg hover:bg-line focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
               >
                 <span
                   aria-hidden="true"
-                  className={`inline-block h-2.5 w-2.5 shrink-0 rounded-full ${a > 0 ? "bg-amber-400" : "bg-slate-400"}`}
+                  className={`lifeline-pin-key shrink-0 ${a > 0 ? "lifeline-pin-key--active" : ""}`}
                 />
                 <span className="flex-1">
                   {g.caption}: {n} {n === 1 ? "event" : "events"}
                 </span>
-                <span className="text-xs text-slate-300">{a > 0 ? `${a} active at this hour` : "none active"}</span>
+                <span className="text-xs text-muted">{a > 0 ? `${a} active at this hour` : "none active"}</span>
               </button>
             </li>
           );
@@ -617,14 +669,14 @@ function PinList({ groups, activeCount, openPin, onOpen }: PinListProps) {
 
 function PinPopupContent({ group, events, hour }: { group: PinGroup; events: TelecomEvent[]; hour: HourKey }) {
   return (
-    <div className="text-sm text-slate-100">
-      <h3 className="pr-6 font-semibold">
+    <div className="text-[13px] text-fg">
+      <h3 className="pr-6 text-[15px] font-semibold">
         {group.caption}: {events.length} observed telecom {events.length === 1 ? "event" : "events"}
       </h3>
       <ul
         tabIndex={0}
         aria-label={`Telecom events at ${group.caption}`}
-        className="mt-2 max-h-72 space-y-3 overflow-y-auto pr-1 focus-visible:outline-2 focus-visible:outline-sky-300"
+        className="mt-2 max-h-72 space-y-3 overflow-y-auto pr-1 focus-visible:outline-2 focus-visible:outline-accent"
       >
         {events.map((ev) => {
           const active = isEventActive(ev, hour);
@@ -632,29 +684,29 @@ function PinPopupContent({ group, events, hour }: { group: PinGroup; events: Tel
             ? formatHour(ev.end_local)
             : `${formatHour(ev.end_effective)}${ev.end_label ? ` (${ev.end_label})` : ""}`;
           return (
-            <li key={ev.id} className="border-t border-slate-700 pt-2 first:border-t-0 first:pt-0">
+            <li key={ev.id} className="border-t border-line pt-2 first:border-t-0 first:pt-0">
               <p className="font-semibold">{humanize(ev.system)}</p>
               <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
-                <dt className="text-slate-400">Status</dt>
+                <dt className="text-muted">Status</dt>
                 <dd>{humanize(ev.status)}</dd>
-                <dt className="text-slate-400">Affects</dt>
+                <dt className="text-muted">Affects</dt>
                 <dd>{humanize(ev.affects)}</dd>
-                <dt className="text-slate-400">Area</dt>
+                <dt className="text-muted">Area</dt>
                 <dd>{ev.town_or_area}</dd>
-                <dt className="text-slate-400">Start</dt>
-                <dd>{formatHour(ev.start_local)}</dd>
-                <dt className="text-slate-400">End</dt>
-                <dd>{end}</dd>
-                <dt className="text-slate-400">This hour</dt>
-                <dd>{active ? "Active" : "Not active"}</dd>
-                <dt className="text-slate-400">Source</dt>
+                <dt className="text-muted">Start</dt>
+                <dd className="font-mono">{formatHour(ev.start_local)}</dd>
+                <dt className="text-muted">End</dt>
+                <dd className="font-mono">{end}</dd>
+                <dt className="text-muted">This hour</dt>
+                <dd className={active ? "text-accent" : "text-muted"}>{active ? "Active" : "Not active"}</dd>
+                <dt className="text-muted">Source</dt>
                 <dd>
                   {isHttpUrl(ev.source_url) ? (
                     <a
                       href={ev.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sky-300 underline hover:text-sky-200 focus-visible:outline-2 focus-visible:outline-sky-300"
+                      className="text-accent underline underline-offset-2 hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       {ev.source_name}
                       <span className="sr-only"> (opens in a new tab)</span>
@@ -665,7 +717,7 @@ function PinPopupContent({ group, events, hour }: { group: PinGroup; events: Tel
                 </dd>
               </dl>
               {!ev.drives_reach_flag && (
-                <p className="mt-1 text-xs text-slate-400">Map pin and briefing context only. It does not set the Reach channel.</p>
+                <p className="mt-1 text-xs text-muted">Map pin and briefing context only. It does not set the Reach channel.</p>
               )}
             </li>
           );

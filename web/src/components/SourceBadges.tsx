@@ -4,25 +4,16 @@ interface Props {
   badges: Badge[];
 }
 
-/** Provenance labels for the layers on screen (Req 8.8, 25.3, 25.4). */
+/** Provenance labels as a quiet list: label in body text, what it applies to as a faint line (Req 8.8, 25.3, 25.4). */
 export function SourceBadges({ badges }: Props) {
   return (
-    <section aria-labelledby="source-badges-heading" className="text-xs">
-      <h2 id="source-badges-heading" className="mb-1 font-semibold text-slate-300">
-        Sources for what is on screen
-      </h2>
-      <ul className="flex flex-wrap gap-1.5">
-        {badges.map((b) => (
-          <li
-            key={b.id}
-            data-badge={b.id}
-            className="rounded border border-slate-600 bg-slate-900 px-2 py-1 text-slate-200"
-          >
-            <span className="text-slate-400">{b.detail}: </span>
-            {b.label}
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className="flex flex-col gap-2">
+      {badges.map((b) => (
+        <li key={b.id} data-badge={b.id} className="rounded-card border border-line px-2.5 py-2">
+          <p className="text-[13px] leading-snug text-fg">{b.label}</p>
+          <p className="mt-0.5 text-[11px] leading-snug text-muted">{b.detail}</p>
+        </li>
+      ))}
+    </ul>
   );
 }

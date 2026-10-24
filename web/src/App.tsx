@@ -5,7 +5,7 @@ import { MapView } from "./components/MapView";
 import { Queue } from "./components/Queue";
 import { ResetControl } from "./components/ResetControl";
 import { BostonPlaceholder, ConfigurationPreview, ScaleSelector } from "./components/ScaleSelector";
-import { SourceBadges } from "./components/SourceBadges";
+import { SourcesPopover } from "./components/SourcesPopover";
 import { TimeSlider } from "./components/TimeSlider";
 import { PhoneSimulator } from "./components/PhoneSimulator";
 import { TractDrawer, type RunContext } from "./components/TractDrawer";
@@ -39,47 +39,73 @@ export default function App() {
     requestAnimationFrame(() => selectRef.current?.focus());
   }, []);
 
+  // Provenance for the top-bar popover: the layer on screen first, then the labels only other layers use.
+  const badges = useMemo(() => {
+    if (!data || view.kind !== "cape") return null;
+    const ctx = { timeline: data.timeline, towns: data.towns, sources: data.sources };
+    const onScreen = sourceBadges(layer, ctx);
+    const ids = new Set(onScreen.map((b) => b.id));
+    const otherLayers = sourceBadges("priority", ctx).filter((b) => !ids.has(b.id));
+    return { onScreen, otherLayers };
+  }, [data, view.kind, layer]);
+
   const subtitle =
-    view.kind === "cape" ? "Blizzard of 2026 replay (Cape Cod)" : entry ? `${entry.place}: ${entry.hazard_label}` : "";
+    view.kind === "cape" ? "Cape Cod · Blizzard of 2026 replay" : entry ? `${entry.place} · ${entry.hazard_label}` : "";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-slate-800 px-4 py-3">
-        <h1 className="text-lg font-semibold">
-          Lifeline City{subtitle && <span className="font-normal text-slate-300"> — {subtitle}</span>}
-        </h1>
-        {entries.length > 0 && <ScaleSelector ref={selectRef} entries={entries} value={entryId} onChange={setEntryId} />}
-        {view.kind === "cape" && <LayerSwitch layer={layer} onChange={setLayer} />}
-        <div className="ml-auto">
-          <ResetControl onReset={onReset} />
-        </div>
-      </header>
-      <ApiBanner error={error} loading={loading} onRetry={retry} />
-      <main className="px-4 py-3" aria-busy={loading}>
-        {loading && !error && <p className="text-slate-300">Loading demo data…</p>}
+    <div className="relative h-screen w-screen overflow-hidden bg-bg text-fg">
+      <main className="absolute inset-0" aria-busy={loading}>
         {data && !error && view.kind === "cape" && (
           <CapeView data={data} layer={layer} hourIdx={hourIdx} onHourIdx={setHourIdx} resetVersion={resetVersion} />
         )}
         {/* Switch point: task 16 renders BostonVoiceView here for the live Boston entry. */}
-        {data && !error && view.kind === "boston" && <BostonPlaceholder onBack={backToCape} />}
-        {data && !error && view.kind === "preview" && entry && <ConfigurationPreview entry={entry} onBack={backToCape} />}
+        {data && !error && view.kind !== "cape" && (
+          <div className="absolute inset-x-3 bottom-3 top-[76px] flex items-center justify-center overflow-y-auto">
+            {view.kind === "boston" && <BostonPlaceholder onBack={backToCape} />}
+            {view.kind === "preview" && entry && <ConfigurationPreview entry={entry} onBack={backToCape} />}
+          </div>
+        )}
+        {loading && !error && (
+          <p className="absolute inset-0 flex items-center justify-center text-muted">Loading demo data…</p>
+        )}
       </main>
+      <header className="glass absolute left-3 right-3 top-3 z-20 flex h-[52px] items-center gap-4 px-4">
+        <h1 className="flex min-w-0 items-baseline gap-3 whitespace-nowrap">
+          <span className="flex items-center gap-2 text-[15px] font-semibold">
+            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
+            Lifeline
+          </span>
+          {subtitle && <span className="truncate text-[13px] font-normal text-muted">{subtitle}</span>}
+        </h1>
+        <div className="ml-auto flex items-center gap-3">
+          {entries.length > 0 && (
+            <ScaleSelector ref={selectRef} entries={entries} value={entryId} onChange={setEntryId} />
+          )}
+          {view.kind === "cape" && <LayerSwitch layer={layer} onChange={setLayer} />}
+          {data && badges && (
+            <SourcesPopover onScreen={badges.onScreen} otherLayers={badges.otherLayers} sources={data.sources} />
+          )}
+          <ResetControl onReset={onReset} />
+        </div>
+      </header>
+      {error && (
+        <div className="absolute left-1/2 top-[76px] z-30 w-[min(640px,calc(100vw-24px))] -translate-x-1/2">
+          <ApiBanner error={error} loading={loading} onRetry={retry} />
+        </div>
+      )}
     </div>
   );
 }
 
 function LayerSwitch({ layer, onChange }: { layer: Layer; onChange: (l: Layer) => void }) {
   return (
-    <fieldset className="flex items-center gap-1">
+    <fieldset className="flex items-center rounded-full border border-line bg-bg/40 p-0.5">
       <legend className="sr-only">Map layer</legend>
-      <span aria-hidden="true" className="mr-1 text-sm text-slate-300">
-        Layer:
-      </span>
       {LAYERS.map((l) => (
         <label
           key={l.id}
-          className={`cursor-pointer rounded-md border px-2.5 py-1 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-sky-300 ${
-            layer === l.id ? "border-sky-300 bg-sky-900 text-white" : "border-slate-600 bg-slate-800 text-slate-100 hover:bg-slate-700"
+          className={`cursor-pointer whitespace-nowrap rounded-full border px-3 py-1 text-xs font-medium transition-colors duration-150 ease-out has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent ${
+            layer === l.id ? "border-line-strong bg-panel-solid text-fg" : "border-transparent text-muted hover:text-fg"
           }`}
         >
           <input
@@ -110,7 +136,7 @@ interface CapeViewProps {
 }
 
 function CapeView({ data, layer, hourIdx: hourIdxProp, onHourIdx, resetVersion }: CapeViewProps) {
-  const { timeline, tracts, towns, events, sources } = data;
+  const { timeline, tracts, towns, events } = data;
   const n = timeline.hours.length;
   const hourIdx = clampHourIdx(hourIdxProp ?? defaultHourIdx(timeline.hours, timeline.key_demo_hours), n);
   const [selectedGeoid, setSelectedGeoid] = useState<Geoid | null>(null);
@@ -118,59 +144,61 @@ function CapeView({ data, layer, hourIdx: hourIdxProp, onHourIdx, resetVersion }
   const onSelectTract = useCallback((geoid: Geoid) => setSelectedGeoid(geoid), []);
   const onCloseDrawer = useCallback(() => setSelectedGeoid(null), []);
 
-  const badges = useMemo(() => sourceBadges(layer, { timeline, towns, sources }), [layer, timeline, towns, sources]);
   const selected = selectedGeoid ? tracts.features.find((f) => f.properties.geoid === selectedGeoid) : undefined;
   const hour = timeline.hours[hourIdx] ?? "";
   const queueRows = useMemo(() => queueAt(timeline, hour), [timeline, hour]);
 
-  // Wide screens (xl): the drawer is a sticky right column; while it is open the queue moves under the
-  // map until 2xl, so the map keeps a usable width. Smaller screens: the drawer stacks below.
-  const grid = selected
-    ? "lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-1 2xl:grid-cols-[minmax(0,1fr)_22rem]"
-    : "lg:grid-cols-[minmax(0,1fr)_24rem]";
+  // Left panel element that hosts MapView's collapsed tract and telecom lists (portal target).
+  const [listsEl, setListsEl] = useState<HTMLDivElement | null>(null);
 
   return (
-    <div className="flex flex-col gap-3 xl:flex-row xl:items-start">
-      <div className="flex min-w-0 flex-1 flex-col gap-3">
-        <TimeSlider hours={timeline.hours} keyHours={timeline.key_demo_hours} hourIdx={hourIdx} onChange={setHourIdx} />
-        <div className={`grid gap-3 ${grid}`}>
-          <MapView
-            tracts={tracts}
-            towns={towns}
-            timeline={timeline}
-            events={events}
-            hourIdx={hourIdx}
-            layer={layer}
-            selectedGeoid={selectedGeoid}
-            onSelectTract={onSelectTract}
-          />
-          <Queue
-            rows={queueRows}
+    <>
+      <MapView
+        tracts={tracts}
+        towns={towns}
+        timeline={timeline}
+        events={events}
+        hourIdx={hourIdx}
+        layer={layer}
+        selectedGeoid={selectedGeoid}
+        onSelectTract={onSelectTract}
+        listsContainer={listsEl}
+      />
+      <aside
+        aria-label="Priority list panel"
+        className="glass absolute bottom-[116px] left-3 top-[76px] z-10 flex w-[min(360px,28vw)] min-w-[300px] flex-col gap-3 overflow-y-auto p-4"
+      >
+        <Queue
+          rows={queueRows}
+          hour={hour}
+          tracts={tracts}
+          selectedGeoid={selectedGeoid}
+          onSelectTract={onSelectTract}
+        />
+        <div ref={setListsEl} />
+      </aside>
+      <div className="glass absolute bottom-3 left-3 right-3 z-10 flex h-[92px] items-center px-4">
+        <TimeSlider hours={timeline.hours} keyHours={timeline.key_demo_hours} hourIdx={hourIdx} onChange={setHourIdx} capeTotal={timeline.cape_total} />
+      </div>
+      <p role="status" className="sr-only">
+        {selected
+          ? `Selected: ${shortTractName(selected.properties.name)}, ${selected.properties.town} at ${formatHour(hour)}.`
+          : "Select a tract on the map, in the tract list or in the priority list."}
+      </p>
+      {selected && (
+        <div className="lifeline-drawer-wrap absolute bottom-[116px] right-3 top-[76px] z-20 w-[min(440px,34vw)] min-w-[380px]">
+          <TractDrawer
+            geoid={selected.properties.geoid}
             hour={hour}
-            tracts={tracts}
-            selectedGeoid={selectedGeoid}
-            onSelectTract={onSelectTract}
+            town={selected.properties.town}
+            name={selected.properties.name}
+            scoring={timeline}
+            resetVersion={resetVersion}
+            onClose={onCloseDrawer}
+            reach={renderPhoneSimulator}
           />
         </div>
-        <p role="status" className="text-sm text-slate-300">
-          {selected
-            ? `Selected: ${shortTractName(selected.properties.name)}, ${selected.properties.town} at ${formatHour(hour)}.`
-            : "Select a tract on the map, in the tract list or in the priority queue."}
-        </p>
-        <SourceBadges badges={badges} />
-      </div>
-      {selected && (
-        <TractDrawer
-          geoid={selected.properties.geoid}
-          hour={hour}
-          town={selected.properties.town}
-          name={selected.properties.name}
-          scoring={timeline}
-          resetVersion={resetVersion}
-          onClose={onCloseDrawer}
-          reach={renderPhoneSimulator}
-        />
       )}
-    </div>
+    </>
   );
 }

@@ -536,6 +536,33 @@ Everything above this line is required. Work below the line is listed in build o
     - In `tests/pipeline/test_config.py`, check that the `config/scoring.yaml` key hours give `has_mixed_hour = true` on the real `--no-llm` output, and that `languages.yaml` sets Barnstable and Yarmouth to en 0.6, pt 0.3, es 0.1
     - _Requirements: 11.11, 11.17, 17.4_
 
+- [x] 20. Redesign the web UI as an operator console (steering design.md)
+  - [x] 20.1 Load the fonts and define the design tokens
+    - Geist and Geist Mono from Google Fonts in web/index.html; tokens in web/src/index.css with Tailwind v4 @theme
+    - Replace every slate-* and sky-* class in web/src with the tokens; keep all labels, aria attributes and keyboard paths
+    - _Requirements: 29.1, 29.2_
+
+  - [x] 20.2 Build the console layout
+    - Full-bleed map, floating top bar, left Priority list panel, bottom time bar and right drawer; no page scroll at 1440x900 or 1280x800
+    - Move the keyboard tract list and the telecom pin list into the left panel as collapsed details elements: All tracts and Telecom reports
+    - _Requirements: 8.1, 9.1, 9.2, 29.1_
+
+  - [x] 20.3 Restyle the map
+    - Single-hue ramps per layer, tract and town outlines, hover and selected outlines, pins, town labels, the dark-matter-nolabels basemap with the plain fallback, and the legend chip
+    - _Requirements: 8.1, 8.4, 8.6, 8.7, 29.4_
+
+  - [x] 20.4 Build the time bar
+    - Prev and next buttons, the hour in Geist Mono, the cape_total sparkline behind a custom range slider, and key-hour tick buttons
+    - _Requirements: 8.2, 8.3, 29.1_
+
+  - [x] 20.5 Restyle the tract drawer
+    - Stat header, a tablist (Briefing, Why flagged, Reach) with arrow-key navigation, the phone frame, check-in status tiles and the radio script in a collapsed details element
+    - _Requirements: 10.1, 10.4, 10.6, 12.4, 14.8, 18.9, 29.1_
+
+  - [x] 20.6 Add the Sources and assumptions popover
+    - An (i) button in the top bar opens a popover with every provenance label and source badge, replacing the always-visible SourceBadges row
+    - _Requirements: 8.8, 25.3, 25.4, 29.1_
+
 ## Notes
 
 - Implementation languages are Python 3.13 (pipeline, API) and TypeScript (web), as in the design.
@@ -591,7 +618,10 @@ Everything above this line is required. Work below the line is listed in build o
     { "id": 38, "tasks": ["18.3", "19.1", "19.3", "19.5", "19.6", "19.7", "19.8", "19.9", "19.12", "19.15", "19.16", "19.17", "19.18", "19.19", "19.21", "19.23", "19.24", "19.27"] },
     { "id": 39, "tasks": ["18.4", "19.2", "19.4", "19.10", "19.13", "19.20", "19.22", "19.25", "19.28"] },
     { "id": 40, "tasks": ["19.11", "19.14"] },
-    { "id": 41, "tasks": ["19.26"] }
+    { "id": 41, "tasks": ["19.26"] },
+    { "id": 42, "tasks": ["20.1"] },
+    { "id": 43, "tasks": ["20.2"] },
+    { "id": 44, "tasks": ["20.3", "20.4", "20.5", "20.6"] }
   ]
 }
 ```

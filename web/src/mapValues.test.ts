@@ -12,7 +12,11 @@ import {
   layerValues,
   legendStops,
   LAYERS,
+  luminance,
   nextHourKey,
+  NO_VALUE_COLOR,
+  RAMP,
+  RAMPS,
   niceCeil,
   pinFeatures,
   pinGroups,
@@ -188,6 +192,18 @@ describe("legend", () => {
     expect(layerDomainMax("priority", tl)).toBe(0.6);
     expect(layerDomainMax("need", tl)).toBe(1);
     expect(layerDomainMax("lifelines", tl)).toBe(1);
+  });
+
+  it("each layer has a 6-stop single-hue ramp with rising lightness", () => {
+    for (const { id } of LAYERS) {
+      const ramp = RAMPS[id];
+      expect(ramp).toHaveLength(6);
+      for (let i = 1; i < ramp.length; i++) expect(luminance(ramp[i]!)).toBeGreaterThan(luminance(ramp[i - 1]!));
+      expect(legendStops(1, ramp).map((s) => s.color)).toEqual(ramp);
+    }
+    expect(RAMP).toEqual(RAMPS.priority);
+    expect(RAMPS.priority[4]).toBe("#F2A541");
+    expect(Number.isFinite(luminance(NO_VALUE_COLOR))).toBe(true);
   });
 
   it("fill expression interpolates the value feature state", () => {

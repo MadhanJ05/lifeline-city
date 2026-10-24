@@ -1,0 +1,82 @@
+/* Map-only styles (design.md "Map colors"). Imported by components/MapView.tsx. Town labels live in index.css. */
+
+/* Count badge next to a pin that holds several events (Cape-wide marker). Decorative: aria-hidden. */
+.lifeline-pin-badge {
+  pointer-events: none;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #10151c;
+  color: #e9eef3;
+  font-family: "Geist Mono", ui-monospace, "SF Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Legend chip label: 11px uppercase, tracked, faint. */
+.lifeline-legend-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8c98a6;
+}
+
+/* Pin key swatch: same look as the map pins (2px ring, accent fill when active). */
+.lifeline-pin-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid #5c6876;
+  background: transparent;
+}
+.lifeline-pin-key--active {
+  border-color: #10151c;
+  background: #f2a541;
+  box-shadow: 0 0 0 1px rgba(242, 165, 65, 0.5);
+}
+
+/* MapLibre popup restyled to the dark panel tokens. */
+.lifeline-popup .maplibregl-popup-content {
+  background: #10151c;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+  padding: 12px 14px;
+  color: #e9eef3;
+}
+.lifeline-popup.maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.lifeline-popup.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+.lifeline-popup.maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+  border-bottom-color: #10151c;
+}
+.lifeline-popup.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.lifeline-popup.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+.lifeline-popup.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+  border-top-color: #10151c;
+}
+.lifeline-popup.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: #10151c;
+}
+.lifeline-popup.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: #10151c;
+}
+.lifeline-popup .maplibregl-popup-close-button {
+  color: #8c98a6;
+  font-size: 16px;
+  padding: 2px 8px;
+}
+.lifeline-popup .maplibregl-popup-close-button:hover {
+  color: #e9eef3;
+  background: rgba(255, 255, 255, 0.07);
+}
+.lifeline-popup .maplibregl-popup-close-button:focus-visible {
+  outline: 2px solid #f2a541;
+  outline-offset: 2px;
+}

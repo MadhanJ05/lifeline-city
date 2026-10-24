@@ -1,6 +1,45 @@
 # How Lifeline City was built with Kiro
 
-Kiro held the project rules (steering), the plan (one spec) and the guardrails (hooks). `DECISIONS.md` is the source of truth; steering and the spec restate it so every agent turn starts from the same constraints.
+Kiro held the project rules (steering), the plan (one spec) and the guardrails (hooks). `DECISIONS.md` is the source of truth; steering and the spec restate it so every agent turn starts from the same constraints. Every line of application code was generated in Kiro, running Claude Opus 5.5.
+
+## At a glance
+
+**Kiro tools used.**
+
+- **Kiro IDE** for everything that shipped. The **Spec agent** built the core product:
+  - **Quick Spec** first asked clarifying questions, then generated requirements, design and tasks.
+  - **Spec task execution** then worked through the task list. The orchestrator dispatched one sub-agent per task, ran independent tasks in waves from the dependency graph in `tasks.meta.json`, and tracked status and property-test results.
+- The **Default agent**, in vibe mode, did the final visual redesign, guided by a design steering file.
+- **Autopilot** was on during the build, with a scoped allow-list of trusted shell commands so routine `uv`, `pytest`, `npm` and `git` steps ran without prompts.
+- **Kiro CLI** was used for setup: GitHub sign-in, setting Claude Opus 5.5 as the default model (`chat.defaultModel`), and checking hackathon credits with `/usage`.
+- We did not use Kiro Web, Crew, MCP servers or Powers. All data access is pipeline code, so it is cached, reproducible and testable without a live connection.
+
+**Spec-driven vs vibe coding.** The core went through the spec: data reconstruction, scoring, verifier, API, check-in state machine. The look did not.
+- **The spec caught design errors before any code existed.** During Quick Spec's clarify step, Kiro noticed that one hand-entered "Cape-wide cellular outage" row would have flagged every town as phones-down for the whole storm. That would have turned every text check-in into a door-knock and removed the demo's core contrast. It asked which events should set the flag, and the answer became Requirement 6.
+- **It also pushed back on scope.** Kiro asked where the heavy Boston block should go, how much text the LLM should write, and which tests were required. The answers became a must-have line in `tasks.md` with an explicit cut order, which is what let a solo build finish everything above the line.
+- **Vibe mode suited the redesign.** For a subjective, visual change, we iterated against the design steering file and a live dev server instead of writing more requirements.
+
+**Agent hooks.** Four hooks, created with Kiro's createHook tool:
+- **Required property tests on save:** they re-run on every save of a `pipeline/*.py` file.
+- **Privacy guard:** a scan for phone numbers and street addresses runs on every save and file creation in `api/` and `data/processed/`, and again at the end of every agent turn. The end-of-turn run is there because files written by the pipeline or by agent tools don't fire editor save events.
+- **What the guard caught:** 10-digit town IDs that looked like phone numbers. Kiro removed them from the exports rather than weakening the guard.
+
+**Steering strategy.** The biggest difference came from one source of truth plus verbatim formulas:
+- Every steering file points at `DECISIONS.md`.
+- `scoring.md` copies the scoring formulas word for word, so generated code could change weights but never the math.
+- When decisions changed mid-build (the phones-down rule, Python 3.13, a 2-1-1 help line for the Cape instead of 311), Kiro re-synced its own steering files and checked the formula block with a diff before writing code.
+- A seventh file, `design.md`, carried the design system for the redesign.
+
+**Property-based testing.** We used Hypothesis in Python and fast-check in TypeScript.
+- **Four properties are required**, because each one protects a promise the demo makes:
+  1. scores stay between 0 and 1
+  2. the reach channel always follows the phones-down flag, and every queued area has a radio script
+  3. the verifier accepts exactly the claims grounded in the data
+  4. every text message fits in two SMS segments under real GSM-7 and UCS-2 encoding
+- **Optional properties** cover phone masking and other pure logic.
+- The same verifier logic, run against live model output, rejected 36 of 50 first-draft AI briefings for numbers that were not in the data.
+
+**Work done outside Kiro.** Research on the storm and its after-action review, data sourcing (including Eversource's filing with the state utility regulator), the hand-entered outage CSVs and `DECISIONS.md` were prepared with Claude (Anthropic's assistant). Those documents were inputs to Kiro's steering and spec.
 
 ## Steering (`.kiro/steering/`)
 

@@ -25,21 +25,21 @@ import type { Run, RunHousehold, RunMessage } from "../types";
 import type { RunContext } from "./TractDrawer";
 import { SimulatedBadge } from "./SimulatedBadge";
 
-const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300";
+const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 /** In-app phone for the check-in loop (Req 14.8, 18.4, 18.5, 26.5, 29.1). Plugged into the drawer through
  *  TractDrawer's `reach` render prop. Everything here is synthetic and labeled "Simulated". */
 export function PhoneSimulator({ detail, run, onRunUpdate }: RunContext) {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} className="flex flex-col gap-2 rounded-md border border-slate-700 bg-slate-900 p-3 text-sm">
+    <section aria-labelledby={headingId} className="flex flex-col gap-2 rounded-card border border-line p-3 text-[13px]">
       <h4 id={headingId} className="font-semibold">
         {SIMULATOR_HEADING}
       </h4>
       {run ? (
         <SimulatorBody key={run.id} run={run} onRunUpdate={onRunUpdate} />
       ) : (
-        <p className="text-slate-300">{detail.channel === "sms" ? NO_RUN_SMS_NOTE : NO_RUN_DOOR_KNOCK_NOTE}</p>
+        <p className="text-muted">{detail.channel === "sms" ? NO_RUN_SMS_NOTE : NO_RUN_DOOR_KNOCK_NOTE}</p>
       )}
     </section>
   );
@@ -52,7 +52,7 @@ function SimulatorBody({ run, onRunUpdate }: { run: Run; onRunUpdate: (run: Run)
   const householdId = resolveHouseholdId(run.households, picked);
   const household = run.households.find((h) => h.id === householdId) ?? null;
 
-  if (!household) return <p className="text-slate-300">No simulated households in this run.</p>;
+  if (!household) return <p className="text-muted">No simulated households in this run.</p>;
 
   return (
     <div className="flex flex-col gap-3">
@@ -64,7 +64,7 @@ function SimulatorBody({ run, onRunUpdate }: { run: Run; onRunUpdate: (run: Run)
           id={pickerId}
           value={household.id}
           onChange={(e) => setPicked(e.target.value)}
-          className={`rounded-md border border-slate-500 bg-slate-800 px-2 py-1 text-slate-100 ${FOCUS}`}
+          className={`rounded-card border border-line-strong bg-bg px-2 py-1.5 text-fg ${FOCUS}`}
         >
           {run.households.map((h) => (
             <option key={h.id} value={h.id}>
@@ -133,15 +133,15 @@ function PhoneFrame({ run, household, onRunUpdate }: FrameProps) {
   const canSend = !posting && replyBody(draft) !== null;
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-slate-600 bg-slate-950 p-3">
+    <div className="mx-auto flex w-full max-w-[22rem] flex-col gap-2 rounded-[24px] border border-line-strong bg-bg p-3">
       {/* Sender and "Simulated" label sit outside the message bubbles (Req 14.8). */}
-      <div className="flex flex-col gap-0.5 border-b border-slate-800 pb-2">
+      <div className="flex flex-col gap-0.5 border-b border-line pb-2">
         <p className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs text-slate-400">From:</span>
+          <span className="text-xs text-muted">From:</span>
           <span className="font-semibold">{SENDER_NAME}</span>
           <SimulatedBadge />
         </p>
-        <p className="flex flex-wrap items-center gap-1.5 text-xs text-slate-300">
+        <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
           <span className="tabular-nums">{toLineText(household.phone)}</span>
           <span aria-hidden="true">·</span>
           <span>{household.label}</span>
@@ -150,7 +150,7 @@ function PhoneFrame({ run, household, onRunUpdate }: FrameProps) {
 
       <Thread household={household} />
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-1.5 border-t border-slate-800 pt-2" aria-busy={posting}>
+      <form onSubmit={onSubmit} className="flex flex-col gap-1.5 border-t border-line pt-2" aria-busy={posting}>
         <label htmlFor={inputId} className="text-xs font-semibold">
           {replyLabel(household)}
         </label>
@@ -165,18 +165,18 @@ function PhoneFrame({ run, household, onRunUpdate }: FrameProps) {
             autoComplete="off"
             aria-describedby={hintId}
             onChange={(e) => setDraft(e.target.value)}
-            className={`min-w-0 flex-1 rounded-md border border-slate-500 bg-slate-800 px-2 py-1 text-slate-100 placeholder:text-slate-400 ${FOCUS}`}
+            className={`min-w-0 flex-1 rounded-full border border-line-strong bg-panel px-3 py-1 text-fg placeholder:text-muted ${FOCUS}`}
             placeholder="Type a reply"
           />
           <button
             type="submit"
             aria-disabled={!canSend}
-            className={`rounded-md border border-sky-300 bg-sky-900 px-3 py-1 font-semibold text-white hover:bg-sky-800 aria-disabled:cursor-not-allowed aria-disabled:border-slate-600 aria-disabled:bg-slate-800 aria-disabled:text-slate-300 ${FOCUS}`}
+            className={`rounded-full border border-accent bg-accent px-3 py-1 font-semibold text-on-accent hover:bg-accent/90 aria-disabled:cursor-not-allowed aria-disabled:border-line-strong aria-disabled:bg-transparent aria-disabled:text-muted ${FOCUS}`}
           >
             {posting ? "Sending…" : "Send"}
           </button>
         </div>
-        <p id={hintId} className="text-xs text-slate-300">
+        <p id={hintId} className="text-xs text-muted">
           {REPLY_HINT}
         </p>
         <div role="group" aria-label="Quick replies" className="flex flex-wrap gap-1.5">
@@ -187,7 +187,7 @@ function PhoneFrame({ run, household, onRunUpdate }: FrameProps) {
               aria-label={q.label}
               aria-disabled={posting}
               onClick={() => send(q.body, false)}
-              className={`rounded-md border border-slate-500 bg-slate-800 px-2 py-0.5 font-semibold text-slate-100 hover:bg-slate-700 aria-disabled:cursor-not-allowed aria-disabled:text-slate-400 ${FOCUS}`}
+              className={`rounded-full border border-line-strong px-2.5 py-0.5 font-mono text-xs font-medium text-fg hover:bg-line aria-disabled:cursor-not-allowed aria-disabled:text-muted ${FOCUS}`}
             >
               {q.body}
             </button>
@@ -197,7 +197,7 @@ function PhoneFrame({ run, household, onRunUpdate }: FrameProps) {
           {posting ? "Sending reply" : ""}
         </p>
         {error && (
-          <p role="alert" className="rounded border border-rose-400/70 bg-rose-950/60 px-2 py-1 text-xs">
+          <p role="alert" className="rounded-card border border-line border-l-2 border-l-help bg-help/10 px-2 py-1 text-xs">
             {error}
           </p>
         )}
@@ -226,7 +226,7 @@ function Thread({ household }: { household: RunHousehold }) {
       className={`max-h-80 overflow-y-auto rounded-md ${FOCUS}`}
     >
       {count === 0 ? (
-        <p className="text-slate-300">No messages yet.</p>
+        <p className="text-muted">No messages yet.</p>
       ) : (
         <ol className="flex flex-col gap-2">
           {household.messages.map((m, i) => (
@@ -244,21 +244,21 @@ function MessageItem({ message: m, lang }: { message: RunMessage; lang: string }
   const classText = messageClassText(m);
   return (
     <li className={`flex max-w-[85%] flex-col gap-0.5 ${out ? "self-start items-start" : "self-end items-end"}`}>
-      <p className="flex flex-wrap items-center gap-1.5 text-xs text-slate-300">
+      <p className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
         <span className="font-semibold">{out ? `${SENDER_NAME}: ${messageKindLabel(m)}` : "Household reply"}</span>
-        {source && <span className="rounded border border-fuchsia-300/60 px-1 text-fuchsia-100">{source}</span>}
+        {source && <span className="rounded border border-simulated/40 px-1 text-simulated">{source}</span>}
         <span className="tabular-nums">{messageTimeText(m.at)}</span>
       </p>
       {/* Message body only: no sender name or "Simulated" label inside the bubble (Req 14.8). */}
       <p
         lang={out ? lang : undefined}
         className={`whitespace-pre-wrap break-words rounded-lg px-2.5 py-1.5 ${
-          out ? "rounded-tl-none bg-slate-800 text-slate-100" : "rounded-tr-none bg-sky-900 text-white"
+          out ? "rounded-tl-sm border border-line bg-panel text-fg" : "rounded-tr-sm bg-text-channel/14 text-fg"
         }`}
       >
         {maskPhonesInText(m.text)}
       </p>
-      {classText && <p className="text-xs text-slate-300">{classText}</p>}
+      {classText && <p className="text-xs text-muted">{classText}</p>}
     </li>
   );
 }

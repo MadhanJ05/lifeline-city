@@ -43,7 +43,9 @@ interface Props {
   sendError?: string | null;
 }
 
-const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300";
+const FOCUS = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+const LABEL = "text-[11px] font-medium uppercase tracking-[0.06em] text-faint";
+const CARD = "rounded-card border border-line p-3";
 
 /** Reach channel, rule, language switcher, SMS preview or Door_Knock_List, and the AM radio script
  *  (Req 12.4 to 12.7, 15.1 to 15.3). Synthetic records carry the "Simulated" badge (Req 17.10). */
@@ -55,26 +57,30 @@ export function ReachPanel({ detail, content, telecomModel, onSend, sending = fa
   const helpLine = content?.help_line.sentence[lang];
 
   return (
-    <div className="flex flex-col gap-3 text-sm">
-      <div>
-        <p>
-          <span className="font-semibold">Channel:</span>{" "}
-          <span className="rounded border border-slate-500 bg-slate-800 px-1.5 py-0.5 text-xs font-semibold">
+    <div className="flex flex-col gap-3 text-[13px]">
+      <div className={CARD}>
+        <p className="flex flex-wrap items-center gap-2">
+          <span className={LABEL}>Channel</span>
+          <span
+            className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+              detail.channel === "sms" ? "bg-text-channel/12 text-text-channel" : "bg-knock/12 text-knock"
+            }`}
+          >
             {channelLabel(detail.channel)}
-          </span>{" "}
-          <span>{rule.headline}</span>
+          </span>
+          <span className="text-fg">{rule.headline}</span>
         </p>
-        <p className="mt-1 text-xs text-slate-300">{rule.rule}</p>
-        {rule.label && <p className="text-xs text-slate-300">{rule.label}</p>}
+        <p className="mt-1 text-xs text-muted">{rule.rule}</p>
+        {rule.label && <p className="mt-0.5 text-[11px] text-faint">{rule.label}</p>}
         {rule.citations.length > 0 && (
-          <ul className="text-xs text-slate-300">
+          <ul className="mt-0.5 text-[11px] text-faint">
             {rule.citations.map((c) => {
               const href = safeUrl(c.source_url);
               return (
                 <li key={c.event_id}>
                   Source:{" "}
                   {href ? (
-                    <a href={href} target="_blank" rel="noreferrer" className={`text-sky-300 underline ${FOCUS}`}>
+                    <a href={href} target="_blank" rel="noreferrer" className={`text-accent underline ${FOCUS}`}>
                       {c.source_name}
                     </a>
                   ) : (
@@ -89,7 +95,7 @@ export function ReachPanel({ detail, content, telecomModel, onSend, sending = fa
 
       <LanguageSwitcher value={lang} onChange={setLang} />
 
-      {!reach && <p className="text-slate-300">Loading reach content…</p>}
+      {!reach && <p className="text-muted">Loading reach content…</p>}
 
       {reach && sections.smsPreview && (
         <SmsSection
@@ -110,7 +116,7 @@ export function ReachPanel({ detail, content, telecomModel, onSend, sending = fa
       {reach && sections.radio && <RadioSection lang={lang} radio={reach.radio?.[lang] ?? null} />}
 
       {helpLine && (
-        <p className="text-xs text-slate-300">
+        <p className="text-[11px] text-faint">
           Help line in every message: <span lang={lang}>{helpLine}</span>
         </p>
       )}
@@ -125,15 +131,16 @@ function LanguageSwitcher({ value, onChange }: { value: Lang; onChange: (l: Lang
     const next = nextLang(value, e.key);
     if (!next) return;
     e.preventDefault();
+    e.stopPropagation();
     onChange(next);
     refs.current[next]?.focus();
   };
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span id={labelId} className="text-xs font-semibold text-slate-200">
+    <div className="flex flex-wrap items-center justify-between gap-2">
+      <span id={labelId} className={LABEL}>
         Preview language
       </span>
-      <div role="radiogroup" aria-labelledby={labelId} onKeyDown={onKeyDown} className="inline-flex rounded-md border border-slate-600">
+      <div role="radiogroup" aria-labelledby={labelId} onKeyDown={onKeyDown} className="inline-flex gap-0.5 rounded-full border border-line p-0.5">
         {LANGS.map((l) => {
           const checked = l === value;
           return (
@@ -147,8 +154,8 @@ function LanguageSwitcher({ value, onChange }: { value: Lang; onChange: (l: Lang
               aria-checked={checked}
               tabIndex={checked ? 0 : -1}
               onClick={() => onChange(l)}
-              className={`px-2 py-1 text-xs first:rounded-l-md last:rounded-r-md ${FOCUS} ${
-                checked ? "bg-sky-200 font-semibold text-slate-950" : "bg-slate-800 text-slate-100 hover:bg-slate-700"
+              className={`rounded-full border px-2.5 py-0.5 text-xs ${FOCUS} ${
+                checked ? "border-line-strong bg-bg font-medium text-fg" : "border-transparent text-muted hover:text-fg"
               }`}
             >
               {LANG_LABEL[l]}
@@ -187,39 +194,40 @@ function SmsSection({
         SMS check-in preview ({langLabel(lang)})
       </h4>
       {sms ? (
-        <figure className="flex flex-col gap-1">
-          <figcaption className="flex items-center gap-1.5 text-xs text-slate-300">
-            <SimulatedBadge /> <span>· Lifeline City</span>
+        <figure className="flex flex-col gap-1.5">
+          {/* Sender and "Simulated" label sit outside the bubble (Req 14.8). */}
+          <figcaption className="flex items-center justify-center gap-1.5 text-[11px] text-muted">
+            <span>Lifeline City</span> <span aria-hidden="true">·</span> <SimulatedBadge />
           </figcaption>
-          <p lang={lang} className="max-w-[22rem] whitespace-pre-line rounded-2xl rounded-tl-sm bg-slate-800 px-3 py-2 text-slate-100">
-            {sms.text}
-          </p>
-          <p className="text-xs text-slate-300">{segmentText(sms)}</p>
+          <div className="mx-auto w-full max-w-[22rem] rounded-[24px] border border-line-strong bg-bg p-3">
+            <p lang={lang} className="max-w-[90%] whitespace-pre-line rounded-2xl rounded-tl-sm border border-line bg-panel px-3 py-2 text-fg">
+              {sms.text}
+            </p>
+          </div>
+          <p className="text-center font-mono text-[11px] text-faint">{segmentText(sms)}</p>
         </figure>
       ) : (
-        <p className="text-slate-300">No SMS check-in cached in {langLabel(lang)} for this town.</p>
+        <p className="text-muted">No SMS check-in cached in {langLabel(lang)} for this town.</p>
       )}
-      <p className="flex items-center gap-1.5 text-xs text-slate-200">
+      <p className="flex items-center gap-1.5 text-xs text-muted">
         <SimulatedBadge /> {householdsText(households)}
       </p>
-      <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={onSend}
-          disabled={disabled}
-          aria-describedby={note ? noteId : undefined}
-          className={`rounded-md border border-sky-300 bg-sky-200 px-3 py-1 font-semibold text-slate-950 hover:bg-sky-100 disabled:cursor-not-allowed disabled:border-slate-600 disabled:bg-slate-800 disabled:text-slate-300 ${FOCUS}`}
-        >
-          {sending ? "Sending check-ins…" : "Send check-ins"}
-        </button>
-        {note && (
-          <span id={noteId} className="text-xs text-slate-300">
-            {note}
-          </span>
-        )}
-      </div>
+      <button
+        type="button"
+        onClick={onSend}
+        disabled={disabled}
+        aria-describedby={note ? noteId : undefined}
+        className={`w-full rounded-card bg-accent px-3 py-2 font-semibold text-on-accent hover:bg-accent/90 disabled:cursor-not-allowed disabled:border disabled:border-line-strong disabled:bg-transparent disabled:text-muted ${FOCUS}`}
+      >
+        {sending ? "Sending check-ins…" : "Send check-ins"}
+      </button>
+      {note && (
+        <p id={noteId} className="text-xs text-muted">
+          {note}
+        </p>
+      )}
       {sendError && (
-        <p role="alert" className="rounded border border-rose-400/70 bg-rose-950/60 px-2 py-1 text-xs">
+        <p role="alert" className="rounded-card border border-line border-l-2 border-l-help bg-help/10 px-2 py-1 text-xs">
           {sendError}
         </p>
       )}
@@ -234,17 +242,17 @@ function DoorKnockSection({ entries, lang, preview }: { entries: DoorKnockEntry[
       <h4 id={headingId} className="font-semibold">
         {DOOR_KNOCK_HEADING}
       </h4>
-      <p className="text-slate-200">{DOOR_KNOCK_EXPLANATION}</p>
+      <p className="text-xs text-muted">{DOOR_KNOCK_EXPLANATION}</p>
       {preview && (
-        <div>
-          <p className="text-xs font-semibold text-slate-200">Doorstep script preview ({langLabel(lang)})</p>
-          <p lang={lang} className="rounded-md border border-slate-700 bg-slate-900 p-2">
+        <div className="flex flex-col gap-1">
+          <p className={LABEL}>Doorstep script preview ({langLabel(lang)})</p>
+          <p lang={lang} className="rounded-card border border-line bg-bg p-2.5">
             {preview}
           </p>
         </div>
       )}
       {entries.length === 0 ? (
-        <p className="text-slate-300">No simulated households in this tract.</p>
+        <p className="text-muted">No simulated households in this tract.</p>
       ) : (
         <ul className="flex flex-col gap-2">
           {entries.map((e) => (
@@ -256,30 +264,46 @@ function DoorKnockSection({ entries, lang, preview }: { entries: DoorKnockEntry[
   );
 }
 
+function HazardIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" className="mt-0.5 shrink-0">
+      <path d="M8 2l6.5 11.5h-13z" />
+      <path d="M8 6.5v3.2M8 11.6v.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function DoorKnockItem({ entry }: { entry: DoorKnockEntry }) {
   return (
-    <li className="flex flex-col gap-1 rounded-md border border-slate-700 bg-slate-900 p-2">
+    <li className="flex flex-col gap-2 rounded-card border border-line p-3">
       <p className="flex flex-wrap items-center gap-1.5 font-semibold">
         {entry.household_label} <SimulatedBadge />
       </p>
       {entry.access_hazard && (
-        <p role="note" className="rounded border border-amber-300 bg-amber-950 px-2 py-1 font-semibold text-amber-100">
-          <span aria-hidden="true">⚠ </span>Access hazard: {entry.access_hazard}
+        <p role="note" className="flex items-start gap-1.5 rounded-card border border-help/40 bg-help/10 px-2 py-1.5 text-xs font-medium text-help">
+          <HazardIcon />
+          <span>Access hazard: {entry.access_hazard}</span>
         </p>
       )}
-      <dl className="grid grid-cols-[auto_1fr] gap-x-2 text-xs">
-        <dt className="text-slate-400">Language</dt>
+      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
+        <dt className="text-faint">Language</dt>
         <dd>{langLabel(entry.lang)}</dd>
-        <dt className="text-slate-400">Responder</dt>
+        <dt className="text-faint">Responder</dt>
         <dd>{entry.responder_label}</dd>
-        <dt className="text-slate-400">Why flagged</dt>
-        <dd>{entryChipTexts(entry).join(" · ")}</dd>
+        <dt className="text-faint">Why flagged</dt>
+        <dd className="flex flex-wrap gap-1">
+          {entryChipTexts(entry).map((t) => (
+            <span key={t} className="rounded-full border border-line px-1.5 py-px text-[11px] text-muted">
+              {t}
+            </span>
+          ))}
+        </dd>
       </dl>
       <details className="text-xs">
-        <summary className={`cursor-pointer rounded text-sky-200 ${FOCUS}`}>
+        <summary className={`cursor-pointer rounded text-accent ${FOCUS}`}>
           Doorstep script ({langLabel(entry.lang)})
         </summary>
-        <p lang={entry.lang} className="mt-1 text-sm">
+        <p lang={entry.lang} className="mt-1 text-[13px]">
           {entry.doorstep_script}
         </p>
       </details>
@@ -290,20 +314,25 @@ function DoorKnockItem({ entry }: { entry: DoorKnockEntry }) {
 function RadioSection({ lang, radio }: { lang: Lang; radio: RadioText | null }) {
   const headingId = useId();
   return (
-    <section aria-labelledby={headingId} className="flex flex-col gap-1">
-      <h4 id={headingId} className="font-semibold">
-        {RADIO_HEADING} ({langLabel(lang)})
-      </h4>
-      {radio ? (
-        <>
-          <p lang={lang} className="rounded-md border border-slate-700 bg-slate-900 p-2">
-            {radio.text}
-          </p>
-          <p className="text-xs text-slate-300">{radioLengthText(radio)}</p>
-        </>
-      ) : (
-        <p className="text-slate-300">{RADIO_MISSING}</p>
-      )}
-    </section>
+    <details className="rounded-card border border-line">
+      <summary className={`cursor-pointer rounded-card px-3 py-2 text-xs font-medium text-fg ${FOCUS}`}>
+        AM radio script (30 s)
+      </summary>
+      <section aria-labelledby={headingId} className="flex flex-col gap-1 px-3 pb-3">
+        <h4 id={headingId} className="font-semibold">
+          {RADIO_HEADING} ({langLabel(lang)})
+        </h4>
+        {radio ? (
+          <>
+            <p lang={lang} className="rounded-card border border-line bg-bg p-2.5">
+              {radio.text}
+            </p>
+            <p className="font-mono text-[11px] text-faint">{radioLengthText(radio)}</p>
+          </>
+        ) : (
+          <p className="text-muted">{RADIO_MISSING}</p>
+        )}
+      </section>
+    </details>
   );
 }

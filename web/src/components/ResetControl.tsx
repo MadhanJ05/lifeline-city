@@ -29,14 +29,23 @@ export function ResetControl({ onReset }: Props) {
         type="button"
         onClick={onClick}
         disabled={status.kind === "pending"}
-        className="rounded-md border border-slate-500 bg-slate-800 px-2.5 py-1 text-sm text-slate-100 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 disabled:opacity-60"
+        className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-transparent px-3 py-1 text-[13px] text-muted transition-colors duration-150 ease-out hover:border-line hover:bg-line hover:text-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60"
       >
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M3 8a5 5 0 1 0 1.6-3.7M3 2.5v2.8h2.8"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
         {status.kind === "pending" ? "Resetting…" : RESET_LABEL}
       </button>
-      <span role="status" className="text-sm text-emerald-200">
+      <span role="status" className="text-sm text-ok">
         {status.kind === "done" ? RESET_DONE_TEXT : ""}
       </span>
-      <span role="alert" className="text-sm text-rose-200">
+      <span role="alert" className="text-sm text-help">
         {status.kind === "error" ? resetErrorText(status.message) : ""}
       </span>
     </div>

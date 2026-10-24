@@ -9,7 +9,7 @@ interface Props {
 export function SimulatedBadge({ className = "" }: Props) {
   return (
     <span
-      className={`inline-flex items-center rounded border border-fuchsia-300/70 bg-fuchsia-950/70 px-1.5 py-0.5 text-xs font-semibold tracking-wide text-fuchsia-100 ${className}`}
+      className={`inline-flex items-center rounded-full border border-simulated/40 px-1.5 py-0.5 text-[10px] font-medium uppercase leading-none tracking-[0.08em] text-simulated ${className}`}
     >
       {SIMULATED_LABEL}
     </span>

@@ -114,9 +114,29 @@ export function layerDomainMax(layer: Layer, timeline: CapeTimeline): number {
 
 // ---------------------------------------------------------------- legend and color
 
-/** Viridis: sequential with monotonic lightness, so it still reads in grayscale. */
-export const RAMP: readonly string[] = ["#440154", "#3b528b", "#21918c", "#5ec962", "#fde725"];
-export const NO_VALUE_COLOR = "#475569";
+/** Single-hue sequential ramps, dark to bright (design.md "Map colors"). Lightness rises
+ *  monotonically, so each ramp still reads in grayscale and values are also shown as text. */
+export const RAMPS: Record<Layer, readonly string[]> = {
+  priority: ["#151A21", "#3A2A17", "#7A4512", "#C46A17", "#F2A541", "#FFD38A"],
+  need: ["#151A21", "#2A2140", "#4B3577", "#7651B8", "#A985F0", "#D9C8FF"],
+  lifelines: ["#151A21", "#3A1D22", "#6E2A2F", "#AE3B3B", "#EE5F55", "#FFA594"],
+};
+/** Priority ramp; kept for callers that predate per-layer ramps. */
+export const RAMP: readonly string[] = RAMPS.priority;
+/** Neutral dark grey for tracts with no value; distinct from every ramp's first stop. */
+export const NO_VALUE_COLOR = "#2A313B";
+
+/** Relative luminance (WCAG) of a #RRGGBB color. */
+export function luminance(hex: string): number {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex);
+  if (!m) return Number.NaN;
+  const n = parseInt(m[1]!, 16);
+  const lin = (c: number) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255);
+}
 
 export interface LegendStop {
   value: number;

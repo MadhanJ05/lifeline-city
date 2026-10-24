@@ -12,11 +12,11 @@ export function ApiBanner({ error, loading, onRetry }: Props) {
   return (
     <div
       role="alert"
-      className="mx-4 my-3 flex flex-wrap items-center gap-3 rounded-md border border-amber-400/60 bg-amber-950/60 px-4 py-3 text-amber-100"
+      className="flex flex-wrap items-center gap-3 rounded-card border border-line border-l-2 border-l-help bg-panel-solid px-4 py-3 text-fg shadow-panel"
     >
       <div className="flex-1">
         <p className="font-semibold">{apiUnreachableText(API_BASE)}</p>
-        <p className="text-sm text-amber-200">
+        <p className="text-sm text-accent">
           {error.message}. Start it with <code>uvicorn api.main:app --port 8000</code>.
         </p>
       </div>
@@ -24,7 +24,7 @@ export function ApiBanner({ error, loading, onRetry }: Props) {
         type="button"
         onClick={onRetry}
         disabled={loading}
-        className="rounded-md bg-amber-300 px-3 py-1.5 font-semibold text-slate-950 hover:bg-amber-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-100 disabled:opacity-60"
+        className="rounded-md bg-accent px-3 py-1.5 font-semibold text-on-accent hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60"
       >
         {loading ? "Retrying…" : "Retry"}
       </button>
