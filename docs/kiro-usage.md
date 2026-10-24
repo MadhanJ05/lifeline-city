@@ -37,7 +37,9 @@ Kiro held the project rules (steering), the plan (one spec) and the guardrails (
   3. the verifier accepts exactly the claims grounded in the data
   4. every text message fits in two SMS segments under real GSM-7 and UCS-2 encoding
 - **Optional properties** cover phone masking and other pure logic.
-- The same verifier logic, run against live model output, rejected 36 of 50 first-draft AI briefings for numbers that were not in the data.
+- **What it caught:**
+  - **Accented Portuguese texts.** While designing property 4, Kiro ran the segment check against the drafted templates. Portuguese with accents (ã, ç, õ) forces UCS-2 encoding and needs 3 segments; without accents it fits in 2. Text bodies in Portuguese and Spanish are now accent-free, while door scripts and radio keep their accents. A hand-picked unit test on English text would never have hit this.
+  - **Ungrounded numbers in live AI output.** The same verifier logic as property 3, run against live model output, rejected 36 of 50 first-draft AI briefings for numbers that were not in the data.
 
 **Work done outside Kiro.** Research on the storm and its after-action review, data sourcing (including Eversource's filing with the state utility regulator), the hand-entered outage CSVs and `DECISIONS.md` were prepared with Claude (Anthropic's assistant). Those documents were inputs to Kiro's steering and spec.
 
@@ -85,7 +87,7 @@ Required property tests, marked `required_pbt` (6 tests):
 3. The verifier accepts exactly the grounded claims.
 4. Every SMS render is at most 2 segments under GSM-7 / UCS-2 rules.
 
-Current counts: `pytest --co -q` collects 294 Python tests (pipeline and API); `cd web && npx vitest --run` passes 96 tests in 9 files.
+Current counts: `pytest --co -q` collects 294 Python tests (pipeline and API); `cd web && npx vitest --run` passes 113 tests in 11 files.
 
 ## Screenshots for the project card
 
