@@ -185,7 +185,7 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
     - In `run.py`, after export, scan every file under `data/processed/` (including `llm_cache/`) and `api/`. On any finding, print the findings and exit non-zero. The written files stay in place until a clean run overwrites them
     - _Requirements: 1.11, 1.12, 26.7, 31.4, 31.5_
 
-- [ ] 7. Create the Kiro hooks with the createHook tool
+- [x] 7. Create the Kiro hooks with the createHook tool
   - [x] 7.1 Create the required property-test hook
     - Use the createHook tool, not hand-written JSON: id `required-pbt`, trigger `PostFileSave`, matcher `/pipeline/.*\.py$`, command `.venv/bin/python -m pytest -q -m required_pbt`
     - On failure, pytest reports the failing test name and Hypothesis prints the falsifying example
@@ -199,44 +199,44 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
     - The guard exits non-zero and prints only the path, line and match type
     - _Requirements: 31.4, 31.5_
 
-- [-] 8. Checkpoint: Cape pipeline and hooks
+- [x] 8. Checkpoint: Cape pipeline and hooks
   - Run `python -m pipeline.run --no-llm` first. Read the key-hour channel report it prints: for each key_demo_hour, the `sms` and `door_knock` counts and towns among queued tracts.
   - Adjust `key_demo_hours` in `config/scoring.yaml` so that at least one hour shows both channels (Mon 2026-02-23 14:00 is probably too early for the 8-hour modeled rule). Re-run `--no-llm` after each change until the report prints "ok".
   - Only then run the LLM step with `python -m pipeline.run` and `ANTHROPIC_API_KEY` set. Then run `pytest -q`. The Tab 3 peak check and the privacy guard must pass, with exit 0.
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Build the API read layer
-  - [~] 9.1 Implement `api/data.py`
+- [x] 9. Build the API read layer
+  - [x] 9.1 Implement `api/data.py`
     - Pydantic models that mirror each processed file. A read-only `Store` loaded at startup from `data/processed/` and `config/`, indexed by tract→town, hour, households by tract and responders by town
     - A missing required file stops startup with "run python -m pipeline.run". `boston_voice.geojson` is optional
     - _Requirements: 11.10, 28.1_
 
-  - [~] 9.2 Implement `api/reach.py`
+  - [x] 9.2 Implement `api/reach.py`
     - Channel lookup per tract-hour. Door-knock entries with "Simulated household #N", the household language, the tract Why_Chips, a responder from the town's configured roles, the doorstep script in the household language and `synthetic: true`
     - Add the Access_Hazard_Note when `wires ≥ access_hazard_wires_pct`
     - _Requirements: 15.1, 15.2, 15.3, 15.5, 17.9_
 
-  - [~] 9.3 Implement the read and content endpoints in `api/main.py`
+  - [x] 9.3 Implement the read and content endpoints in `api/main.py`
     - Limit CORS to `http://localhost:5173` and `http://127.0.0.1:5173`. Add `/api/health`, `/api/hours`, `/api/towns`, `/api/tracts`, `/api/timeline`, `/api/queue`, `/api/telecom-events`, `/api/sources` and `/api/scale-catalog`
     - `/api/tracts/{geoid}?hour=` returns `TractDetail`: metrics, need, telecom rule and label, active events for the town or Cape-wide areas, channel, the door-knock list, and household statuses (`awaiting_door_knock` or `not_contacted`)
     - `/api/content/{geoid}?hour=` serves from the Content_Cache only. Unknown geoids and hours return 404
     - _Requirements: 8.2, 8.4, 9.1, 9.2, 10.1, 10.2, 10.3, 10.4, 10.5, 11.10, 12.4, 12.7, 15.1, 20.2, 24.1, 28.1, 28.2_
 
-  - [~] 9.4 Add the demo reset endpoint
+  - [x] 9.4 Add the demo reset endpoint
     - `api/state.py` with an empty `CheckInStore` and a `reset()` that swaps in a fresh store. `POST /api/demo/reset` returns `{ok: true}`
     - _Requirements: 21.1_
 
-- [~] 10. Checkpoint: API
+- [x] 10. Checkpoint: API
   - Run `pytest -q`. Ask the user to start `uvicorn api.main:app --port 8000` manually and check `/api/health` and `/api/queue?hour=2026-02-23T09:00`.
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Build the web app
-  - [~] 11.1 Scaffold `web/`
+- [x] 11. Build the web app
+  - [x] 11.1 Scaffold `web/`
     - Vite + React 18 + TypeScript (strict) + Tailwind + MapLibre GL JS, with Vitest (`passWithNoTests: true`) and fast-check. Exact versions in `web/package.json`
     - `src/types.ts` mirrors every processed file and API model. `src/api.ts` reads `VITE_API_BASE ?? "http://localhost:8000"` and provides `useStaticData` and the "API not reachable at {VITE_API_BASE}" banner with a Retry button. `src/format.ts` holds `maskPhone` and local-hour formatting
     - _Requirements: 14.7, 26.5, 28.4_
 
-  - [~] 11.2 Implement `MapView`, `TimeSlider` and `SourceBadges` and wire them into `App.tsx`
+  - [x] 11.2 Implement `MapView`, `TimeSlider` and `SourceBadges` and wire them into `App.tsx`
     - `MapView`:
       - choropleth layers Priority (default), Need and Lost lifelines, updated with `setFeatureState`
       - town boundaries
@@ -248,11 +248,11 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
     - `SourceBadges` shows the provenance labels for the layers on screen. Add a shared `SimulatedBadge` here
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 17.10, 25.3, 25.4, 29.1, 29.2, 29.4_
 
-  - [~] 11.3 Implement `Queue` and wire it into `App.tsx`
+  - [x] 11.3 Implement `Queue` and wire it into `App.tsx`
     - Each row is a `<button>` showing the town, tract, priority as a number, channel and 2 Why_Chips. Activating a row, or selecting a tract on the map, opens the drawer at the selected hour
     - _Requirements: 9.1, 9.2, 9.4, 9.5, 29.1_
 
-  - [~] 11.4 Implement `TractDrawer` and `WhyFlagged` and wire them into `App.tsx`
+  - [x] 11.4 Implement `TractDrawer` and `WhyFlagged` and wire them into `App.tsx`
     - `useTractDetail`. Focus moves into the drawer and Esc closes it. The Briefing shows a "Verified" or "Template" label
     - `WhyFlagged` shows:
       - each Need indicator's raw value and rank, and any missing indicators
@@ -262,29 +262,29 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
       - the ACS-estimate label for Sandwich and Chatham
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 25.3, 25.4, 29.1, 29.4_
 
-  - [~] 11.5 Implement `ReachPanel` inside the drawer
+  - [x] 11.5 Implement `ReachPanel` inside the drawer
     - Show the channel and telecom rule, with an en, pt and es language switcher that keeps accented UI labels
     - For `sms` tract-hours, show the SMS preview and a "Send check-ins" button (connected in task 13.4). For `door_knock` tract-hours, show the Door_Knock_List with "Simulated" badges and the access hazard note
     - Show the AM radio script, labeled for the county AM station
     - _Requirements: 10.6, 12.4, 12.5, 12.6, 12.7, 14.7, 15.1, 15.2, 15.3, 17.10_
 
-  - [~] 11.6 Implement `ScaleSelector` and the reset control in the header
+  - [x] 11.6 Implement `ScaleSelector` and the reset control in the header
     - List the 6 catalog entries with their tier. The Cape entry opens the map. Every other entry (Boston included until task 16) opens a Configuration_Preview with the tier and lost-lifelines inputs and no scores
     - Add a labeled "Reset demo" button that calls `POST /api/demo/reset` and refreshes the state
     - _Requirements: 21.2, 23.12, 24.1, 24.2, 24.3, 24.5, 29.1, 29.3_
 
-- [~] 12. Checkpoint: web app
+- [x] 12. Checkpoint: web app
   - Run `cd web && npx vitest --run && npm run build` and `pytest -q`. Ask the user to run `npm run dev` manually and check keyboard navigation.
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 13. Build the check-in loop
-  - [~] 13.1 Implement `api/sms.py`
+- [x] 13. Build the check-in loop
+  - [x] 13.1 Implement `api/sms.py`
     - `normalize`, and `classify` for "1", "2" and the `languages.yaml` keywords, ignoring case, spaces and accents
     - A `Sender` protocol. `SimulatorSender` handles every `SMS_MODE` value until Twilio is built
     - `mask_phone`, with environment values read from `.env`
     - _Requirements: 18.2, 18.3, 19.1, 19.2, 19.3, 26.1, 26.4_
 
-  - [~] 13.2 Implement the check-in state machine in `api/state.py`
+  - [x] 13.2 Implement the check-in state machine in `api/state.py`
     - `CheckInStore` with a lock and an injected clock
     - `send` rejects `door_knock` tract-hours with `phones_degraded` and tracts with no households with `no_households`. It returns the existing run for the same tract-hour, and otherwise sends the check-in in each household's language
     - Seeded reply schedule from `(seed, geoid, hour)`, skipping the operator household (#`demo.operator_household`). Generated replies are labeled "Simulated"
@@ -296,14 +296,14 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
     - `reset()` swaps in a fresh store. Every run, reply and Escalation has `synthetic: true`
     - _Requirements: 15.6, 17.9, 18.1, 18.6, 18.10, 19.4, 19.5, 19.6, 19.7, 20.1, 20.2, 20.4, 21.1_
 
-  - [~] 13.3 Add the check-in endpoints to `api/main.py`
+  - [x] 13.3 Add the check-in endpoints to `api/main.py`
     - `POST /api/checkins/send` returns 201, 200 for an existing run, 409 `phones_degraded` or `no_households`, or 404
     - `GET /api/checkins/{run_id}` runs `advance` first. `POST /api/simulator/reply` processes a typed reply
     - Reset uses the real store. `TractDetail` includes the run and household statuses. Phone numbers are logged masked only
     - At startup, clamp `reply_delay_s` below the timeout and log a warning
     - _Requirements: 15.6, 18.1, 18.5, 18.9, 19.8, 20.3, 21.1, 26.4_
 
-  - [~] 13.4 Connect "Send check-ins", polling and counters in the web app
+  - [x] 13.4 Connect "Send check-ins", polling and counters in the web app
     - `useRunPolling` polls every 2 s while the run is active and stops on complete or unmount. "Send check-ins" in `ReachPanel` calls the send endpoint
     - The drawer shows:
       - the sent, OK, need help and silent counters
@@ -313,28 +313,28 @@ Rough budget for about 5 hours: scaffold 15 min, pipeline 1 h 50 min (no staging
     - Reset clears the run and refetches
     - _Requirements: 10.6, 18.7, 18.8, 18.9, 19.8, 20.2, 20.3, 21.2_
 
-  - [~] 13.5 Implement `PhoneSimulator` in the drawer
+  - [x] 13.5 Implement `PhoneSimulator` in the drawer
     - A household picker, defaulting to the operator household #1 (Portuguese in Barnstable and Yarmouth tracts), and a thread of outbound messages and replies, with the "Simulated" badge and sender name outside the message body. A keyboard-operable reply box posts to `/api/simulator/reply`. Any number goes through `maskPhone`
     - _Requirements: 14.8, 17.10, 18.4, 18.5, 26.5, 29.1, 29.3_
 
-- [~] 14. Checkpoint: check-in loop
+- [x] 14. Checkpoint: check-in loop
   - Run `pytest -q` and `cd web && npx vitest --run && npm run build`. Ask the user to run the API and web app manually and try send, reply, silence and reset.
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 15. Write the docs
-  - [~] 15.1 Write `README.md`
+- [x] 15. Write the docs
+  - [x] 15.1 Write `README.md`
     - List the run steps in order: `uv venv --python 3.13` and install, `python -m pipeline.run`, `uvicorn api.main:app --port 8000`, then `cd web && npm run dev`
     - State that the API has no authentication and is for localhost demo use only, that all households and responders are synthetic, and that SMS defaults to the simulator
     - _Requirements: 28.3, 31.7_
 
-  - [~] 15.2 Write `docs/methods.md` (one page at most)
+  - [x] 15.2 Write `docs/methods.md` (one page at most)
     - Cover the scoring formulas, the ZIP-to-tract area-weight simplification and emPOWER masking (1 to 10 reported as 11)
     - Cover the curve reconstruction (pins, lower bounds, scaling and unmatched hours), modeled telecom and the 12 h default
     - Cover the Barnstable and Yarmouth language-mix and ACS-customer assumptions, the Cape help line choice (Mass 2-1-1, where MEMA sent residents) and the excluded sitrep #009 figure
     - Keep it to one page; detail beyond that stays in code comments and the design
     - _Requirements: 2.7, 2.8, 4.15_
 
-  - [~] 15.3 Write `docs/kiro-usage.md`
+  - [x] 15.3 Write `docs/kiro-usage.md`
     - Describe the steering files, the lifeline-city spec and the task 7 hooks (triggers, commands and why the Stop hook exists)
     - _Requirements: 31.6_
 

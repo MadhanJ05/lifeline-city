@@ -19,6 +19,10 @@
     "5.7 Write the required property test for channel and radio coverage": {
       "status": "passed",
       "lastRunTimestamp": 1792870773049
+    },
+    "19.20 Write the property test for phone masking": {
+      "status": "passed",
+      "lastRunTimestamp": 1792875804421
     }
   },
   "executionHistory": {
@@ -513,6 +517,11 @@
         "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792872097371
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792872739670
       }
     ],
     "9.1 Implement `api/data.py`": [
@@ -520,6 +529,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847034
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792872739730
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873071073
       }
     ],
     "9.2 Implement `api/reach.py`": [
@@ -527,6 +546,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847062
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873074413
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873216224
       }
     ],
     "9.3 Implement the read and content endpoints in `api/main.py`": [
@@ -534,6 +563,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847088
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873219869
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873427134
       }
     ],
     "9.4 Add the demo reset endpoint": [
@@ -541,6 +580,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847124
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873427835
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873504612
       }
     ],
     "10. Checkpoint: API": [
@@ -548,6 +597,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847156
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873505163
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873590751
       }
     ],
     "11.1 Scaffold `web/`": [
@@ -555,6 +614,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847184
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873591300
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873947348
       }
     ],
     "11.2 Implement `MapView`, `TimeSlider` and `SourceBadges` and wire them into `App.tsx`": [
@@ -562,6 +631,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847206
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873948011
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792874803592
       }
     ],
     "11.3 Implement `Queue` and wire it into `App.tsx`": [
@@ -569,6 +648,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847228
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792874804593
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792874904144
       }
     ],
     "11.4 Implement `TractDrawer` and `WhyFlagged` and wire them into `App.tsx`": [
@@ -576,6 +665,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847250
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792874903292
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875206955
       }
     ],
     "11.5 Implement `ReachPanel` inside the drawer": [
@@ -583,6 +682,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847271
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875207131
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875344343
       }
     ],
     "11.6 Implement `ScaleSelector` and the reset control in the header": [
@@ -590,6 +699,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847291
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875343599
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875497954
       }
     ],
     "12. Checkpoint: web app": [
@@ -597,6 +716,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847312
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875498555
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875651015
       }
     ],
     "13.1 Implement `api/sms.py`": [
@@ -604,6 +733,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847335
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875651062
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875823377
       }
     ],
     "13.2 Implement the check-in state machine in `api/state.py`": [
@@ -611,6 +750,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847357
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875823983
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876142410
       }
     ],
     "13.3 Add the check-in endpoints to `api/main.py`": [
@@ -618,6 +767,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847382
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876143136
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876365317
       }
     ],
     "13.4 Connect \"Send check-ins\", polling and counters in the web app": [
@@ -625,6 +784,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847403
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876365922
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876707073
       }
     ],
     "13.5 Implement `PhoneSimulator` in the drawer": [
@@ -632,6 +801,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847423
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876707784
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876915448
       }
     ],
     "14. Checkpoint: check-in loop": [
@@ -639,6 +818,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847448
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876915933
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877118021
       }
     ],
     "15.1 Write `README.md`": [
@@ -646,6 +835,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847470
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877118857
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877234251
       }
     ],
     "15.2 Write `docs/methods.md` (one page at most)": [
@@ -653,6 +852,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847515
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877119989
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877235101
       }
     ],
     "15.3 Write `docs/kiro-usage.md`": [
@@ -660,6 +869,16 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792866847534
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877120745
+      },
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877236323
       }
     ],
     "16.1 Add the Boston fetches and confirm the Boston config": [
@@ -744,6 +963,41 @@
         "executionId": "491cf96c-85a0-4389-8b35-280154750c46",
         "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
         "timestamp": 1792871589488
+      }
+    ],
+    "9. Build the API read layer": [
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792873504639
+      }
+    ],
+    "11. Build the web app": [
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792875498011
+      }
+    ],
+    "13. Build the check-in loop": [
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792876915491
+      }
+    ],
+    "15. Write the docs": [
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877236367
+      }
+    ],
+    "7. Create the Kiro hooks with the createHook tool": [
+      {
+        "executionId": "6aeb0bcb-67ca-4945-9576-84b0fb476f42",
+        "chatSessionId": "sess_d06c5c8b-37b0-4d1e-ba6e-25aafa7e2f40",
+        "timestamp": 1792877247898
       }
     ]
   }
