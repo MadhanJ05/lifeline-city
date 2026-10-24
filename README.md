@@ -6,9 +6,9 @@
 
 [▶ 3-minute demo video](VIDEO_LINK) · [How Kiro was used](docs/kiro-usage.md) · [Run it (no API keys)](#run-it-no-api-keys-needed) · [Methods and assumptions](docs/methods.md)
 
-![The Lifeline console at Tuesday 6 AM of the February 2026 blizzard, near the peak: the Cape map colored by priority, the top neighborhoods on door-knock lists, and the Place and hazard menu open showing Boston, Plymouth, Worcester, Lowell and Springfield](docs/screenshot-console.png)
+![The Lifeline console at Monday noon of the February 2026 blizzard: the priority list on the left with all ten neighborhoods on text check-ins, the Cape map colored by priority, and the drawer for Falmouth tract 148 showing rank 1, priority 0.325 and a briefing where every number cites its data field](docs/screenshot-hero.png)
 
-*Tuesday Feb 24, 6 AM, near the peak, replayed from real storm data. Nine of the ten highest-priority neighborhoods are on door-knock lists because their phones are likely down. The open menu shows the other towns and hazards the same model is built for.*
+*Monday Feb 23, noon, replayed from real storm data. Power is going out fast, but phones still work, so all ten top neighborhoods get text check-ins. Falmouth tract 148 ranks first: 90% without power for 4 hours, and in the 98th percentile for seniors living alone. By 6 PM its phones are likely down, and it moves to a door-knock list.*
 
 ---
 
