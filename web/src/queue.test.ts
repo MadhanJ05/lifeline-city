@@ -6,6 +6,7 @@ import {
   formatPriority,
   queueAt,
   rowChips,
+  rowReason,
   tractNameOf,
   tractNames,
 } from "./queue";
@@ -31,8 +32,8 @@ function row(rank: number, geoid: string, channel: Channel = "sms"): QueueRow {
 
 describe("channel labels", () => {
   it("names each channel in text", () => {
-    expect(channelLabel("sms")).toBe("SMS check-ins");
-    expect(channelLabel("door_knock")).toBe("Door-knock list");
+    expect(channelLabel("sms")).toBe("Text");
+    expect(channelLabel("door_knock")).toBe("Door-knock");
   });
 
   it("notes degraded phones only for door-knock", () => {
@@ -87,6 +88,11 @@ describe("formatPriority", () => {
 describe("row helpers", () => {
   it("shows the first two Why_Chips", () => {
     expect(rowChips(row(1, "a")).map((c) => c.field)).toEqual(["need.seniors_alone.pct", "out_pct"]);
+  });
+
+  it("merges the two reasons into one line", () => {
+    expect(rowReason(row(1, "a"))).toBe("Seniors living alone, 98th percentile · 100% without power");
+    expect(rowReason({ why_chips: [] })).toBe("");
   });
 
   it("looks up short tract names with a GEOID fallback", () => {

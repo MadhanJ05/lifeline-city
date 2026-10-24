@@ -259,6 +259,14 @@ export function pinGroups(events: readonly TelecomEvent[]): PinGroup[] {
   return [...groups.values()];
 }
 
+/** Text drawn next to a pin: "Cape-wide · 8" for the Cape-wide marker, the bare count for other
+ *  pins that hold several events, null for single-event pins. */
+export function pinBadgeText(g: Pick<PinGroup, "kind" | "eventIds">): string | null {
+  const n = g.eventIds.length;
+  if (g.kind === "cape_wide") return `Cape-wide · ${n}`;
+  return n > 1 ? String(n) : null;
+}
+
 export interface PinFeatureProps {
   pin_id: string;
   event_id: string;

@@ -5,8 +5,8 @@ import type { CapeTimeline, CapeTracts, Channel, Chip, Geoid, HourKey, QueueRow 
 
 /** Reach_Channel as text, so the badge never relies on color alone (Req 29.4). */
 export const CHANNEL_LABEL: Record<Channel, string> = {
-  sms: "SMS check-ins",
-  door_knock: "Door-knock list",
+  sms: "Text",
+  door_knock: "Door-knock",
 };
 
 /** Descriptive note shown with the channel; only the door-knock channel has one. */
@@ -39,6 +39,11 @@ export function formatPriority(p: number | null | undefined): string {
 /** The two Why_Chips shown in a queue row (Req 9.2). */
 export function rowChips(row: Pick<QueueRow, "why_chips">): Chip[] {
   return row.why_chips.slice(0, 2);
+}
+
+/** One-line row reason: "<need reason> · <lifelines reason>" (empty when the row has no chips). */
+export function rowReason(row: Pick<QueueRow, "why_chips">): string {
+  return rowChips(row).map((c) => c.text).join(" · ");
 }
 
 /** GEOID -> short tract name ("Tract 101.02") from the tract geometry file. */

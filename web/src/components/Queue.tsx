@@ -1,6 +1,6 @@
 import { useId, useMemo } from "react";
 import { formatHour } from "../format";
-import { channelLabel, channelNote, formatPriority, rowChips, tractNameOf, tractNames } from "../queue";
+import { channelLabel, channelNote, formatPriority, rowReason, tractNameOf, tractNames } from "../queue";
 import type { CapeTracts, Channel, Geoid, HourKey, QueueRow } from "../types";
 
 interface Props {
@@ -32,6 +32,7 @@ export function Queue({ rows, hour, tracts, selectedGeoid, onSelectTract }: Prop
         <h2 id={headingId} className="text-[11px] font-medium uppercase tracking-[0.06em] text-faint">
           Priority list <span className="sr-only">at {formatHour(hour)}</span>
         </h2>
+        <p className="text-xs text-muted">Neighborhoods most likely to need help right now</p>
         <p aria-hidden="true" className="font-mono text-[15px] font-medium text-fg">
           {formatHour(hour)}
         </p>
@@ -57,7 +58,7 @@ export function Queue({ rows, hour, tracts, selectedGeoid, onSelectTract }: Prop
             const tract = tractNameOf(names, r.geoid);
             const note = channelNote(r.channel);
             const width = maxPriority > 0 ? (r.priority / maxPriority) * 100 : 0;
-            const [first, second] = rowChips(r);
+            const reason = rowReason(r);
             return (
               <li key={r.geoid}>
                 <button
@@ -91,8 +92,11 @@ export function Queue({ rows, hour, tracts, selectedGeoid, onSelectTract }: Prop
                       {formatPriority(r.priority)}
                     </span>
                   </span>
-                  {first && <span className="col-start-2 col-end-4 truncate text-xs text-muted">{first.text}</span>}
-                  {second && <span className="col-start-2 col-end-4 truncate text-[11px] text-faint">{second.text}</span>}
+                  {reason && (
+                    <span title={reason} className="col-start-2 col-end-4 truncate text-xs text-muted">
+                      {reason}
+                    </span>
+                  )}
                 </button>
               </li>
             );

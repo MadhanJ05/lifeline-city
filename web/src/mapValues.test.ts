@@ -20,6 +20,7 @@ import {
   RAMPS,
   RAMP_START,
   niceCeil,
+  pinBadgeText,
   pinFeatures,
   pinGroups,
   shortTractName,
@@ -234,6 +235,13 @@ describe("legend", () => {
 });
 
 describe("telecom pins", () => {
+  it("labels the Cape-wide pin with its count; other multi-event pins show the bare count", () => {
+    const ids = (n: number) => Array.from({ length: n }, (_, i) => `e${i}`);
+    expect(pinBadgeText({ kind: "cape_wide", eventIds: ids(8) })).toBe("Cape-wide · 8");
+    expect(pinBadgeText({ kind: "town", eventIds: ids(2) })).toBe("2");
+    expect(pinBadgeText({ kind: "town", eventIds: ids(1) })).toBeNull();
+  });
+
   const ev = (id: string, pins: TelecomEvent["pins"], start = "2026-02-23T04:18", end = "2026-02-23T16:18") =>
     ({ id, start_local: start, end_effective: end, pins }) as TelecomEvent;
   const capeWide = { kind: "cape_wide" as const, town: null, caption: "Cape-wide", lon: -70.25, lat: 41.85 };

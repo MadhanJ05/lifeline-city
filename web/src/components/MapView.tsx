@@ -25,6 +25,7 @@ import {
   layerValues,
   legendStops,
   NO_VALUE_COLOR,
+  pinBadgeText,
   pinFeatures,
   pinGroups,
   RAMPS,
@@ -154,15 +155,20 @@ function addOverlays(map: MapLibreMap, tracts: CapeTracts, towns: CapeTowns, gro
  *  need no glyphs, so they also show on the fallback background. aria-hidden: the Telecom reports
  *  list is the accessible path to the same counts. */
 function addPinBadges(map: MapLibreMap, groups: readonly PinGroup[]): Marker[] {
-  return groups
-    .filter((g) => g.eventIds.length > 1)
-    .map((g) => {
-      const el = document.createElement("div");
-      el.className = "lifeline-pin-badge";
-      el.textContent = String(g.eventIds.length);
-      el.setAttribute("aria-hidden", "true");
-      return new Marker({ element: el, anchor: "bottom-left", offset: [4, -4] }).setLngLat([g.lon, g.lat]).addTo(map);
-    });
+  return groups.flatMap((g) => {
+    const text = pinBadgeText(g);
+    if (!text) return [];
+    const el = document.createElement("div");
+    el.textContent = text;
+    el.setAttribute("aria-hidden", "true");
+    if (g.kind === "cape_wide") {
+      // Small text label to the right of the pin: "Cape-wide · 8".
+      el.className = "lifeline-pin-label";
+      return [new Marker({ element: el, anchor: "left", offset: [10, 0] }).setLngLat([g.lon, g.lat]).addTo(map)];
+    }
+    el.className = "lifeline-pin-badge";
+    return [new Marker({ element: el, anchor: "bottom-left", offset: [4, -4] }).setLngLat([g.lon, g.lat]).addTo(map)];
+  });
 }
 
 /** Cape map: choropleth (Priority, Need, Lost lifelines), town lines, telecom pins, legend, hover
@@ -528,19 +534,19 @@ function swatchFor(stops: readonly LegendStop[], v: number | null): string {
   return color;
 }
 
-/** Compact legend chip: layer name, the ramp as discrete swatches (no gradient), min/max as text,
- *  the no-value swatch and the telecom pin key. */
+/** Compact legend chip: layer name, the ramp as discrete swatches, "Low"/"High" ends with the
+ *  numbers underneath, and the telecom pin key. */
 function Legend({ layer, stops }: { layer: Layer; stops: LegendStop[] }) {
   const first = stops[0]?.label ?? "0.00";
   const last = stops[stops.length - 1]?.label ?? "1.00";
   return (
     <section
-      aria-label={`Legend: ${layerLabel(layer)} from ${first} to ${last}`}
+      aria-label={`Legend: ${layerLabel(layer)} from low ${first} to high ${last}`}
       className="glass lifeline-legend absolute bottom-[116px] left-[calc(min(360px,28vw)+24px)] z-10 w-[232px] px-3 py-2.5 text-[11px] text-muted"
     >
       <p className="lifeline-legend-label">
         {layerLabel(layer)}
-        <span className="sr-only">, {first} to {last}</span>
+        <span className="sr-only">, low {first} to high {last}</span>
       </p>
       <ol className="mt-1.5 flex h-2 overflow-hidden rounded-full" aria-label={`${stops.length} color steps`}>
         {stops.map((s) => (
@@ -549,19 +555,19 @@ function Legend({ layer, stops }: { layer: Layer; stops: LegendStop[] }) {
           </li>
         ))}
       </ol>
-      <p aria-hidden="true" className="mt-1 flex justify-between font-mono tabular-nums text-fg">
-        <span>{first}</span>
-        <span>{last}</span>
-      </p>
+      <div aria-hidden="true" className="mt-1 flex justify-between">
+        <span className="flex flex-col">
+          <span className="text-fg">Low</span>
+          <span className="font-mono text-[10px] tabular-nums text-faint">{first}</span>
+        </span>
+        <span className="flex flex-col items-end">
+          <span className="text-fg">High</span>
+          <span className="font-mono text-[10px] tabular-nums text-faint">{last}</span>
+        </span>
+      </div>
       <p className="mt-1.5 flex items-center gap-1.5">
-        <span aria-hidden="true" className="inline-block h-2 w-3 rounded-sm" style={{ background: NO_VALUE_COLOR }} />
-        Darker is lower, brighter is higher. Near-black: no value.
-      </p>
-      <p className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
         <span aria-hidden="true" className="lifeline-pin-key lifeline-pin-key--active" />
-        Telecom event active at this hour
-        <span aria-hidden="true" className="lifeline-pin-key ml-2" />
-        Not active
+        Phone or radio failure reported
       </p>
     </section>
   );
