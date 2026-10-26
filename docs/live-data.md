@@ -34,7 +34,7 @@ None of these endpoints is documented or covered by published terms. They are th
    - `outages/<quadkey>.json`: outage map tiles.
 3. Each town row has `cust_a.val` (customers out), `cust_s` (customers served) and `percent_out`. `percent_out` is in percent and never drops below 0.01, so the fraction is computed from the counts.
 4. Small counts are rounded for privacy and flagged `"masked": true`. An outage of 1 to 4 customers shows as 4.
-5. Empty tiles return **403**, not 404. The file host is S3, which answers 403 for missing objects. Only tile requests treat 403 as empty; a 403 on any other file is an error.
+5. Empty tiles return **403**, not 404. The file host is S3, which answers 403 for missing objects. A 403 counts as an empty tile only when two things hold: it is a tile request, and the body is S3's `<Code>AccessDenied</Code>` XML. A 403 with any other body, such as a firewall or rate-limit page, is a tile error. A 403 on any other file is a source error.
 
 ### National Grid
 
@@ -49,10 +49,24 @@ None of these endpoints is documented or covered by published terms. They are th
 
 Both maps serve outages in quadkey map tiles. A tile lists single outages (`cluster: false`) and clusters of nearby outages. The collector:
 
-1. **Starts from the 3 tiles at zoom 7** that cover Massachusetts.
+1. **Starts from the zoom-7 tiles over the area the utility's summary counts.** For National Grid that is Massachusetts (3 tiles). For Eversource it is CT, MA and NH (12 tiles), because its summary counts all three states.
 2. **Fetches the 4 child tiles of any tile that still contains a cluster.** It repeats this down to zoom 16; on a quiet day nothing needs splitting past zoom 10.
 3. **Keeps each outage once,** from the deepest tile it appears in. It keys on the incident ID, or on location plus start time when the ID is blank.
 4. **Keeps a cluster only when it could not be split.** That covers three cases: maximum zoom, the request cap (4,000 tiles per source per snapshot), or no child tile came back. This way customers are neither counted twice nor dropped.
+
+### Completeness check
+
+A tile that silently fails would look like "no outages here." So every snapshot compares two numbers from the same interval:
+- the outages it located in the tiles, counting each unsplit cluster as its `n_out`
+- the utility's own total in its summary file
+
+**Outage counts are compared because they are exact on both sides.** Customer counts are recorded but not compared, because the tiles round small outages up. The manifest records `outages_found`, `outages_reported`, `cust_out_found`, `cust_out_reported` and `complete`.
+
+**If fewer outages are found than reported, the source's status is `incomplete`.** Its rows are still saved, the summary line says INCOMPLETE, and a one-shot run exits 1.
+
+First live check (2026-10-26 20:15 UTC):
+- **Eversource:** 24 of 24 located, 138 customers from points vs 81 reported.
+- **National Grid:** 7 of 7 located, 86 customers from points vs 68 reported.
 
 ## Output
 

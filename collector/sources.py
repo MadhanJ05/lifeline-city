@@ -5,8 +5,11 @@ snapshot archives the raw responses and the parsing here can be redone later (do
 
 Each collect_* function fills a SourceResult as it goes, so a failure part-way still leaves the raw
 files fetched so far for the archive. `fetch(url, missing=(404,))` is the only network boundary: it
-returns the body, or None when the status is in `missing` (normal for empty map tiles), and raises
-FetchError for anything else.
+returns the body, or None when the response matches `missing` (see is_missing; normal for empty map
+tiles), and raises FetchError for anything else.
+
+Both utility collectors compare the outages found in the tiles with the utility's own count for the
+same interval and record the result in meta["complete"], so a silently missing tile shows up.
 """
 from __future__ import annotations
 
@@ -28,18 +31,34 @@ Fetch = Callable[..., bytes | None]
 
 
 class FetchError(Exception):
-    """A request failed with something other than 404 (network error, timeout, 5xx)."""
+    """A request failed in a way `missing` doesn't cover (network error, timeout, 5xx, blocked)."""
+
+
+# A `missing` entry is a status code, or (status, marker): that status means "no such file" only when
+# the body contains the marker.
+Missing = tuple[int | tuple[int, bytes], ...]
+
+# Eversource's map files sit on S3, which answers 403 AccessDenied, not 404, for tiles with no
+# outages. A 403 without that body (a firewall or rate-limit block) stays an error.
+S3_MISSING = (403, b"<Code>AccessDenied</Code>")
+
+
+def is_missing(status: int, body: bytes, missing: Missing) -> bool:
+    return any(m == status if isinstance(m, int) else (m[0] == status and m[1] in body) for m in missing)
 
 
 MEMA_CSV = "http://mema.mapsonline.net/power_outage_public.csv"  # MEMA serves it over HTTP only
 
 EVERSOURCE = "https://outagemap.eversource.com/resources/data/external/interval_generation_data"
 EVERSOURCE_REPORTS = ("report_east.json", "report_west.json")  # Eastern, Western MA (report_conn/_hampshire: CT, NH)
+# Eversource's summary counts CT, MA and NH together, so its tiles are crawled over all three for the
+# completeness check; outages outside MA are dropped later by tract assignment.
+EVERSOURCE_BBOX = (40.90, -73.80, 45.40, -69.85)
 
 KUBRA = "https://kubra.io"
 NATIONAL_GRID_MA = ("9cb2e5b7-d321-4575-a552-4ae7078cbc31", "ec79df5b-2c54-4fb9-a86a-b20775678236")  # instance, view
 
-ROOT_ZOOM = 7          # 3 tiles cover Massachusetts
+ROOT_ZOOM = 7          # 3 tiles cover Massachusetts, 12 cover Eversource's CT, MA and NH
 MAX_ZOOM = 16          # both maps stop splitting clusters by zoom 15 (checked 2026-10-26)
 MAX_TILE_REQUESTS = 4000
 WORKERS = 4
@@ -193,11 +212,22 @@ def _tiles_jsonl(tiles: dict[str, bytes]) -> bytes:
     return b"\n".join(json.dumps({"q": q, "data": json.loads(b)}).encode() for q, b in sorted(tiles.items()))
 
 
-def _crawl_into(res: SourceResult, tile_url: Callable[[str], str], fetch: Fetch) -> None:
-    tiles, outages, stats = crawl(tile_url, fetch, res.source, geo.bbox_quadkeys(geo.MA_BBOX, ROOT_ZOOM))
+def _crawl_into(res: SourceResult, tile_url: Callable[[str], str], fetch: Fetch,
+                bbox: tuple[float, float, float, float], summary_totals: dict) -> None:
+    """Crawl the tiles over `bbox`, then check them against the utility's own totals for the interval.
+
+    Outage counts are exact on both sides, so they decide meta["complete"]. Customer counts are kept
+    for reference only: the tiles round small outages up (1 to 4 customers show as 4).
+    """
+    tiles, outages, stats = crawl(tile_url, fetch, res.source, geo.bbox_quadkeys(bbox, ROOT_ZOOM))
     res.raw["tiles.jsonl"] = _tiles_jsonl(tiles)
     res.outages = outages
-    res.meta.update(stats)
+    reported = _int(summary_totals.get("total_outages"))
+    found = sum(o["n_out"] or 1 for o in outages)
+    res.meta.update(stats, outages_reported=reported, outages_found=found,
+                    cust_out_reported=_int((summary_totals.get("total_cust_a") or {}).get("val")),
+                    cust_out_found=sum(o["cust_out"] or 0 for o in outages),
+                    complete=None if reported is None else found >= reported)
 
 
 # ---------------------------------------------------------------- Eversource (Kubra Storm Center, iFactor)
@@ -238,8 +268,8 @@ def collect_eversource(fetch: Fetch, res: SourceResult) -> None:
         res.towns.extend(parse_eversource_report(body))
     for row in res.towns:
         row["source_updated"] = res.meta["generated_at"]
-    # Eversource's file host answers 403, not 404, for tiles with no outages.
-    _crawl_into(res, lambda q: f"{base}/outages/{q}.json", lambda url: fetch(url, (403, 404)))
+    _crawl_into(res, lambda q: f"{base}/outages/{q}.json", lambda url: fetch(url, (404, S3_MISSING)),
+                EVERSOURCE_BBOX, s)
 
 
 # ---------------------------------------------------------------- National Grid (Kubra Storm Center)
@@ -305,4 +335,4 @@ def collect_national_grid(fetch: Fetch, res: SourceResult, ids: tuple[str, str] 
         # Kubra shards cluster tiles by the last three quadkey digits, reversed.
         return f"{KUBRA}/{cluster_path.replace('{qkh}', q[-3:][::-1])}/{cluster_layer.replace('{q}', q)}"
 
-    _crawl_into(res, tile_url, fetch)
+    _crawl_into(res, tile_url, fetch, geo.MA_BBOX, (s.get("totals") or [{}])[0])

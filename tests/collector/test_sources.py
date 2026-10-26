@@ -123,38 +123,71 @@ def test_parse_eversource_report():
         ("Eversource EMA", "BARNSTABLE", 31220, 0, False), ("Eversource EMA", "BOSTON", 343700, 3, True)]
 
 
-def eversource_pages(directory="2026_10_26_19_09_30"):
+S3_403 = b'<?xml version="1.0" encoding="UTF-8"?>\n<Error><Code>AccessDenied</Code><Message>Access Denied</Message></Error>'
+WAF_403 = b"<HTML><HEAD><TITLE>ERROR: The request could not be satisfied</TITLE></HEAD><BODY>Request blocked.</BODY></HTML>"
+
+
+def test_is_missing():
+    assert sources.is_missing(404, b"", (404,))
+    assert sources.is_missing(403, S3_403, (404, sources.S3_MISSING))
+    assert not sources.is_missing(403, WAF_403, (404, sources.S3_MISSING))
+    assert not sources.is_missing(403, S3_403, (404,))
+    assert not sources.is_missing(200, S3_403, (404, sources.S3_MISSING))
+
+
+def s3_fetch(pages, body_403=S3_403):
+    """Like S3 behind the map: unknown keys answer 403 with `body_403`."""
+    def fetch(url, missing=(404,)):
+        if url in pages:
+            return pages[url]
+        if sources.is_missing(403, body_403, missing):
+            return None
+        raise FetchError(f"HTTP 403: {url}")
+    return fetch
+
+
+def eversource_pages(directory="2026_10_26_19_09_30", outage_tile=None, total_outages=1):
     base = f"{EV}/{directory}"
-    roots = geo.bbox_quadkeys(geo.MA_BBOX, sources.ROOT_ZOOM)
     cape = geo.quadkey(*geo.tile_xy(*BARNSTABLE, sources.ROOT_ZOOM), sources.ROOT_ZOOM)
-    assert cape in roots
+    assert cape in geo.bbox_quadkeys(sources.EVERSOURCE_BBOX, sources.ROOT_ZOOM)
     return {
         f"{EV}/metadata.json": json.dumps({"directory": directory}).encode(),
-        f"{base}/data.json": json.dumps({"summaryFileData": {"date_generated": "2026-10-26T15:07:10-0400",
-                                                             "page_mode": {"mode": "BLUESKY", "pausePublish": False}}}).encode(),
+        f"{base}/data.json": json.dumps({"summaryFileData": {
+            "date_generated": "2026-10-26T15:07:10-0400", "total_outages": total_outages, "total_cust_a": {"val": 40},
+            "page_mode": {"mode": "BLUESKY", "pausePublish": False}}}).encode(),
         f"{base}/report_east.json": ev_report("EMA", [{"area_name": "BARNSTABLE", "cust_a": {"val": 40}, "cust_s": 31220}]),
         f"{base}/report_west.json": ev_report("WMA", [{"area_name": "AGAWAM", "cust_a": {"val": 0}, "cust_s": 13124}]),
-        f"{base}/outages/{cape}.json": tile(item(BARNSTABLE, 40, inc_id="W1-0", cause="TREE")),
+        f"{base}/outages/{cape}.json": outage_tile or tile(item(BARNSTABLE, 40, inc_id="W1-0", cause="TREE")),
     }
 
 
-def test_collect_eversource_treats_403_tiles_as_empty():
-    pages = eversource_pages()
-
-    def s3_fetch(url, missing=(404,)):  # S3 answers 403 for objects that don't exist
-        if url in pages:
-            return pages[url]
-        if 403 in missing:
-            return None
-        raise FetchError(f"HTTP 403: {url}")
-
+def test_collect_eversource_treats_s3_403_tiles_as_empty():
     res = SourceResult("eversource")
-    sources.collect_eversource(s3_fetch, res)
+    sources.collect_eversource(s3_fetch(eversource_pages()), res)
     assert [(t["town"], t["cust_out"], t["source_updated"]) for t in res.towns] == [
         ("BARNSTABLE", 40, "2026-10-26T15:07:10-0400"), ("AGAWAM", 0, "2026-10-26T15:07:10-0400")]
     assert [(o["outage_id"], o["cust_out"]) for o in res.outages] == [("W1-0", 40)]
     assert res.meta["page_mode"] == "BLUESKY" and res.meta["tile_errors"] == 0
+    assert (res.meta["outages_found"], res.meta["outages_reported"], res.meta["complete"]) == (1, 1, True)
     assert {"metadata.json", "data.json", "report_east.json", "report_west.json", "tiles.jsonl"} <= set(res.raw)
+
+
+def test_collect_eversource_blocked_tiles_are_errors_and_incomplete():
+    pages = eversource_pages()
+    del pages[next(u for u in pages if "/outages/" in u)]  # the one tile with the outage is blocked too
+    res = SourceResult("eversource")
+    sources.collect_eversource(s3_fetch(pages, body_403=WAF_403), res)
+    assert res.meta["tile_errors"] == len(geo.bbox_quadkeys(sources.EVERSOURCE_BBOX, sources.ROOT_ZOOM))
+    assert (res.meta["outages_found"], res.meta["outages_reported"], res.meta["complete"]) == (0, 1, False)
+
+
+def test_unsplit_cluster_counts_all_its_outages():
+    cluster = item(BARNSTABLE, 30, cluster=True)
+    cluster["desc"]["n_out"] = 3
+    res = SourceResult("eversource")
+    sources.collect_eversource(s3_fetch(eversource_pages(outage_tile=tile(cluster), total_outages=3)), res)
+    assert [(o["cluster"], o["n_out"]) for o in res.outages] == [(True, 3)]
+    assert res.meta["complete"] is True
 
 
 def test_collect_eversource_missing_report_raises_but_keeps_raw():
@@ -198,6 +231,7 @@ def test_collect_national_grid_dedupes_towns_across_reports():
         f"{api}/configuration/DEP?preview=false": json.dumps({"x": ["public/reports/t_report.json", "public/reports/c_report.json",
                                                                     "public/summary-1/data.json", "public/cluster-1/{q}.json"]}).encode(),
         f"{sources.KUBRA}/{data}/public/summary-1/data.json": json.dumps({"summaryFileData": {
+            "totals": [{"summaryTotalId": "total-1", "total_cust_a": {"val": 26}, "total_outages": 1}],
             "date_generated": "2026-10-26T19:22:16Z", "page_mode": {"mode": "BLUESKY", "pausePublish": False}}}).encode(),
         f"{sources.KUBRA}/{data}/public/reports/t_report.json": json.dumps(town_report).encode(),
         f"{sources.KUBRA}/{data}/public/reports/c_report.json": json.dumps(county_report).encode(),
@@ -209,3 +243,5 @@ def test_collect_national_grid_dedupes_towns_across_reports():
         ("LENOX", "Berkshire", 0), ("WORCESTER", "Worcester", 26)]
     assert [o["cust_out"] for o in res.outages] == [26]
     assert all(t["source_updated"] == "2026-10-26T19:22:16Z" for t in res.towns)
+    assert (res.meta["outages_found"], res.meta["outages_reported"], res.meta["complete"]) == (1, 1, True)
+    assert (res.meta["cust_out_found"], res.meta["cust_out_reported"]) == (26, 26)

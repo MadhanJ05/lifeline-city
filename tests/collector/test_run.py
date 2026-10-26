@@ -9,7 +9,7 @@ import pytest
 import requests
 
 from collector import run
-from collector.sources import FetchError
+from collector.sources import S3_MISSING, FetchError
 
 NOW = datetime(2026, 10, 26, 19, 45, tzinfo=UTC)
 
@@ -51,12 +51,28 @@ def test_csv_header_written_once(tmp_path):
     assert lines[0].startswith("snapshot_utc,source,outage_id") and len(lines) == 3
 
 
-def test_summary_line_flags_storm_mode_and_errors(tmp_path):
+def incomplete(fetch, res):
+    good(fetch, res)
+    res.meta.update(outages_found=0, outages_reported=1, complete=False)
+
+
+def test_incomplete_source_keeps_rows_and_is_flagged(tmp_path):
+    m = run.snapshot(NOW, None, tmp_path, {"inc": incomplete})
+    assert m["sources"]["inc"]["status"] == "incomplete"
+    assert len(rows(tmp_path / "towns.csv")) == 1 and len(rows(tmp_path / "outages.csv")) == 1
+
+
+def test_summary_line_flags_storm_mode_incomplete_and_errors():
     m = {"snapshot_utc": "20261026T194500Z", "sources": {
-        "eversource": {"status": "ok", "towns": 165, "outages": 2, "tile_requests": 9, "page_mode": "STORM"},
+        "eversource": {"status": "incomplete", "towns": 165, "outages_found": 2, "outages_reported": 5,
+                       "tile_requests": 9, "tile_errors": 3, "page_mode": "STORM"},
+        "national_grid": {"status": "ok", "towns": 172, "outages_found": 7, "outages_reported": 7,
+                          "tile_requests": 15, "tile_errors": 0, "page_mode": "BLUESKY"},
         "mema": {"status": "error", "error": "FetchError: HTTP 500"}}}
     line = run.summary_line(m)
-    assert "eversource 165 towns, 2 outages, 9 tile req [STORM]" in line and "mema ERROR" in line
+    assert "eversource 165 towns, 2/5 outages located, 9 tile req, 3 tile errors INCOMPLETE [STORM]" in line
+    assert "national_grid 172 towns, 7/7 outages located, 15 tile req |" in line
+    assert "mema ERROR" in line
 
 
 class FakeResponse:
@@ -83,13 +99,20 @@ def test_fetch_statuses(responses):
     fetch = run.make_fetch()
     responses += [FakeResponse(404)]
     assert fetch("u") is None
-    responses += [FakeResponse(403)]
-    assert fetch("u", (403, 404)) is None
     responses += [FakeResponse(200, gzip.compress(b"hello"))]
     assert fetch("u") == b"hello"
-    responses += [FakeResponse(403)]
+    responses += [FakeResponse(403, b"<Error><Code>AccessDenied</Code></Error>")]
     with pytest.raises(FetchError, match="HTTP 403"):
-        fetch("u")
+        fetch("u")  # 403 is only "missing" where the caller says so
+
+
+def test_fetch_403_is_missing_only_with_the_s3_body(responses):
+    fetch = run.make_fetch()
+    responses += [FakeResponse(403, b'<?xml version="1.0"?><Error><Code>AccessDenied</Code></Error>')]
+    assert fetch("u", (404, S3_MISSING)) is None
+    responses += [FakeResponse(403, b"<HTML><BODY>Request blocked.</BODY></HTML>")]
+    with pytest.raises(FetchError, match="HTTP 403"):
+        fetch("u", (404, S3_MISSING))
 
 
 def test_fetch_retries_server_errors(responses):

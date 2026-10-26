@@ -1,11 +1,13 @@
 """Live outage collector: snapshots of MEMA, Eversource and National Grid, archived under data/live/.
 
-  python -m collector.run              one snapshot, then exit (exit 1 if any source failed)
+  python -m collector.run              one snapshot, then exit (exit 1 unless every source is "ok")
   python -m collector.run --every 15   a snapshot every 15 minutes, on the quarter hour, until stopped
 
 Each snapshot writes data/live/snapshots/<UTC time>/<source>/<file>.gz (the raw responses) and
 manifest.json, then appends normalized rows to data/live/towns.csv and data/live/outages.csv.
-One source failing never stops the others; its error is recorded in the manifest.
+A source's status is "ok", "incomplete" (fewer outages located in the map tiles than the utility
+reports; its rows are still appended) or "error" (nothing appended). One source failing never stops
+the others.
 """
 from __future__ import annotations
 
@@ -35,10 +37,10 @@ SOURCES: dict[str, Callable[[Fetch, SourceResult], None]] = {
 
 
 def make_fetch(timeout: float = 20, retries: int = 2) -> Fetch:
-    """requests-based fetch: None for a status in `missing`; retries network errors, 429 and 5xx."""
+    """requests-based fetch: None for a response matching `missing`; retries network errors, 429 and 5xx."""
     local = threading.local()
 
-    def fetch(url: str, missing: tuple[int, ...] = (404,)) -> bytes | None:
+    def fetch(url: str, missing: sources.Missing = (404,)) -> bytes | None:
         if not hasattr(local, "session"):
             local.session = requests.Session()
             local.session.headers["User-Agent"] = USER_AGENT
@@ -49,7 +51,7 @@ def make_fetch(timeout: float = 20, retries: int = 2) -> Fetch:
             except requests.RequestException as e:
                 err = type(e).__name__
             else:
-                if r.status_code in missing:
+                if sources.is_missing(r.status_code, r.content, missing):
                     return None
                 if r.ok:
                     body = r.content
@@ -84,7 +86,7 @@ def snapshot(now: datetime, fetch: Fetch, live: Path = LIVE,
         res, t0 = SourceResult(name), time.monotonic()
         try:
             collect(fetch, res)
-            status, error = "ok", None
+            status, error = ("incomplete" if res.meta.get("complete") is False else "ok"), None
         except Exception as e:  # one bad feed must not stop the others
             status, error = "error", f"{type(e).__name__}: {e}"
         for fname, body in res.raw.items():
@@ -94,7 +96,7 @@ def snapshot(now: datetime, fetch: Fetch, live: Path = LIVE,
         manifest["sources"][name] = {"status": status, "error": error,
                                      "seconds": round(time.monotonic() - t0, 1),
                                      "towns": len(res.towns), "outages": len(res.outages), **res.meta}
-        if status == "ok":
+        if status != "error":
             towns += [{"snapshot_utc": stamp, **r} for r in res.towns]
             outages += [{"snapshot_utc": stamp, **r} for r in res.outages]
     snap.mkdir(parents=True, exist_ok=True)
@@ -107,13 +109,19 @@ def snapshot(now: datetime, fetch: Fetch, live: Path = LIVE,
 def summary_line(manifest: dict) -> str:
     parts = []
     for name, s in manifest["sources"].items():
-        if s["status"] != "ok":
+        if s["status"] == "error":
             parts.append(f"{name} ERROR {s['error']}")
             continue
-        out_total = s.get("outages")
-        mode = f" [{s['page_mode']}]" if s.get("page_mode") not in (None, "BLUESKY") else ""
-        tiles = f", {s['tile_requests']} tile req" if "tile_requests" in s else ""
-        parts.append(f"{name} {s['towns']} towns, {out_total} outages{tiles}{mode}")
+        text = f"{name} {s['towns']} towns"
+        if "outages_found" in s:
+            text += f", {s['outages_found']}/{s['outages_reported']} outages located, {s['tile_requests']} tile req"
+            if s.get("tile_errors"):
+                text += f", {s['tile_errors']} tile errors"
+        if s["status"] == "incomplete":
+            text += " INCOMPLETE"
+        if s.get("page_mode") not in (None, "BLUESKY"):
+            text += f" [{s['page_mode']}]"
+        parts.append(text)
     return f"{manifest['snapshot_utc']}  " + " | ".join(parts)
 
 
