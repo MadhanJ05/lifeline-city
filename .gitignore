@@ -13,3 +13,6 @@ __pycache__/
 # Web
 web/node_modules/
 web/dist/
+
+# Live outage snapshots (collector/)
+data/live/

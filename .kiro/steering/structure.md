@@ -34,20 +34,23 @@ pipeline/
   scale_catalog.py export.py
 api/
   main.py data.py state.py reach.py sms.py
+collector/         live outage snapshots (docs/live-data.md)
+  run.py sources.py geo.py
 web/
   src/App.tsx src/api.ts src/types.ts
   src/components/  MapView TimeSlider Queue TractDrawer WhyFlagged ReachPanel
                    PhoneSimulator BostonVoiceView ScaleSelector SourceBadges
 tests/
-  pipeline/ api/
+  pipeline/ api/ collector/
 docs/
-  methods.md kiro-usage.md
+  methods.md kiro-usage.md live-data.md
 .env.example
 ```
 
 ## Rules
 
 - Pipeline reads `data/raw/` and `config/`, writes only `data/processed/`. API reads only `data/processed/` and `config/`. Web reads only the API.
+- Collector writes only `data/live/` (gitignored) and appends there; nothing reads it yet.
 - Shared helpers (percentile rank, hourly time grid, paths, provenance labels) live in `pipeline/common.py`. Do not duplicate them.
 - Each `data/processed/` file has a matching TypeScript type in `web/src/types.ts` and a pydantic model in `api/data.py`.
 - Tests mirror source paths: `pipeline/lifelines.py` -> `tests/pipeline/test_lifelines.py`.
