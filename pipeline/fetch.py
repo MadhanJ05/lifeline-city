@@ -204,6 +204,42 @@ def empower_zips(bbox_4326: tuple[float, float, float, float]) -> gpd.GeoDataFra
     return gdf.drop_duplicates("Zip_Code").sort_values("Zip_Code").reset_index(drop=True)
 
 
+# ---------------------------------------------------------------- 2020 Census blocks (live step `locate`)
+
+PL_URL = "https://api.census.gov/data/2020/dec/pl"
+TIGERWEB_BLOCKS_URL = ("https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/"
+                       "tigerWMS_Census2020/MapServer/10/query")
+
+
+def census_blocks(county: str = COUNTY) -> pd.DataFrame:
+    """2020 Census blocks in one county: [GEOID, homes, occupied, lat, lon].
+
+    homes = housing units (P.L. 94-171 H1_001N). occupied = H1_002N, homes that were someone's usual
+    residence on Census Day, so summer homes count as vacant. lat/lon = TIGERweb internal point.
+    """
+    pl = json.loads(cached_get(f"pl2020_block_{county}", PL_URL, {
+        "get": "H1_001N,H1_002N,H1_003N", "for": "block:*", "in": f"state:{STATE} county:{county} tract:*",
+        **_acs_key()}))
+    occ = pd.DataFrame(pl[1:], columns=pl[0])
+    occ["GEOID"] = occ["state"] + occ["county"] + occ["tract"] + occ["block"]
+    occ = occ.rename(columns={"H1_001N": "homes", "H1_002N": "occupied"})[["GEOID", "homes", "occupied"]]
+    pts = json.loads(cached_get(f"tigerweb2020_blocks_{county}", TIGERWEB_BLOCKS_URL, {
+        "where": f"STATE='{STATE}' AND COUNTY='{county}'", "outFields": "GEOID,INTPTLAT,INTPTLON",
+        "returnGeometry": "false", "f": "json"}))
+    if pts.get("exceededTransferLimit"):
+        raise PipelineError("tigerweb_blocks", TIGERWEB_BLOCKS_URL, "more blocks than one page returns")
+    loc = pd.DataFrame([f["attributes"] for f in pts["features"]]).rename(
+        columns={"INTPTLAT": "lat", "INTPTLON": "lon"})
+    out = occ.merge(loc, on="GEOID", how="inner", validate="one_to_one")
+    if len(out) != len(occ):
+        raise PipelineError("census_blocks", f"{len(occ) - len(out)} P.L. blocks have no TIGERweb point")
+    for c in ("homes", "occupied"):
+        out[c] = pd.to_numeric(out[c]).astype(int)
+    for c in ("lat", "lon"):
+        out[c] = pd.to_numeric(out[c])
+    return out.sort_values("GEOID").reset_index(drop=True)
+
+
 # ---------------------------------------------------------------- step
 
 

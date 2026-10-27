@@ -32,6 +32,7 @@ pipeline/
   run.py common.py fetch.py need.py tracts_towns.py outage_curves.py wires.py
   telecom.py lifelines.py voice_boston.py synthetic.py content.py verifier.py
   scale_catalog.py export.py
+  locate.py        live step: collector snapshot -> tract estimates (docs/live-data.md)
 api/
   main.py data.py state.py reach.py sms.py
 collector/         live outage snapshots (docs/live-data.md)
@@ -50,7 +51,7 @@ docs/
 ## Rules
 
 - Pipeline reads `data/raw/` and `config/`, writes only `data/processed/`. API reads only `data/processed/` and `config/`. Web reads only the API.
-- Collector writes only `data/live/` (gitignored) and appends there; nothing reads it yet.
+- Collector writes only `data/live/` (gitignored) and appends there. `pipeline/locate.py` reads a snapshot from `data/live/` and writes `data/live/located/`; the replay steps never read `data/live/`.
 - Shared helpers (percentile rank, hourly time grid, paths, provenance labels) live in `pipeline/common.py`. Do not duplicate them.
 - Each `data/processed/` file has a matching TypeScript type in `web/src/types.ts` and a pydantic model in `api/data.py`.
 - Tests mirror source paths: `pipeline/lifelines.py` -> `tests/pipeline/test_lifelines.py`.

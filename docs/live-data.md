@@ -94,10 +94,40 @@ So the points are where the outages are, and the town report is the count. The n
 - **Storm mode.** Both feeds have `page_mode` (now `BLUESKY`) and `pausePublish`. Whether a utility pauses or simplifies its map during a major event is unknown. The manifest records both flags every snapshot, and the summary line prints the mode when it isn't `BLUESKY`.
 - **What a point marks.** One point can stand for thousands of customers on a circuit. Whether it sits at the fault, at the device that opened, or at the middle of the affected area changes how far its customers should be spread.
 
-## Next: from points to neighborhoods
+## Locate: from points to neighborhoods (`pipeline/locate.py`)
 
-1. **Place each outage in a census tract.**
-2. **Spread its customers over nearby homes,** using Census block housing counts.
-3. **Scale the tract numbers to the town totals.** This also corrects the masked counts.
-4. **Estimate customers per tract** from ACS housing units, scaled to each town's `cust_served`.
-5. **Label the result on screen** "Estimated from outage locations."
+```sh
+.venv/bin/python -m pipeline.locate                              # the latest snapshot
+.venv/bin/python -m pipeline.locate --snapshot 20261026T201554Z
+```
+
+Step by step, for the Cape (Barnstable County):
+
+1. **Place.** Each outage point goes to the Cape town it falls in. A point outside every town but within 2 km of one (on a pier or in a harbor) goes to the nearest town; anything farther drops.
+2. **Spread.** An outage's customers fill the nearest homes in its town, block by block, never past a block's homes. Larger outages are placed first.
+3. **Reconcile.** The utility's town report is the count:
+   - Each town's spread is scaled to its reported total and clipped to each block's homes, with any excess moved to the town's remaining homes. This also corrects the privacy-rounded counts.
+   - A town with a total but no points is spread over all its homes and labeled "Estimated from the town total."
+   - A town reporting 0 is set to 0.
+4. **Year-round homes.** Customers out become year-round homes out, using each block's year-round share. This way, summer homes standing empty in a winter storm aren't counted as people in the dark. The share comes from:
+   - **2020 Census P.L. 94-171, table H1, by block:** H1_001N housing units and H1_002N occupied homes. "Occupied" means someone's usual residence on Census Day, so summer homes count as vacant.
+   - **ACS households (B11001_001E) per tract,** which brings the 2020 occupied count up to date.
+
+The Cape has 164,885 homes. 103,368 were occupied year-round in 2020, or 104,301 after scaling to the ACS.
+
+**Block locations** are TIGERweb 2020 block internal points (`tigerWMS_Census2020` layer 10), downloaded once and cached under `data/raw/cache/`.
+
+**Output** goes to `data/live/located/<snapshot>.csv`, one row per tract:
+- `homes`, `year_round_homes`, `customers_out`, `year_round_out`, `pct_year_round_out`
+- `label`: "Estimated from outage locations," "Estimated from the town total," or "No outages reported"
+
+`<snapshot>.json` records, per town, the reported total, the total from points, the estimate and the method used.
+
+**What-if on the real Cape geography** (2026-10-26): with 1,000 customers out and a town total of 1,000,
+- **Truro:** 375 year-round homes, all in tract 208 (37% of its year-round homes).
+- **Hyannis:** 893 year-round homes, mostly tract 153 (36%).
+
+**Limits:**
+- **Homes stand in for customers.** Utility customers also include businesses, so in commercial areas an outage is spread over a slightly wider area than it really covers.
+- **A point's meaning is unknown.** Whether a point marks the fault, the device that opened, or the middle of the affected area, it is treated as the center.
+- **Year-round shares are from 2020,** scaled per tract, not per block, to current households.
